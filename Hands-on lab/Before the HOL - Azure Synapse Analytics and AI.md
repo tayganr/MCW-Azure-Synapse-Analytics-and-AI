@@ -59,7 +59,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 8. [Postman](https://www.postman.com/downloads/)
 
-9. [Ensure the Microsoft.Sql resource provider is registered in your Azure Subscription](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types)
+9. [Ensure the Microsoft.Sql resource provider is registered in your Azure Subscription](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types).
 
 ## Before the hands-on lab
 
