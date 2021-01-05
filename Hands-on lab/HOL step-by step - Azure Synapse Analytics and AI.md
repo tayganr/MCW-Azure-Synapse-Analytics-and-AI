@@ -109,6 +109,8 @@ This lab explores the cold data scenario of ingesting various types of raw data 
 
 9. [Postman](https://www.postman.com/downloads/)
 
+10. [Ensure the Microsoft.Sql resource provider is registered in your Azure Subscription](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types). 
+
 ## Before the hands-on lab
 
 Refer to the Before the hands-on lab setup guide manual before continuing to the lab exercises.
