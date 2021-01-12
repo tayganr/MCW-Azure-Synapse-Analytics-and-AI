@@ -1840,7 +1840,7 @@ In this exercise, you will create multiple machine learning models. You will lea
 
 4. On the **Configure Settings** form, enter a globally unique **Compute name** of your choice, and select **Create**.
 
-    ![The new compute instance settings form is displayed populated with a compute name](media/aml_newcomputeform_settings.png, "The new compute instance settings form")
+    ![The new compute instance settings form is displayed populated with a compute name](media/aml_newcomputeform_settings.png "The new compute instance settings form")
 
 5. Select the **Compute clusters** tab, and select **Create**.
 
