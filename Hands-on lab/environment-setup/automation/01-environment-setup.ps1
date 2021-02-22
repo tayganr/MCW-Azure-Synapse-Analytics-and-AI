@@ -15,7 +15,7 @@ if($subs.GetType().IsArray -and $subs.length -gt 1){
         Select-AzSubscription -SubscriptionName $selectedSubName
 }
 
-$userName = ((az ad signed-in-user show) | ConvertFrom-JSON).UserPrincipalName
+$userName = ((az ad signed-in-user show -o json) | ConvertFrom-JSON).UserPrincipalName
 $resourceGroupName = Read-Host -Prompt "Enter the name of the resource group containing the Azure Synapse Analytics Workspace"
 $sqlPassword = Read-Host -Prompt "Enter the SQL Administrator password you used in the deployment" -AsSecureString
 $sqlPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringUni([System.Runtime.InteropServices.Marshal]::SecureStringToCoTaskMemUnicode($sqlPassword))
