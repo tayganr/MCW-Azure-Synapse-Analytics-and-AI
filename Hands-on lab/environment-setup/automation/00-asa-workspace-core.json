@@ -255,7 +255,7 @@
           "delayInMinutes": "[variables('sparkAutoPauseDelayInMinutes')]"
         },
         "sparkVersion": "[variables('sparkVersion')]",
-        "libraryRequirements": {
+        "sparkConfigProperties": {
           "filename": "[variables('packagesRequirementsFileName')]",
           "content": "[variables('packagesRequirementsContent')]"
         }
