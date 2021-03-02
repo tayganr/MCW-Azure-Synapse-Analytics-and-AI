@@ -1808,7 +1808,7 @@ In this exercise, you will create multiple machine learning models. You will lea
     SELECT P.ProductId,P.Seasonality,S.TransactionDateId,COUNT(*) as TransactionItemsCount
     FROM wwi_mcw.SaleSmall S
     JOIN wwi_mcw.Product P ON S.ProductId = P.ProductId
-    where TransactionDateId between 01012019 and 12312019
+    where TransactionDateId between 20190101 and 20191231
     GROUP BY P.ProductId ,P.Seasonality,S.TransactionDateId
     ```
 
