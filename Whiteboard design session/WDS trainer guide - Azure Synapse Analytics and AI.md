@@ -693,6 +693,10 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
       The result cache is evicted regularly based on a time-aware least recently used algorithm (TLRU).
 
+11. How can WWI business analysts find and access the correct data ingested into the unified environment by simply using business or technical terms?
+
+    The search functionality in Azure Purview Data Catalog supports Semantic search that enables data discovery using business or technical terms. Moreover, Azure Purview allows you to create a glossary of essential terms for enriching your data. A glossary provides a vocabulary for business users. It consists of business terms that can be related to each other and allows them to be categorized to be understood in different contexts. These terms can then be mapped to assets like a database, tables, columns, etc. This helps abstract the technical jargon associated with the data repositories and allows the business user to discover and work with data in the vocabulary that is more familiar to them.
+
 *Visualize*
 
 1. What product can WWI use to visualize their retail transaction data? Is it a separate tool that they need to install?
