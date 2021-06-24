@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-October 2020
+June 2021
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2020 Microsoft Corporation. All rights reserved.
+© 2021 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -330,7 +330,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
     - Their smallest fact table exceeds several GB’s and, by their nature experiences frequent inserts.
 
-    - As they develop the data warehouse, the WWI data team identified some tables created from the raw input that might be useful, but they don’t currently join to other tables and they are not sure of the best columns they should use for distributing the data.
+    - As they develop the data warehouse, the WWI data team identified some tables created from the raw input that might be useful, but they don’t currently join to other tables, and they are not sure of the best columns they should use for distributing the data.
 
     - Their data engineers sometimes use temporary staging tables in their data preparation.
 
@@ -500,7 +500,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 Peter Guerin, Chief Technical Officer (CTO), World Wide Importers.
 
-The primary audience is the business decision makers and technology decision makers. From the case study scenario, this includes Peter Guerin, CTO of WWI. Usually we talk to the infrastructure managers who report to the chief information officers (CIOs), or to application sponsors (like a vice president [VP] line of business [LOB], or chief marketing officer [CMO]), or to those who represent the business unit IT or developers that report to application sponsors.
+The primary audience is the business decision makers and technology decision makers. From the case study scenario, this includes Peter Guerin, CTO of WWI. Usually, we talk to the infrastructure managers who report to the chief information officers (CIOs), or to application sponsors (like a vice president [VP] line of business [LOB], or chief marketing officer [CMO]), or to those who represent the business unit IT or developers that report to application sponsors.
 
 ## Preferred solution
 
@@ -550,7 +550,7 @@ The primary audience is the business decision makers and technology decision mak
 
     In ADLS, it is a best practice to have a dedicated Storage Account for production, and a separate Storage Account for dev and test workloads. This will ensure that dev or test workloads never interfere with production.  
 
-    One common folder structure is to organize the data in separate folders by degree of refinement. For example a bronze folder contains the raw data, silver contains the cleaned, prepared and integrated data and gold contains data ready to support analytics, which might include final refinements such as pre-computed aggregates.
+    One common folder structure is to organize the data in separate folders by degree of refinement. For example, a bronze folder contains the raw data, silver contains the cleaned, prepared and integrated data and gold contains data ready to support analytics, which might include final refinements such as pre-computed aggregates.
 
 4. When it comes to ingesting raw data in batch from new data sources, what data formats could they support with your solution?
 
@@ -646,7 +646,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
         - The table size on disk is more than 2 GB.
         - The table has frequent insert, update, and delete operations.
 
-    - As they develop the data warehouse, the WWI data team identified some tables created from the raw input that might be useful, but they don’t currently join to other tables and they are not sure of the best columns they should use for distributing the data.
+    - As they develop the data warehouse, the WWI data team identified some tables created from the raw input that might be useful, but they don’t currently join to other tables, and they are not sure of the best columns they should use for distributing the data.
 
       - They should consider round-robin distribution.
 
@@ -678,7 +678,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 8. What approach can they use to update the JSON data?
 
-     The can use JSON_MODIFY with the UPDATE statement.
+     They can use JSON_MODIFY with the UPDATE statement.
 
 9. In some of their queries, they are OK trading off speed of returning counts for a small reduction in accuracy. How might they do this?
 
@@ -746,7 +746,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 2. How is access to data authorized for data stored in Azure Data Lake Store Gen2? In Azure Synapse SQL databases?
 
-    **Authorization in ADLS Gen2:** From an authorization standpoint, course grained access control can be applied at the container level in Azure Storage by specifying AAD roles. Furthermore, fine grained access control is enabled by setting POSIX ACLs at the folder level.
+    **Authorization in ADLS Gen2:** From an authorization standpoint, coarse grained access control can be applied at the container level in Azure Storage by specifying AAD roles. Furthermore, fine grained access control is enabled by setting POSIX ACLs at the folder level.
 
     **Authorization in databases:** Management of database permissions is performed by setting access permissions on Azure Active Directory groups and users, which are external to the database. Object level security allows you to control permissions on tables, views, stored procedures and functions.
 
@@ -784,7 +784,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
     Yes, by using SQL Data Discovery and Classification, which:
      - Automatically discovers columns containing potentially sensitive data.
      - Provides a simple way to review and apply the classification recommendations through the Azure portal.
-     - Persists sensitive data labels in the database (as metadata attributes), audits and detects access to the sensitive data. It includes a built-in set of labels and information types; however users can chose to define custom labels across Azure tenant using Azure Security Center.
+     - Persists sensitive data labels in the database (as metadata attributes), audits and detects access to the sensitive data. It includes a built-in set of labels and information types; however, users can chose to define custom labels across Azure tenant using Azure Security Center.
      - This feature is accessed using the Azure Portal.
 
 6. From a network security standpoint, how should your solution be secured?
