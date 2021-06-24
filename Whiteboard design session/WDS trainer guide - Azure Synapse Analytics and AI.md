@@ -450,6 +450,9 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Azure Purview Data Catalog lineage user guide               | <https://docs.microsoft.com/en-us/azure/purview/catalog-lineage-user-guide>                                                                                                                                                                                                         |
 | Asset insights on your data in Azure Purview                | <https://docs.microsoft.com/en-us/azure/purview/asset-insights>                                                                                                                                                                                                                     |
 | Sensitivity label insights about your data in Azure Purview | <https://docs.microsoft.com/en-us/azure/purview/sensitivity-insights>                                                                                                                                                                                                               |
+| Azure Purview | <https://azure.microsoft.com/en-us/services/purview/> |
+| Azure Purview - Map, Discover, and Find Insights Across Data Sources | <https://youtu.be/27bA4KFiEKk> |
+
 
 # Azure Synapse Analytics and AI whiteboard design session trainer guide
 
