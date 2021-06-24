@@ -39,6 +39,7 @@ In this hands-on-lab, you will build an end-to-end data analytics with machine l
 - Azure Stream Analytics
 - Azure Machine Learning
 - Azure App Service
+- Azure Purview
 - Event Hubs
 - IoT Hub
 - Power BI
