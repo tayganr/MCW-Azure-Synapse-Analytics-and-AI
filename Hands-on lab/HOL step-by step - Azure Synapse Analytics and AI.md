@@ -303,7 +303,7 @@ The data that we will be retrieving to populate the sale table is currently stor
     | Field | Value |
     |-------|-------|
     | Output stream name  | Enter **salesdata**. |
-    | Source type | **Dataset** |
+    | Source type | **Integration Dataset** |
     | Dataset | **asamcw_sales_parquet** |
 
     ![The Source settings tab is selected displaying the Output stream name set to salesdata and the selected dataset being asamcw_sales_parquet.](media/dataflow_source_sourcesettings.png "Defining the source")
@@ -326,7 +326,7 @@ The data that we will be retrieving to populate the sale table is currently stor
     |-------|-------|
     | Output stream name  | Enter **sale**. |
     | Incoming stream | **salesdata** |
-    | Sink type | **Dataset** |
+    | Sink type | **Integration Dataset** |
     | Dataset | **asamcw_sale_asa** |
 
     ![The Sink tab is displayed with the form populated with the values from the preceding table.](media/dataflow_sink_sinktab.png "Defining the data flow sink")
@@ -354,11 +354,7 @@ The data that we will be retrieving to populate the sale table is currently stor
   
     ![The Activities menu of the pipeline is displayed with the Move and transform section expanded. An arrow indicating a drag operation shows adding a Data flow activity to the design surface of the pipeline.](media/pipeline_sales_dataflowactivitymenu.png "Drag and drop of the data flow activity")
 
-23. In the **Adding data flow** blade, ensure **Use existing data flow** is selected, and choose **ASAMCW_Exercise_2_2018_and_2019_Sales** from the select list and select **OK**.
-
-    ![The Adding data flow blade is displayed populated with the appropriate values.](media/pipeline_dataflowactivity_addingblade.png "Configuring the data flow activity")
-
-24. Select the **Settings** tab and set the form fields to the following values:
+23. Select the **Settings** tab and set the form fields to the following values:
 
     | Field | Value |
     |-------|-------|
@@ -369,25 +365,25 @@ The data that we will be retrieving to populate the sale table is currently stor
 
     ![The data flow activity Settings tab is displayed with the fields specified in the preceding table highlighted.](media/pipeline_sales_dataflowsettings.png "Data flow activity settings")
 
-25. In the top toolbar, select **Publish all** to publish the new dataset definitions. When prompted, select the **Publish** button to commit the changes.
+24. In the top toolbar, select **Publish all** to publish the new dataset definitions. When prompted, select the **Publish** button to commit the changes.
 
     ![The top toolbar is displayed with the Publish all button highlighted.](media/publishall_toolbarmenu.png "Publishing changes")
 
-26. Once published, expand the **Add trigger** item on the pipeline designer toolbar, and select **Trigger now**. In the **Pipeline run** blade, select **OK** to proceed with the latest published configuration. You will see notification toast windows indicating the pipeline is running and when it has completed.
+25. Once published, expand the **Add trigger** item on the pipeline designer toolbar, and select **Trigger now**. In the **Pipeline run** blade, select **OK** to proceed with the latest published configuration. You will see notification toast windows indicating the pipeline is running and when it has completed.
 
     > &#x1F534; **Note**: This pipeline is processing 667,049,970 rows of 2018 and 2019 sales data. Please proceed to the next task! When the pipeline completes, you will see a notification in Azure Synapse Analytics studio. At that time you can verify your data if you choose (step 29 in this exercise).
 
-27. View the status of the pipeline run by locating the **ASAMCW - Exercise 2 - Copy Sale Data** pipeline in the Integrate blade. Expand the actions menu, and select the **Monitor** item.
+26. View the status of the pipeline run by locating the **ASAMCW - Exercise 2 - Copy Sale Data** pipeline in the Integrate blade. Expand the actions menu, and select the **Monitor** item.
 
     ![In the Integrate blade, the Action menu is displayed with the Monitor item selected on the ASAMCW - Exercise 2 - Copy Sale Data pipeline.](media/orchestrate_pipeline_monitor_copysaledata.png "Monitoring a pipeline")
   
-28. You should see a run of the pipeline we created in the **Pipeline runs** table showing as in progress. It will take approximately 45 minutes for this pipeline operation to complete. You will need to refresh this table from time to time to see updated progress. Once it has completed. You should see the pipeline run displayed with a Status of **Succeeded**.
+27. You should see a run of the pipeline we created in the **Pipeline runs** table showing as in progress. It will take approximately 45 minutes for this pipeline operation to complete. You will need to refresh this table from time to time to see updated progress. Once it has completed. You should see the pipeline run displayed with a Status of **Succeeded**.
 
     > **Note**: _Feel free to proceed to the following tasks in this exercise while this pipeline runs_.
 
     ![On the pipeline runs screen, a successful pipeline run is highlighted in the table.](media/pipeline_run_sales_successful.png "Successful pipeline indicator")
 
-29. Verify the table has populated by creating a new query. Select the **Develop** item from the left menu, and in the **Develop** blade, expand the **+** button, and select **SQL script**. In the query window, be sure to connect to the SQL Pool database (`SQLPool01`), then paste and run the following query. When complete, select the **Discard all** button from the top toolbar.
+28. Verify the table has populated by creating a new query. Select the **Develop** item from the left menu, and in the **Develop** blade, expand the **+** button, and select **SQL script**. In the query window, be sure to connect to the SQL Pool database (`SQLPool01`), then paste and run the following query. When complete, select the **Discard all** button from the top toolbar.
 
   ```sql
     select count(TransactionId) from wwi_mcw.SaleSmall;
