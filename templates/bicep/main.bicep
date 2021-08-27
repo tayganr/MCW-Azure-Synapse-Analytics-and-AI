@@ -111,10 +111,6 @@ resource synapseWorkspace 'Microsoft.Synapse/workspaces@2021-05-01' = {
         enabled: true
         delayInMinutes: 15
       }
-      libraryRequirements: {
-        filename: 'requirements.txt'
-        content: 'xgboost ==1.0.2\nonnxruntime ==1.0.0\nwerkzeug ==0.16.1\nnimbusml ==1.7.1\nruamel.yaml ==0.16.9\nazureml-train-automl-runtime ==1.6.0\nscikit-learn ==0.20.3\nnumpy ==1.16.2\npandas ==0.23.4\nscipy ==1.4.1'
-      }
     }
   }
   resource sqlPool 'sqlPools' = {
@@ -127,6 +123,33 @@ resource synapseWorkspace 'Microsoft.Synapse/workspaces@2021-05-01' = {
     properties: {
       createMode: 'Default'
       collation: 'SQL_Latin1_General_CP1_CI_AS'
+    }
+  }
+}
+
+resource updateBigDataPool 'Microsoft.Synapse/workspaces/bigDataPools@2021-05-01' = {
+  name: synapseWorkspace::bigDataPool.name
+  location: location
+  dependsOn: [
+    synapseWorkspace::bigDataPool
+  ]
+  properties: {
+    sparkVersion: '2.4'
+    nodeCount: 0
+    nodeSize: 'Small'
+    nodeSizeFamily: 'MemoryOptimized'
+    autoScale: {
+      enabled: true
+      minNodeCount: 3
+      maxNodeCount: 4
+    }
+    autoPause: {
+      enabled: true
+      delayInMinutes: 15
+    }
+    libraryRequirements: {
+      filename: 'requirements.txt'
+      content: 'xgboost ==1.0.2\nonnxruntime ==1.0.0\nwerkzeug ==0.16.1\nnimbusml ==1.7.1\nruamel.yaml ==0.16.9\nazureml-train-automl-runtime ==1.6.0\nscikit-learn ==0.20.3\nnumpy ==1.16.2\npandas ==0.23.4\nscipy ==1.4.1'
     }
   }
 }
@@ -174,53 +197,11 @@ resource mlWorkspace 'Microsoft.MachineLearningServices/workspaces@2021-07-01' =
   }
 }
 
-// --------------------------------------------------------------------------
-// RBAC
-// --------------------------------------------------------------------------
-resource roleAssignment1 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-  name: guid('1${resourceGroupName}')
-  properties: {
-    principalId: mlWorkspace.identity.principalId
-    roleDefinitionId: role['Contributor']
-    principalType: 'ServicePrincipal'
-  }
-}
-
 resource roleAssignment2 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
   name: guid('2${resourceGroupName}')
   properties: {
     principalId: synapseWorkspace.identity.principalId
     roleDefinitionId: role['StorageBlobDataContributor']
-    principalType: 'ServicePrincipal'
-  }
-}
-
-resource roleAssignment3 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-  name: guid('3${resourceGroupName}')
-  scope: applicationInsights
-  properties: {
-    principalId: mlWorkspace.identity.principalId
-    roleDefinitionId: role['Contributor']
-    principalType: 'ServicePrincipal'
-  }
-}
-
-resource roleAssignment4 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-  name: guid('4${resourceGroupName}')
-  scope: keyVault
-  properties: {
-    principalId: mlWorkspace.identity.principalId
-    roleDefinitionId: role['Contributor']
-    principalType: 'ServicePrincipal'
-  }
-}
-
-resource roleAssignment5 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-  name: guid('5${resourceGroupName}')
-  scope: keyVault
-  properties: {
-    principalId: mlWorkspace.identity.principalId
-    roleDefinitionId: role['KeyVaultAdministrator']
     principalType: 'ServicePrincipal'
   }
 }
@@ -245,22 +226,61 @@ resource roleAssignment6 'Microsoft.Authorization/roleAssignments@2020-08-01-pre
 //   }
 // }
 
-resource roleAssignment8 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-  name: guid('8${resourceGroupName}')
-  scope: storageAccount
-  properties: {
-    principalId: mlWorkspace.identity.principalId
-    roleDefinitionId: role['Contributor']
-    principalType: 'ServicePrincipal'
-  }
-}
+// resource roleAssignment1 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+//   name: guid('1${resourceGroupName}')
+//   properties: {
+//     principalId: mlWorkspace.identity.principalId
+//     roleDefinitionId: role['Contributor']
+//     principalType: 'ServicePrincipal'
+//   }
+// }
 
-resource roleAssignment9 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-  name: guid('9${resourceGroupName}')
-  scope: storageAccount
-  properties: {
-    principalId: mlWorkspace.identity.principalId
-    roleDefinitionId: role['StorageBlobDataContributor']
-    principalType: 'ServicePrincipal'
-  }
-}
+// resource roleAssignment3 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+//   name: guid('3${resourceGroupName}')
+//   scope: applicationInsights
+//   properties: {
+//     principalId: mlWorkspace.identity.principalId
+//     roleDefinitionId: role['Contributor']
+//     principalType: 'ServicePrincipal'
+//   }
+// }
+
+// resource roleAssignment4 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+//   name: guid('4${resourceGroupName}')
+//   scope: keyVault
+//   properties: {
+//     principalId: mlWorkspace.identity.principalId
+//     roleDefinitionId: role['Contributor']
+//     principalType: 'ServicePrincipal'
+//   }
+// }
+
+// resource roleAssignment5 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+//   name: guid('5${resourceGroupName}')
+//   scope: keyVault
+//   properties: {
+//     principalId: mlWorkspace.identity.principalId
+//     roleDefinitionId: role['KeyVaultAdministrator']
+//     principalType: 'ServicePrincipal'
+//   }
+// }
+
+// resource roleAssignment8 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+//   name: guid('8${resourceGroupName}')
+//   scope: storageAccount
+//   properties: {
+//     principalId: mlWorkspace.identity.principalId
+//     roleDefinitionId: role['Contributor']
+//     principalType: 'ServicePrincipal'
+//   }
+// }
+
+// resource roleAssignment9 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+//   name: guid('9${resourceGroupName}')
+//   scope: storageAccount
+//   properties: {
+//     principalId: mlWorkspace.identity.principalId
+//     roleDefinitionId: role['StorageBlobDataContributor']
+//     principalType: 'ServicePrincipal'
+//   }
+// }
