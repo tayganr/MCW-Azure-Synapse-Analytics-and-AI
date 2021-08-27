@@ -5,14 +5,14 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.451.19169",
-      "templateHash": "14300317944913333155"
+      "templateHash": "3291752051954135334"
     }
   },
   "functions": [],
   "variables": {
-    "sqlAdministratorLoginPassword": "sqlPassword!",
+    "sqlAdministratorLoginPassword": "Synapse2021!",
     "tenantId": "[subscription().tenantId]",
-    "subscriptionId": "[subscription().id]",
+    "subscriptionId": "[subscription().subscriptionId]",
     "location": "[resourceGroup().location]",
     "resourceGroupName": "[resourceGroup().name]",
     "suffix": "[substring(guid(resourceGroup().id), 0, 6)]",
