@@ -1,9 +1,17 @@
 // param suffix string
-@secure()
-param sqlAdministratorLoginPassword string
+var sqlAdministratorLoginPassword = 'sqlPassword!'
 var tenantId = subscription().tenantId
+var subscriptionId = subscription().id
 var location = resourceGroup().location
+var resourceGroupName = resourceGroup().name
 var suffix = substring(guid(resourceGroup().id),0,6)
+var roleDefinitionPrefix = '/subscriptions/${subscriptionId}/providers/Microsoft.Authorization/roleDefinitions'
+var role = {
+  Contributor: '${roleDefinitionPrefix}/b24988ac-6180-42a0-ab88-20f7382dd24c'
+  KeyVaultAdministrator: '${roleDefinitionPrefix}/00482a5a-887f-4fb3-b363-3b7fe8e74483'
+  StorageBlobDataOwner: '${roleDefinitionPrefix}/b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
+  StorageBlobDataContributor : '${roleDefinitionPrefix}/ba92f5b4-2d11-453d-a403-e96b0029c9fe'
+}
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: 'asastore${suffix}'
@@ -163,5 +171,96 @@ resource mlWorkspace 'Microsoft.MachineLearningServices/workspaces@2021-07-01' =
     storageAccount: storageAccount.id
     hbiWorkspace: false
     allowPublicAccessWhenBehindVnet: false
+  }
+}
+
+// --------------------------------------------------------------------------
+// RBAC
+// --------------------------------------------------------------------------
+resource roleAssignment1 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('1${resourceGroupName}')
+  properties: {
+    principalId: mlWorkspace.identity.principalId
+    roleDefinitionId: role['Contributor']
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource roleAssignment2 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('2${resourceGroupName}')
+  properties: {
+    principalId: synapseWorkspace.identity.principalId
+    roleDefinitionId: role['StorageBlobDataContributor']
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource roleAssignment3 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('3${resourceGroupName}')
+  scope: applicationInsights
+  properties: {
+    principalId: mlWorkspace.identity.principalId
+    roleDefinitionId: role['Contributor']
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource roleAssignment4 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('4${resourceGroupName}')
+  scope: keyVault
+  properties: {
+    principalId: mlWorkspace.identity.principalId
+    roleDefinitionId: role['Contributor']
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource roleAssignment5 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('5${resourceGroupName}')
+  scope: keyVault
+  properties: {
+    principalId: mlWorkspace.identity.principalId
+    roleDefinitionId: role['KeyVaultAdministrator']
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource roleAssignment6 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('6${resourceGroupName}')
+  scope: synapseStorageAccount
+  properties: {
+    principalId: synapseWorkspace.identity.principalId
+    roleDefinitionId: role['StorageBlobDataOwner']
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// resource roleAssignment7 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+//   name: guid('7${resourceGroupName}')
+//   scope: synapseStorageAccount
+//   properties: {
+//     // principalId: #USER_OBJECT_ID# 
+//     roleDefinitionId: role['StorageBlobDataOwner']
+//     principalType: 'ServicePrincipal'
+//   }
+// }
+
+resource roleAssignment8 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('8${resourceGroupName}')
+  scope: storageAccount
+  properties: {
+    principalId: mlWorkspace.identity.principalId
+    roleDefinitionId: role['Contributor']
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource roleAssignment9 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('9${resourceGroupName}')
+  scope: storageAccount
+  properties: {
+    principalId: mlWorkspace.identity.principalId
+    roleDefinitionId: role['StorageBlobDataContributor']
+    principalType: 'ServicePrincipal'
   }
 }

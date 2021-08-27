@@ -1,0 +1,375 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.4.451.19169",
+      "templateHash": "14300317944913333155"
+    }
+  },
+  "functions": [],
+  "variables": {
+    "sqlAdministratorLoginPassword": "sqlPassword!",
+    "tenantId": "[subscription().tenantId]",
+    "subscriptionId": "[subscription().id]",
+    "location": "[resourceGroup().location]",
+    "resourceGroupName": "[resourceGroup().name]",
+    "suffix": "[substring(guid(resourceGroup().id), 0, 6)]",
+    "roleDefinitionPrefix": "[format('/subscriptions/{0}/providers/Microsoft.Authorization/roleDefinitions', variables('subscriptionId'))]",
+    "role": {
+      "Contributor": "[format('{0}/b24988ac-6180-42a0-ab88-20f7382dd24c', variables('roleDefinitionPrefix'))]",
+      "KeyVaultAdministrator": "[format('{0}/00482a5a-887f-4fb3-b363-3b7fe8e74483', variables('roleDefinitionPrefix'))]",
+      "StorageBlobDataOwner": "[format('{0}/b7e6dc6d-f1e8-4753-8033-0f276bb0955b', variables('roleDefinitionPrefix'))]",
+      "StorageBlobDataContributor": "[format('{0}/ba92f5b4-2d11-453d-a403-e96b0029c9fe', variables('roleDefinitionPrefix'))]"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2021-04-01",
+      "name": "[format('{0}/{1}/{2}', format('asastore{0}', variables('suffix')), 'default', 'azureml')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', format('asastore{0}', variables('suffix')), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2021-04-01",
+      "name": "[format('{0}/{1}/{2}', format('asastore{0}', variables('suffix')), 'default', 'staging')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', format('asastore{0}', variables('suffix')), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices",
+      "apiVersion": "2021-04-01",
+      "name": "[format('{0}/{1}', format('asastore{0}', variables('suffix')), 'default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2021-04-01",
+      "name": "[format('{0}/{1}/{2}', format('asadatalake{0}', variables('suffix')), 'default', 'defaultfs')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', format('asadatalake{0}', variables('suffix')), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2021-04-01",
+      "name": "[format('{0}/{1}/{2}', format('asadatalake{0}', variables('suffix')), 'default', 'staging')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', format('asadatalake{0}', variables('suffix')), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2021-04-01",
+      "name": "[format('{0}/{1}/{2}', format('asadatalake{0}', variables('suffix')), 'default', 'wwi-02')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', format('asadatalake{0}', variables('suffix')), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices",
+      "apiVersion": "2021-04-01",
+      "name": "[format('{0}/{1}', format('asadatalake{0}', variables('suffix')), 'default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces/firewallRules",
+      "apiVersion": "2021-05-01",
+      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'allowAll')]",
+      "properties": {
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "255.255.255.255"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces/bigDataPools",
+      "apiVersion": "2021-05-01",
+      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'SparkPool01')]",
+      "location": "[variables('location')]",
+      "properties": {
+        "sparkVersion": "2.4",
+        "nodeCount": 0,
+        "nodeSize": "Small",
+        "nodeSizeFamily": "MemoryOptimized",
+        "autoScale": {
+          "enabled": true,
+          "minNodeCount": 3,
+          "maxNodeCount": 4
+        },
+        "autoPause": {
+          "enabled": true,
+          "delayInMinutes": 15
+        },
+        "libraryRequirements": {
+          "filename": "requirements.txt",
+          "content": "xgboost ==1.0.2\nonnxruntime ==1.0.0\nwerkzeug ==0.16.1\nnimbusml ==1.7.1\nruamel.yaml ==0.16.9\nazureml-train-automl-runtime ==1.6.0\nscikit-learn ==0.20.3\nnumpy ==1.16.2\npandas ==0.23.4\nscipy ==1.4.1"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces/sqlPools",
+      "apiVersion": "2021-05-01",
+      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'SQLPool01')]",
+      "location": "[variables('location')]",
+      "sku": {
+        "name": "DW100c",
+        "capacity": 0
+      },
+      "properties": {
+        "createMode": "Default",
+        "collation": "SQL_Latin1_General_CP1_CI_AS"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2021-04-01",
+      "name": "[format('asastore{0}', variables('suffix'))]",
+      "location": "[variables('location')]",
+      "kind": "StorageV2",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "properties": {
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [],
+          "ipRules": [],
+          "defaultAction": "Allow"
+        },
+        "supportsHttpsTrafficOnly": true,
+        "accessTier": "Hot"
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2021-04-01",
+      "name": "[format('asadatalake{0}', variables('suffix'))]",
+      "location": "[variables('location')]",
+      "kind": "StorageV2",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "properties": {
+        "isHnsEnabled": true,
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [],
+          "ipRules": [],
+          "defaultAction": "Allow"
+        },
+        "supportsHttpsTrafficOnly": true,
+        "accessTier": "Hot"
+      }
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces",
+      "apiVersion": "2021-05-01",
+      "name": "[format('asaworkspace{0}', variables('suffix'))]",
+      "location": "[variables('location')]",
+      "properties": {
+        "defaultDataLakeStorage": {
+          "accountUrl": "[reference(format('asadatalake{0}', variables('suffix'))).primaryEndpoints.dfs]",
+          "filesystem": "defaultfs"
+        },
+        "sqlAdministratorLogin": "asa.sql.admin",
+        "sqlAdministratorLoginPassword": "[variables('sqlAdministratorLoginPassword')]"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults",
+      "apiVersion": "2021-04-01-preview",
+      "name": "[format('asakeyvault{0}', variables('suffix'))]",
+      "location": "[variables('location')]",
+      "properties": {
+        "sku": {
+          "family": "A",
+          "name": "standard"
+        },
+        "enableSoftDelete": false,
+        "tenantId": "[variables('tenantId')]",
+        "accessPolicies": []
+      }
+    },
+    {
+      "type": "Microsoft.Insights/components",
+      "apiVersion": "2020-02-02",
+      "name": "[format('asaappinsights{0}', variables('suffix'))]",
+      "location": "[variables('location')]",
+      "kind": "web",
+      "properties": {
+        "Application_Type": "web"
+      }
+    },
+    {
+      "type": "Microsoft.MachineLearningServices/workspaces",
+      "apiVersion": "2021-07-01",
+      "name": "[format('amlworkspace{0}', variables('suffix'))]",
+      "location": "[variables('location')]",
+      "sku": {
+        "name": "Basic",
+        "tier": "Basic"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "friendlyName": "[format('amlworkspace{0}', variables('suffix'))]",
+        "keyVault": "[resourceId('Microsoft.KeyVault/vaults', format('asakeyvault{0}', variables('suffix')))]",
+        "applicationInsights": "[resourceId('Microsoft.Insights/components', format('asaappinsights{0}', variables('suffix')))]",
+        "storageAccount": "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]",
+        "hbiWorkspace": false,
+        "allowPublicAccessWhenBehindVnet": false
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Insights/components', format('asaappinsights{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.KeyVault/vaults', format('asakeyvault{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
+      "name": "[guid(format('1{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[reference(resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix'))), '2021-07-01', 'full').identity.principalId]",
+        "roleDefinitionId": "[variables('role').Contributor]",
+        "principalType": "ServicePrincipal"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
+      "name": "[guid(format('2{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[reference(resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix'))), '2021-05-01', 'full').identity.principalId]",
+        "roleDefinitionId": "[variables('role').StorageBlobDataContributor]",
+        "principalType": "ServicePrincipal"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
+      "scope": "[format('Microsoft.Insights/components/{0}', format('asaappinsights{0}', variables('suffix')))]",
+      "name": "[guid(format('3{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[reference(resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix'))), '2021-07-01', 'full').identity.principalId]",
+        "roleDefinitionId": "[variables('role').Contributor]",
+        "principalType": "ServicePrincipal"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Insights/components', format('asaappinsights{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
+      "scope": "[format('Microsoft.KeyVault/vaults/{0}', format('asakeyvault{0}', variables('suffix')))]",
+      "name": "[guid(format('4{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[reference(resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix'))), '2021-07-01', 'full').identity.principalId]",
+        "roleDefinitionId": "[variables('role').Contributor]",
+        "principalType": "ServicePrincipal"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.KeyVault/vaults', format('asakeyvault{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
+      "scope": "[format('Microsoft.KeyVault/vaults/{0}', format('asakeyvault{0}', variables('suffix')))]",
+      "name": "[guid(format('5{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[reference(resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix'))), '2021-07-01', 'full').identity.principalId]",
+        "roleDefinitionId": "[variables('role').KeyVaultAdministrator]",
+        "principalType": "ServicePrincipal"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.KeyVault/vaults', format('asakeyvault{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
+      "scope": "[format('Microsoft.Storage/storageAccounts/{0}', format('asadatalake{0}', variables('suffix')))]",
+      "name": "[guid(format('6{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[reference(resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix'))), '2021-05-01', 'full').identity.principalId]",
+        "roleDefinitionId": "[variables('role').StorageBlobDataOwner]",
+        "principalType": "ServicePrincipal"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
+      "scope": "[format('Microsoft.Storage/storageAccounts/{0}', format('asastore{0}', variables('suffix')))]",
+      "name": "[guid(format('8{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[reference(resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix'))), '2021-07-01', 'full').identity.principalId]",
+        "roleDefinitionId": "[variables('role').Contributor]",
+        "principalType": "ServicePrincipal"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
+      "scope": "[format('Microsoft.Storage/storageAccounts/{0}', format('asastore{0}', variables('suffix')))]",
+      "name": "[guid(format('9{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[reference(resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix'))), '2021-07-01', 'full').identity.principalId]",
+        "roleDefinitionId": "[variables('role').StorageBlobDataContributor]",
+        "principalType": "ServicePrincipal"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.MachineLearningServices/workspaces', format('amlworkspace{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]"
+      ]
+    }
+  ]
+}
