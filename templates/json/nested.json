@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.4.613.9944",
+      "templateHash": "1025556203802899935"
+    }
+  },
+  "parameters": {
+    "synapseWorkspaceName": {
+      "type": "string"
+    },
+    "bigDataPoolName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  },
+  "functions": [],
+  "resources": [
+    {
+      "type": "Microsoft.Synapse/workspaces/bigDataPools",
+      "apiVersion": "2021-05-01",
+      "name": "[format('{0}/{1}', parameters('synapseWorkspaceName'), parameters('bigDataPoolName'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "sparkVersion": "2.4",
+        "nodeCount": 0,
+        "nodeSize": "Small",
+        "nodeSizeFamily": "MemoryOptimized",
+        "autoScale": {
+          "enabled": true,
+          "minNodeCount": 3,
+          "maxNodeCount": 4
+        },
+        "autoPause": {
+          "enabled": true,
+          "delayInMinutes": 15
+        },
+        "libraryRequirements": {
+          "filename": "requirements.txt",
+          "content": "xgboost ==1.0.2\nonnxruntime ==1.0.0\nwerkzeug ==0.16.1\nnimbusml ==1.7.1\nruamel.yaml ==0.16.9\nazureml-train-automl-runtime ==1.6.0\nscikit-learn ==0.20.3\nnumpy ==1.16.2\npandas ==0.23.4\nscipy ==1.4.1"
+        }
+      }
+    }
+  ]
+}

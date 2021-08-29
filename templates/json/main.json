@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "4506162398618671982"
+      "templateHash": "2203771986278657447"
     }
   },
   "functions": [],
@@ -201,27 +201,24 @@
       ]
     },
     {
-      "type": "Microsoft.Synapse/workspaces/bigDataPools",
-      "apiVersion": "2021-05-01",
-      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'SparkPool01')]",
-      "location": "[variables('location')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "name": "updateBigDataPool",
       "properties": {
-        "sparkVersion": "2.4",
-        "nodeCount": 0,
-        "nodeSize": "Small",
-        "nodeSizeFamily": "MemoryOptimized",
-        "autoScale": {
-          "enabled": true,
-          "minNodeCount": 3,
-          "maxNodeCount": 4
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/json/nested.json"
         },
-        "autoPause": {
-          "enabled": true,
-          "delayInMinutes": 15
-        },
-        "libraryRequirements": {
-          "filename": "requirements.txt",
-          "content": "xgboost ==1.0.2\nonnxruntime ==1.0.0\nwerkzeug ==0.16.1\nnimbusml ==1.7.1\nruamel.yaml ==0.16.9\nazureml-train-automl-runtime ==1.6.0\nscikit-learn ==0.20.3\nnumpy ==1.16.2\npandas ==0.23.4\nscipy ==1.4.1"
+        "parameters": {
+          "synapseWorkspaceName": {
+            "value": "[format('asaworkspace{0}', variables('suffix'))]"
+          },
+          "bigDataPoolName": {
+            "value": "SparkPool01"
+          },
+          "location": {
+            "value": "[variables('location')]"
+          }
         }
       },
       "dependsOn": [
