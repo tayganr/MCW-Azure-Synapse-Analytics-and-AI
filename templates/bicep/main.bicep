@@ -128,7 +128,7 @@ resource synapseWorkspace 'Microsoft.Synapse/workspaces@2021-05-01' = {
 }
 
 resource updateBigDataPool 'Microsoft.Synapse/workspaces/bigDataPools@2021-05-01' = {
-  name: synapseWorkspace::bigDataPool.name
+  name: '${synapseWorkspace.name}/${synapseWorkspace::bigDataPool.name}'
   location: location
   dependsOn: [
     synapseWorkspace::bigDataPool
