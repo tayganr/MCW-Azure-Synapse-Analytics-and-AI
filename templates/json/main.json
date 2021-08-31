@@ -5,7 +5,15 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "2203771986278657447"
+      "templateHash": "2471885404796146361"
+    }
+  },
+  "parameters": {
+    "azureActiveDirectoryObjectID": {
+      "type": "string",
+      "metadata": {
+        "description": "Please enter your Azure AD Object ID. This can be found by locating your profile within Azure Portal > Azure Active Directory > Users."
+      }
     }
   },
   "functions": [],
@@ -140,6 +148,38 @@
       ]
     },
     {
+      "type": "Microsoft.Synapse/workspaces/integrationRuntimes",
+      "apiVersion": "2021-05-01",
+      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'AzureIntegrationRuntime01')]",
+      "properties": {
+        "type": "Managed",
+        "typeProperties": {
+          "computeProperties": {
+            "location": "AutoResolve",
+            "dataFlowProperties": {
+              "computeType": "MemoryOptimized",
+              "coreCount": 16,
+              "timeToLive": 60
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "apiVersion": "2021-04-01-preview",
+      "name": "[format('{0}/{1}', format('asakeyvault{0}', variables('suffix')), 'SQL-USER-ASA')]",
+      "properties": {
+        "value": "[variables('sqlAdministratorLoginPassword')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.KeyVault/vaults', format('asakeyvault{0}', variables('suffix')))]"
+      ]
+    },
+    {
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2021-04-01",
       "name": "[format('asastore{0}', variables('suffix'))]",
@@ -238,8 +278,36 @@
         },
         "enableSoftDelete": false,
         "tenantId": "[variables('tenantId')]",
-        "accessPolicies": []
-      }
+        "accessPolicies": [
+          {
+            "tenantId": "[variables('tenantId')]",
+            "objectId": "[reference(resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix'))), '2021-05-01', 'full').identity.principalId]",
+            "permissions": {
+              "secrets": [
+                "get",
+                "list",
+                "set",
+                "delete"
+              ]
+            }
+          },
+          {
+            "tenantId": "[variables('tenantId')]",
+            "objectId": "[parameters('azureActiveDirectoryObjectID')]",
+            "permissions": {
+              "secrets": [
+                "get",
+                "list",
+                "set",
+                "delete"
+              ]
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
     },
     {
       "type": "Microsoft.Insights/components",
@@ -280,6 +348,16 @@
     {
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2020-08-01-preview",
+      "name": "[guid(format('1{0}', variables('resourceGroupName')))]",
+      "properties": {
+        "principalId": "[parameters('azureActiveDirectoryObjectID')]",
+        "roleDefinitionId": "[variables('role').StorageBlobDataOwner]",
+        "principalType": "User"
+      }
+    },
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-08-01-preview",
       "name": "[guid(format('2{0}', variables('resourceGroupName')))]",
       "properties": {
         "principalId": "[reference(resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix'))), '2021-05-01', 'full').identity.principalId]",
@@ -294,7 +372,7 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2020-08-01-preview",
       "scope": "[format('Microsoft.Storage/storageAccounts/{0}', format('asadatalake{0}', variables('suffix')))]",
-      "name": "[guid(format('6{0}', variables('resourceGroupName')))]",
+      "name": "[guid(format('3{0}', variables('resourceGroupName')))]",
       "properties": {
         "principalId": "[reference(resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix'))), '2021-05-01', 'full').identity.principalId]",
         "roleDefinitionId": "[variables('role').StorageBlobDataOwner]",
@@ -303,6 +381,37 @@
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]",
         "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+      "apiVersion": "2018-11-30",
+      "name": "postDeploymentIdentity",
+      "location": "[variables('location')]"
+    },
+    {
+      "type": "Microsoft.Resources/deploymentScripts",
+      "apiVersion": "2020-10-01",
+      "name": "powerShellLoadData",
+      "kind": "AzurePowerShell",
+      "location": "[variables('location')]",
+      "properties": {
+        "azPowerShellVersion": "3.0",
+        "arguments": "[format('-dataLakeAccountName {0} -resourceGroupName {1}', format('asadatalake{0}', variables('suffix')), variables('resourceGroupName'))]",
+        "primaryScriptUri": "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/ps1/postDeploymentScript.ps1",
+        "forceUpdateTag": "[guid(resourceGroup().id)]",
+        "cleanupPreference": "OnSuccess",
+        "retentionInterval": "PT4H "
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]": {}
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]"
       ]
     }
   ]
