@@ -27,15 +27,3 @@ Get-AzStorageBlob -Container $container -Prefix "sale-small/Year=2019" -Context 
     $jsonBlob = "product-json/json-data/product-$_.json"
     Start-AzStorageBlobCopy -AbsoluteUri $uri -DestContainer $container -DestBlob $jsonBlob -DestContext $dataLakeContext
 }
-# $jsonDocs = @(
-#     'product-1.json'
-#     'product-2.json'
-#     'product-3.json'
-#     'product-4.json'
-#     'product-5.json'
-# )
-# foreach ($jsonDoc in $jsonDocs) {
-#     $uri = "https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/environment-setup/automation/rawdata/json-data/${jsonDoc}"
-#     $jsonBlob = "product-json/json-data/${jsonDoc}"
-#     Start-AzStorageBlobCopy -AbsoluteUri $uri -DestContainer $container -DestBlob $jsonBlob -DestContext $dataLakeContext
-# }
