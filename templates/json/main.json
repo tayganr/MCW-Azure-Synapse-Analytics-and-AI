@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "5766580436008966520"
+      "templateHash": "14299468652397338863"
     }
   },
   "functions": [],
@@ -33,82 +33,8 @@
       ]
     },
     {
-      "type": "Microsoft.Synapse/workspaces/firewallRules",
-      "apiVersion": "2021-05-01",
-      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'allowAll')]",
-      "properties": {
-        "startIpAddress": "0.0.0.0",
-        "endIpAddress": "255.255.255.255"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
-      ]
-    },
-    {
-      "type": "Microsoft.Synapse/workspaces/bigDataPools",
-      "apiVersion": "2021-05-01",
-      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'SparkPool01')]",
-      "location": "[variables('location')]",
-      "properties": {
-        "sparkVersion": "2.4",
-        "nodeCount": 0,
-        "nodeSize": "Small",
-        "nodeSizeFamily": "MemoryOptimized",
-        "autoScale": {
-          "enabled": true,
-          "minNodeCount": 3,
-          "maxNodeCount": 4
-        },
-        "autoPause": {
-          "enabled": true,
-          "delayInMinutes": 15
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
-      ]
-    },
-    {
-      "type": "Microsoft.Synapse/workspaces/sqlPools",
-      "apiVersion": "2021-05-01",
-      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'SQLPool01')]",
-      "location": "[variables('location')]",
-      "sku": {
-        "name": "DW100c",
-        "capacity": 0
-      },
-      "properties": {
-        "createMode": "Default",
-        "collation": "SQL_Latin1_General_CP1_CI_AS"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
-      ]
-    },
-    {
-      "type": "Microsoft.Synapse/workspaces/integrationRuntimes",
-      "apiVersion": "2021-05-01",
-      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'AzureIntegrationRuntime01')]",
-      "properties": {
-        "type": "Managed",
-        "typeProperties": {
-          "computeProperties": {
-            "location": "AutoResolve",
-            "dataFlowProperties": {
-              "computeType": "MemoryOptimized",
-              "coreCount": 16,
-              "timeToLive": 60
-            }
-          }
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
-      ]
-    },
-    {
       "type": "Microsoft.Synapse/workspaces/linkedservices",
-      "apiVersion": "2018-06-01",
+      "apiVersion": "2021-06-01",
       "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'asadatalaketr8595')]",
       "properties": {
         "type": "AzureBlobFS",

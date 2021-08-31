@@ -57,61 +57,7 @@ resource synapseWorkspace 'Microsoft.Synapse/workspaces@2021-05-01' = {
   identity: {
     type: 'SystemAssigned'
   }
-  resource firewall 'firewallRules' = {
-    name: 'allowAll'
-    properties: {
-      startIpAddress: '0.0.0.0'
-      endIpAddress: '255.255.255.255'
-    }
-  }
-  resource bigDataPool 'bigDataPools' = {
-    name: 'SparkPool01'
-    location: location
-    properties: {
-      sparkVersion: '2.4'
-      nodeCount: 0
-      nodeSize: 'Small'
-      nodeSizeFamily: 'MemoryOptimized'
-      autoScale: {
-        enabled: true
-        minNodeCount: 3
-        maxNodeCount: 4
-      }
-      autoPause: {
-        enabled: true
-        delayInMinutes: 15
-      }
-    }
-  }
-  resource sqlPool 'sqlPools' = {
-    name: 'SQLPool01'
-    location: location
-    sku: {
-      name: 'DW100c'
-      capacity: 0
-    }
-    properties: {
-      createMode: 'Default'
-      collation: 'SQL_Latin1_General_CP1_CI_AS'
-    }
-  }
-  resource integrationRuntime 'integrationRuntimes@2021-05-01' = {
-    name: 'AzureIntegrationRuntime01'
-    properties: {
-      type: 'Managed'
-      typeProperties: {
-        computeProperties: {
-          location: 'AutoResolve'
-          dataFlowProperties: {
-            computeType: 'MemoryOptimized'
-            coreCount: 16
-            timeToLive: 60
-          }
-        }
-      }
-    }
-  }
-  resource linkedService1 'linkedservices@2018-06-01' = {
+  resource linkedService1 'linkedservices@2021-06-01' = {
     name: 'asadatalaketr8595'
     properties: {
       type: 'AzureBlobFS'
