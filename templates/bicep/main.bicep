@@ -129,6 +129,22 @@ resource synapseWorkspace 'Microsoft.Synapse/workspaces@2021-05-01' = {
       collation: 'SQL_Latin1_General_CP1_CI_AS'
     }
   }
+  resource integrationRuntime 'integrationRuntimes@2021-05-01' = {
+    name: 'AzureIntegrationRuntime01'
+    properties: {
+      type: 'Managed'
+      typeProperties: {
+        computeProperties: {
+          location: 'AutoResolve'
+          dataFlowProperties: {
+            computeType: 'MemoryOptimized'
+            coreCount: 16
+            timeToLive: 60
+          }
+        }
+      }
+    }
+  }
 }
 
 resource updateBigDataPool 'Microsoft.Resources/deployments@2021-04-01' = {
