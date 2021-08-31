@@ -257,3 +257,30 @@ resource roleAssignment3 'Microsoft.Authorization/roleAssignments@2020-08-01-pre
   }
 }
 
+resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' = {
+  name: 'postDeploymentIdentity'
+  location: location
+}
+
+resource script 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
+  name: 'powerShellLoadData'
+  kind: 'AzurePowerShell'
+  location: location
+  properties: {
+    azPowerShellVersion: '3.0'
+    arguments: '-dataLakeAccountName ${synapseStorageAccount.name} -resourceGroupName ${resourceGroupName}'
+    primaryScriptUri: 'https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/ps1/postDeploymentScript.ps1'
+    forceUpdateTag: guid(resourceGroup().id)
+    cleanupPreference: 'OnSuccess'
+    retentionInterval: 'PT4H '
+  }
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${userAssignedIdentity.id}': {}
+    }
+  }
+  dependsOn: [
+    synapseStorageAccount
+  ]
+}
