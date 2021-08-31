@@ -22,17 +22,20 @@ foreach ($blobPath in $blobPaths) {
 Get-AzStorageBlob -Container $container -Prefix "sale-small/Year=2018" -Context $sourceContext | Start-AzStorageBlobCopy -DestContainer $container -DestContext $dataLakeContext
 Get-AzStorageBlob -Container $container -Prefix "sale-small/Year=2019" -Context $sourceContext | Start-AzStorageBlobCopy -DestContainer $container -DestContext $dataLakeContext
 # JSON Documents
-New-Item -Name "json-data" -ItemType "directory"
-$jsonDocs = @(
-    'product-1.json'
-    'product-2.json'
-    'product-3.json'
-    'product-4.json'
-    'product-5.json'
-)
-foreach ($jsonDoc in $jsonDocs) {
-    $uri = "https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/environment-setup/automation/rawdata/json-data/${jsonDoc}"
-    Invoke-RestMethod -Uri $uri -OutFile "json-data/${jsonDoc}" 
+1..5 | ForEach-Object {
+    $uri = "https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/environment-setup/automation/rawdata/json-data/product-$_.json"
+    $jsonBlob = "product-json/json-data/product-$_.json"
+    Start-AzStorageBlobCopy -AbsoluteUri $uri -DestContainer $container -DestBlob $jsonBlob -DestContext $dataLakeContext
 }
-Set-Location -Path "json-data"
-Get-ChildItem -File -Recurse | Set-AzStorageBlobContent -Container $container -Context $dataLakeContext
+# $jsonDocs = @(
+#     'product-1.json'
+#     'product-2.json'
+#     'product-3.json'
+#     'product-4.json'
+#     'product-5.json'
+# )
+# foreach ($jsonDoc in $jsonDocs) {
+#     $uri = "https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/environment-setup/automation/rawdata/json-data/${jsonDoc}"
+#     $jsonBlob = "product-json/json-data/${jsonDoc}"
+#     Start-AzStorageBlobCopy -AbsoluteUri $uri -DestContainer $container -DestBlob $jsonBlob -DestContext $dataLakeContext
+# }
