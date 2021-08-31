@@ -3,14 +3,22 @@ param(
     [string]$resourceGroupName
 )
 
+# $dataLakeAccountName = "asadatalake96c5df"
+# $resourceGroupName = "Synapse22-MCW"
+$blobPath = "sale-small/Year=2010/Quarter=Q4/Month=12/Day=20101231/sale-small-20101231-snappy.parquet"
+$dataLakeStorageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $dataLakeAccountName)[0].Value
+$dataLakeContext = New-AzStorageContext -StorageAccountName $dataLakeAccountName -StorageAccountKey $dataLakeStorageAccountKey
+$sourceContext = New-AzStorageContext -StorageAccountName "solliancepublicdata" -Anonymous -Protocol "https"
+Start-AzStorageBlobCopy -SrcContainer "wwi-02" -SrcBlob $blobPath -DestContainer "wwi-02" -DestBlob $blobPath -Context $sourceContext -DestContext $dataLakeContext
+
 # $publicDataUrl = "https://solliancepublicdata.blob.core.windows.net/"
 # $dataLakeStorageUrl = "https://"+ $dataLakeAccountName + ".dfs.core.windows.net/"
 # $dataLakeStorageBlobUrl = "https://"+ $dataLakeAccountName + ".blob.core.windows.net/"
-$dataLakeStorageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $dataLakeAccountName)[0].Value
-$dataLakeContext = New-AzStorageContext -StorageAccountName $dataLakeAccountName -StorageAccountKey $dataLakeStorageAccountKey
+# $dataLakeStorageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $dataLakeAccountName)[0].Value
+# $dataLakeContext = New-AzStorageContext -StorageAccountName $dataLakeAccountName -StorageAccountKey $dataLakeStorageAccountKey
 
-Start-AzStorageBlobCopy -AbsoluteUri "https://solliancepublicdata.blob.core.windows.net/wwi-02/sale-small/Year=2010/Quarter=Q4/Month=12/Day=20101231/sale-small-20101231-s
-nappy.parquet" -DestContainer "wwi-02" -DestBlob "sale-small/Year=2010/Quarter=Q4/Month=12/Day=20101231/sale-small-20101231-snappy.parquet" -DestContext $dataLakeContext -Force
+# # Start-AzStorageBlobCopy -AbsoluteUri "https://solliancepublicdata.blob.core.windows.net/wwi-02/sale-small/Year=2010/Quarter=Q4/Month=12/Day=20101231/sale-small-20101231-s
+# # nappy.parquet" -DestContainer "wwi-02" -DestBlob "sale-small/Year=2010/Quarter=Q4/Month=12/Day=20101231/sale-small-20101231-snappy.parquet" -DestContext $dataLakeContext -Force
 
 # $destinationSasKey = New-AzStorageContainerSASToken -Container "wwi-02" -Context $dataLakeContext -Permission rwdl
 # $storageAccount = Get-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $dataLakeAccountName
