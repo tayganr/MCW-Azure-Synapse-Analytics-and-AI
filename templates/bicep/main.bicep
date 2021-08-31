@@ -1,4 +1,8 @@
 // param suffix string
+@description('Please enter your Azure AD Object ID. This can be found by locating your profile within Azure Portal > Azure Active Directory > Users.')
+param azureActiveDirectoryObjectID string
+
+// Variables
 var sqlAdministratorLoginPassword = 'Synapse2021!'
 var tenantId = subscription().tenantId
 var subscriptionId = subscription().subscriptionId
@@ -161,7 +165,38 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-04-01-preview' = {
     }
     enableSoftDelete: false
     tenantId: tenantId
-    accessPolicies: []
+    accessPolicies: [
+      {
+        tenantId: tenantId
+        objectId: synapseWorkspace.identity.principalId
+        permissions: {
+          secrets: [
+            'get'
+            'list'
+            'set'
+            'delete'
+          ]
+        }
+      }
+      {
+        tenantId: tenantId
+        objectId: azureActiveDirectoryObjectID
+        permissions: {
+          secrets: [
+            'get'
+            'list'
+            'set'
+            'delete'
+          ]
+        }
+      }
+    ]
+  }
+  resource secret 'secrets' = {
+    name: 'SQL-USER-ASA'
+    properties: {
+      value: sqlAdministratorLoginPassword
+    }
   }
 }
 
@@ -194,6 +229,15 @@ resource mlWorkspace 'Microsoft.MachineLearningServices/workspaces@2021-07-01' =
   }
 }
 
+resource roleAssignment1 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('1${resourceGroupName}')
+  properties: {
+    principalId: azureActiveDirectoryObjectID
+    roleDefinitionId: role['StorageBlobDataOwner']
+    principalType: 'User'
+  }
+}
+
 resource roleAssignment2 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
   name: guid('2${resourceGroupName}')
   properties: {
@@ -203,8 +247,8 @@ resource roleAssignment2 'Microsoft.Authorization/roleAssignments@2020-08-01-pre
   }
 }
 
-resource roleAssignment6 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-  name: guid('6${resourceGroupName}')
+resource roleAssignment3 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid('3${resourceGroupName}')
   scope: synapseStorageAccount
   properties: {
     principalId: synapseWorkspace.identity.principalId
@@ -213,71 +257,3 @@ resource roleAssignment6 'Microsoft.Authorization/roleAssignments@2020-08-01-pre
   }
 }
 
-// resource roleAssignment7 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-//   name: guid('7${resourceGroupName}')
-//   scope: synapseStorageAccount
-//   properties: {
-//     // principalId: #USER_OBJECT_ID# 
-//     roleDefinitionId: role['StorageBlobDataOwner']
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
-// resource roleAssignment1 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-//   name: guid('1${resourceGroupName}')
-//   properties: {
-//     principalId: mlWorkspace.identity.principalId
-//     roleDefinitionId: role['Contributor']
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
-// resource roleAssignment3 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-//   name: guid('3${resourceGroupName}')
-//   scope: applicationInsights
-//   properties: {
-//     principalId: mlWorkspace.identity.principalId
-//     roleDefinitionId: role['Contributor']
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
-// resource roleAssignment4 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-//   name: guid('4${resourceGroupName}')
-//   scope: keyVault
-//   properties: {
-//     principalId: mlWorkspace.identity.principalId
-//     roleDefinitionId: role['Contributor']
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
-// resource roleAssignment5 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-//   name: guid('5${resourceGroupName}')
-//   scope: keyVault
-//   properties: {
-//     principalId: mlWorkspace.identity.principalId
-//     roleDefinitionId: role['KeyVaultAdministrator']
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
-// resource roleAssignment8 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-//   name: guid('8${resourceGroupName}')
-//   scope: storageAccount
-//   properties: {
-//     principalId: mlWorkspace.identity.principalId
-//     roleDefinitionId: role['Contributor']
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
-// resource roleAssignment9 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-//   name: guid('9${resourceGroupName}')
-//   scope: storageAccount
-//   properties: {
-//     principalId: mlWorkspace.identity.principalId
-//     roleDefinitionId: role['StorageBlobDataContributor']
-//     principalType: 'ServicePrincipal'
-//   }
-// }
