@@ -5,16 +5,25 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "14299468652397338863"
+      "templateHash": "14809429525935232492"
     }
   },
   "functions": [],
   "variables": {
     "sqlAdministratorLoginPassword": "Synapse2021!",
     "location": "[resourceGroup().location]",
+    "resourceGroupName": "[resourceGroup().name]",
     "suffix": "[substring(guid(resourceGroup().id), 0, 6)]"
   },
   "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices",
+      "apiVersion": "2021-04-01",
+      "name": "[format('{0}/{1}', format('asastore{0}', variables('suffix')), 'default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]"
+      ]
+    },
     {
       "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
       "apiVersion": "2021-04-01",
@@ -33,19 +42,36 @@
       ]
     },
     {
-      "type": "Microsoft.Synapse/workspaces/linkedservices",
-      "apiVersion": "2021-06-01",
-      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'asadatalaketr8595')]",
+      "type": "Microsoft.Synapse/workspaces/firewallRules",
+      "apiVersion": "2021-05-01",
+      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'allowAll')]",
       "properties": {
-        "type": "AzureBlobFS",
-        "typeProperties": {
-          "url": "https://asadatalaketr8595.dfs.core.windows.net",
-          "encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFTQVdPUktTUEFDRVRSODU5NV9iZDQzZmVlOS0xMjg1LTQ2NDctODVhMS04ZjdkNWVhMTliOTEiDQp9"
-        }
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "255.255.255.255"
       },
       "dependsOn": [
         "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
       ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2021-04-01",
+      "name": "[format('asastore{0}', variables('suffix'))]",
+      "location": "[variables('location')]",
+      "kind": "StorageV2",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "properties": {
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [],
+          "ipRules": [],
+          "defaultAction": "Allow"
+        },
+        "supportsHttpsTrafficOnly": true,
+        "accessTier": "Hot"
+      }
     },
     {
       "type": "Microsoft.Storage/storageAccounts",
@@ -86,6 +112,38 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+      "apiVersion": "2018-11-30",
+      "name": "postDeploymentIdentity",
+      "location": "[variables('location')]"
+    },
+    {
+      "type": "Microsoft.Resources/deploymentScripts",
+      "apiVersion": "2020-10-01",
+      "name": "synapseArtifacts",
+      "kind": "AzurePowerShell",
+      "location": "[variables('location')]",
+      "properties": {
+        "azPowerShellVersion": "3.0",
+        "arguments": "[format('-resourceGroupName {0} -storageAccountName {1} -synapseWorkspaceName {2}', variables('resourceGroupName'), format('asastore{0}', variables('suffix')), format('asaworkspace{0}', variables('suffix')))]",
+        "primaryScriptUri": "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/ps1/postDeploymentScript2.ps1",
+        "forceUpdateTag": "[guid(resourceGroup().id)]",
+        "cleanupPreference": "OnSuccess",
+        "retentionInterval": "PT4H "
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]": {}
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]"
       ]
     }
   ]
