@@ -1,5 +1,6 @@
 // Variables
 var sqlAdministratorLoginPassword = 'Synapse2021!'
+var tenantId = subscription().tenantId
 var subscriptionId = subscription().subscriptionId
 var location = resourceGroup().location
 var resourceGroupName = resourceGroup().name
@@ -80,6 +81,15 @@ resource synapseWorkspace 'Microsoft.Synapse/workspaces@2021-05-01' = {
     properties: {
       startIpAddress: '0.0.0.0'
       endIpAddress: '255.255.255.255'
+    }
+  }
+  resource admin 'administrators' = {
+    name: 'activeDirectory'
+    properties: {
+      sid: userAssignedIdentity.properties.principalId
+      tenantId: tenantId
+      administratorType: 'ActiveDirectory'
+      login: userAssignedIdentity.name
     }
   }
 }

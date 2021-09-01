@@ -5,12 +5,13 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "9411129313333192606"
+      "templateHash": "5598708126474570320"
     }
   },
   "functions": [],
   "variables": {
     "sqlAdministratorLoginPassword": "Synapse2021!",
+    "tenantId": "[subscription().tenantId]",
     "subscriptionId": "[subscription().subscriptionId]",
     "location": "[resourceGroup().location]",
     "resourceGroupName": "[resourceGroup().name]",
@@ -60,6 +61,21 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces/administrators",
+      "apiVersion": "2021-05-01",
+      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'activeDirectory')]",
+      "properties": {
+        "sid": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')).principalId]",
+        "tenantId": "[variables('tenantId')]",
+        "administratorType": "ActiveDirectory",
+        "login": "postDeploymentIdentity"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]",
+        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]"
       ]
     },
     {
