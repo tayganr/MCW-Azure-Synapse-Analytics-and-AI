@@ -4,8 +4,15 @@ param(
     [string]$synapseWorkspaceName
 )
 
-$token = Get-AzAccessToken -ResourceUrl "https://management.core.windows.net/"
+$token = Get-AzAccessToken -ResourceUrl "https://dev.azuresynapse.net"
 Write-Output $token
+
+$headers = @{ Authorization = "Bearer $token" }
+
+$uri = "https://asaworkspace400f89.dev.azuresynapse.net/linkedservices?api-version=2020-12-01"
+$result = Invoke-RestMethod -Method Get -ContentType "application/json" -Uri $uri -Headers $headers
+Write-Output $result
+
 
 # Install-Module Az.Synapse -Force
 
