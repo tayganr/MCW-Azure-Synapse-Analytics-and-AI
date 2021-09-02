@@ -5,25 +5,14 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "5598708126474570320"
+      "templateHash": "7545053453863176786"
     }
   },
   "functions": [],
   "variables": {
     "sqlAdministratorLoginPassword": "Synapse2021!",
-    "tenantId": "[subscription().tenantId]",
-    "subscriptionId": "[subscription().subscriptionId]",
     "location": "[resourceGroup().location]",
-    "resourceGroupName": "[resourceGroup().name]",
-    "suffix": "[substring(guid(resourceGroup().id), 0, 6)]",
-    "roleDefinitionPrefix": "[format('/subscriptions/{0}/providers/Microsoft.Authorization/roleDefinitions', variables('subscriptionId'))]",
-    "role": {
-      "Owner": "[format('{0}/8e3af657-a8ff-443c-a75c-2fe8c4bcb635', variables('roleDefinitionPrefix'))]",
-      "Contributor": "[format('{0}/b24988ac-6180-42a0-ab88-20f7382dd24c', variables('roleDefinitionPrefix'))]",
-      "KeyVaultAdministrator": "[format('{0}/00482a5a-887f-4fb3-b363-3b7fe8e74483', variables('roleDefinitionPrefix'))]",
-      "StorageBlobDataOwner": "[format('{0}/b7e6dc6d-f1e8-4753-8033-0f276bb0955b', variables('roleDefinitionPrefix'))]",
-      "StorageBlobDataContributor": "[format('{0}/ba92f5b4-2d11-453d-a403-e96b0029c9fe', variables('roleDefinitionPrefix'))]"
-    }
+    "suffix": "[substring(guid(resourceGroup().id), 0, 6)]"
   },
   "resources": [
     {
@@ -61,21 +50,6 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]"
-      ]
-    },
-    {
-      "type": "Microsoft.Synapse/workspaces/administrators",
-      "apiVersion": "2021-05-01",
-      "name": "[format('{0}/{1}', format('asaworkspace{0}', variables('suffix')), 'activeDirectory')]",
-      "properties": {
-        "sid": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')).principalId]",
-        "tenantId": "[variables('tenantId')]",
-        "administratorType": "ActiveDirectory",
-        "login": "postDeploymentIdentity"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]",
-        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]"
       ]
     },
     {
@@ -138,51 +112,16 @@
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', format('asadatalake{0}', variables('suffix')))]"
       ]
-    },
-    {
-      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
-      "apiVersion": "2018-11-30",
-      "name": "postDeploymentIdentity",
-      "location": "[variables('location')]"
-    },
-    {
-      "type": "Microsoft.Authorization/roleAssignments",
-      "apiVersion": "2020-08-01-preview",
-      "name": "[guid(format('X{0}', variables('resourceGroupName')))]",
-      "properties": {
-        "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')).principalId]",
-        "roleDefinitionId": "[variables('role').Owner]",
-        "principalType": "ServicePrincipal"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]"
-      ]
-    },
-    {
-      "type": "Microsoft.Resources/deploymentScripts",
-      "apiVersion": "2020-10-01",
-      "name": "synapseArtifacts",
-      "kind": "AzurePowerShell",
-      "location": "[variables('location')]",
-      "properties": {
-        "azPowerShellVersion": "3.0",
-        "arguments": "[format('-resourceGroupName {0} -storageAccountName {1} -synapseWorkspaceName {2}', variables('resourceGroupName'), format('asastore{0}', variables('suffix')), format('asaworkspace{0}', variables('suffix')))]",
-        "primaryScriptUri": "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/ps1/postDeploymentScript2.ps1",
-        "forceUpdateTag": "[guid(resourceGroup().id)]",
-        "cleanupPreference": "OnSuccess",
-        "retentionInterval": "PT4H "
-      },
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]": {}
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', format('asastore{0}', variables('suffix')))]",
-        "[resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))]",
-        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', 'postDeploymentIdentity')]"
-      ]
     }
-  ]
+  ],
+  "outputs": {
+    "synapseWorkspaceName": {
+      "type": "string",
+      "value": "[format('asaworkspace{0}', variables('suffix'))]"
+    },
+    "storageAccountName": {
+      "type": "string",
+      "value": "[format('asastore{0}', variables('suffix'))]"
+    }
+  }
 }
