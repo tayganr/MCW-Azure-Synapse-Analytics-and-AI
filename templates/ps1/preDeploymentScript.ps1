@@ -32,6 +32,17 @@ function deployTemplate([string]$accessToken, [string]$templateLink, [string]$re
     $job = Invoke-RestMethod @params
     Return $job
 }
+function getDeployment([string]$accessToken, [string]$subscriptionId, [string]$resourceGroupName, [string]$deploymentName) {
+    $params = @{
+        ContentType = "application/json"
+        Headers = @{"Authorization"="Bearer ${accessToken}"}
+        Method = "GET"
+        URI = "https://management.azure.com/subscriptions/${subscriptionId}/resourcegroups/${resourceGroupName}/providers/Microsoft.Resources/deployments/${deploymentName}?api-version=2021-04-01"
+    }
+    $response = Invoke-RestMethod @params
+    Return $response
+}
+
 # Variables
 $tenantId = (Get-AzContext).Tenant.Id
 $subscriptionId = (Get-AzContext).Subscription.Id
@@ -46,11 +57,8 @@ $resourceGroupName = $resourceGroup.ResourceGroupName
 # Main Deployment
 $accessToken = (Get-AzAccessToken -ResourceUrl "https://management.azure.com").Token
 $templateLink = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/json/main.json" 
-# $parameters = @{ suffix = @{ value = $suffix } }
-# $deployment = deployTemplate $accessToken $templateLink $resourceGroupName $parameters
 $deployment = deployTemplate $accessToken $templateLink $resourceGroupName
 $deploymentName = $deployment.name
-
 $progress = ('.', '..', '...')
 $provisioningState = ""
 While ($provisioningState -ne "Succeeded") {
@@ -62,3 +70,125 @@ While ($provisioningState -ne "Succeeded") {
     }
     $provisioningState = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName).properties.provisioningState
 }
+
+# Get Outputs
+$deployment = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName)
+$synapseWorkspaceName = $deployment.Properties.Outputs.synapseWorkspaceName.Value
+$storageAccountName = $deployment.Properties.Outputs.storageAccountName.Value
+$dataLakeAccountName = $deployment.Properties.Outputs.dataLakeAccountName.Value
+$keyVaultName = $deployment.Properties.Outputs.keyVaultName.Value
+$sqlPoolName = $deployment.Properties.Outputs.sqlPoolName.Value
+$sqlAdminName = $deployment.Properties.Outputs.sqlAdminName.Value
+$keyVaultSecretName = $deployment.Properties.Outputs.keyVaultSecretName.Value
+
+# Synapse
+Install-Module Az.Synapse -Force
+# Linked Service #1 - Storage Account
+$storageAccountKey1 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $storageAccountName)[0].Value
+$linkedService1 = @{
+    name = "${storageAccountName}"
+    type = "Microsoft.Synapse/workspaces/linkedservices"
+    properties = @{
+        type = "AzureBlobStorage"
+        typeProperties = @{
+            connectionString = "DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageAccountKey1};EndpointSuffix=core.windows.net;"
+        }
+    }
+}
+ConvertTo-Json $linkedService1  | Out-File ls1.json
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $storageAccountName -DefinitionFile "ls1.json"
+
+# Linked Service #2 - Data Lake
+$storageAccountKey2 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $dataLakeAccountName)[0].Value
+$linkedService2 = @{
+    name = "${dataLakeAccountName}"
+    properties =  @{
+        type = "AzureBlobFS"
+        typeProperties =  @{
+            url = "https://${dataLakeAccountName}.dfs.core.windows.net"
+            accountKey =  @{
+                type =  "SecureString"
+                value = "${storageAccountKey2}"
+            }
+        }
+    }
+}
+ConvertTo-Json $linkedService2  | Out-File ls2.json
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $storageAccountName -DefinitionFile "ls2.json"
+
+# Linked Service #3 - Key Vault
+$linkedService3 = @{
+    name = "${keyVaultName}"
+    type = "Microsoft.Synapse/workspaces/linkedservices"
+    properties = {
+        type = "AzureKeyVault"
+        typeProperties = {
+            baseUrl = "https://${keyVaultName}.vault.azure.net/"
+        }
+    }
+}
+ConvertTo-Json $linkedService3  | Out-File ls3.json
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $storageAccountName -DefinitionFile "ls3.json"
+
+# Linked Service #4 - SQL DWH
+$linkedService4 = @{
+    name = "${sqlPoolName}"
+    properties = {
+        type = "AzureSqlDW"
+        typeProperties = {
+            connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=${sqlAdminName}"
+            password = {
+                type = "AzureKeyVaultSecret"
+                store = { 
+                    referenceName = "${keyVaultName}"
+                    type = "LinkedServiceReference"
+                },
+                secretName = "${keyVaultSecretName}"
+            }
+        }
+    }
+}
+ConvertTo-Json $linkedService4  | Out-File ls4.json
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $storageAccountName -DefinitionFile "ls4.json"
+
+# Linked Service #5 - SQL DWH Workload 01
+$linkedService5 = @{
+    name = "${sqlPoolName}_workload01"
+    properties = {
+        type = "AzureSqlDW"
+        typeProperties = {
+            connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload01"
+            password = {
+                type = "AzureKeyVaultSecret"
+                store = { 
+                    referenceName = "${keyVaultName}"
+                    type = "LinkedServiceReference"
+                },
+                secretName = "${keyVaultSecretName}"
+            }
+        }
+    }
+}
+ConvertTo-Json $linkedService5  | Out-File ls5.json
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $storageAccountName -DefinitionFile "ls5.json"
+
+# Linked Service #6 - SQL DWH Workload 01
+$linkedService6 = @{
+    name = "${sqlPoolName}_workload02"
+    properties = {
+        type = "AzureSqlDW"
+        typeProperties = {
+            connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload02"
+            password = {
+                type = "AzureKeyVaultSecret"
+                store = { 
+                    referenceName = "${keyVaultName}"
+                    type = "LinkedServiceReference"
+                },
+                secretName = "${keyVaultSecretName}"
+            }
+        }
+    }
+}
+ConvertTo-Json $linkedService6  | Out-File ls6.json
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $storageAccountName -DefinitionFile "ls6.json"
