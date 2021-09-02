@@ -46,6 +46,7 @@ function getDeployment([string]$accessToken, [string]$subscriptionId, [string]$r
 # Variables
 $tenantId = (Get-AzContext).Tenant.Id
 $subscriptionId = (Get-AzContext).Subscription.Id
+Clear-Host
 $principalId = getUserPrincipalId
 $suffix = -join ((48..57) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
 $location = 'uksouth'
@@ -57,7 +58,8 @@ $resourceGroupName = $resourceGroup.ResourceGroupName
 # Main Deployment
 $accessToken = (Get-AzAccessToken -ResourceUrl "https://management.azure.com").Token
 $templateLink = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/json/main.json" 
-$deployment = deployTemplate $accessToken $templateLink $resourceGroupName
+$parameters = @{ azureActiveDirectoryObjectID = @{ value = $principalId } }
+$deployment = deployTemplate $accessToken $templateLink $resourceGroupName $parameters
 $deploymentName = $deployment.name
 $progress = ('.', '..', '...')
 $provisioningState = ""
