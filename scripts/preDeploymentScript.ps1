@@ -38,6 +38,20 @@ function getDeployment([string]$accessToken, [string]$subscriptionId, [string]$r
     }
     Return $response
 }
+function getDeploymentOps([string]$accessToken, [string]$subscriptionId, [string]$resourceGroupName, [string]$deploymentName) {
+    $params = @{
+        ContentType = "application/json"
+        Headers = @{"Authorization"="Bearer ${accessToken}"}
+        Method = "GET"
+        URI =   "https://management.azure.com/subscriptions/${subscriptionId}/resourcegroups/${resourceGroupName}/deployments/${deploymentName}/operations?api-version=2021-04-01"
+    }
+    try {
+        $response = Invoke-RestMethod @params
+    } catch {
+        $response = $_.Exception.Response.StatusDescription
+    }
+    Return $response
+}
 
 # Variables
 $subscriptionId = (Get-AzContext).Subscription.Id
@@ -63,10 +77,17 @@ While ($provisioningState -ne "Succeeded") {
             Clear-Host
             Write-Host "Deployment is in progress, this will take approximately 10 minutes"
             Write-Host "${provisioningState}${x}"
+            ForEach ($op in $deploymentOperations.value) {
+                $resourceName = $item.properties.targetResource.resourceName
+                $resourceType = $item.properties.targetResource.resourceType
+                $resourceState = $item.properties.provisioningState
+                Write-Host "${resourceState}`t${resourceType}`t${resourceName}"
+            }
             Start-Sleep 1
         }
     }
     $provisioningState = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName).properties.provisioningState
+    $deploymentOperations = getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName
 }
 
 # Get Outputs
