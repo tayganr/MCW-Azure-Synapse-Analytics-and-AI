@@ -688,10 +688,25 @@ $uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics
 Invoke-RestMethod -Uri $uriSql -OutFile "01_sqlpool01_mcw.sql"
 Invoke-Sqlcmd -InputFile "01_sqlpool01_mcw.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 # SQL Script 3
-$params = "DATALAKESTORAGEKEY=${storageAccountKey2}", "DATALAKESTORAGEACCOUNTNAME=${dataLakeAccountName}"
+
+# PS /home/taygan> $params
+# DATALAKESTORAGEKEY=Q5Fg1qAR/N4sSj9MODdLVKU9U7+B7NHveTgMFCq6pPtlCNLqDz0NPzpP66glIRHrneLyayUVW9jyh7esVzEDMA'+CHAR(61)+''+CHAR(61)+'
+# DATALAKESTORAGEACCOUNTNAME=asadatalakec8dc56
+# PS /home/taygan> [IO.File]::ReadAllText("02_sqlpool01_ml.sql") -replace `
+# >>    'DATALAKESTORAGEKEY',"${key}" > foo.sql
+# PS /home/taygan> ls
+#  00_master_setup.sql    02_sqlpool01_ml.sql   ds1.json   ds3.json  'Exercise 7 - Machine Learning.ipynb'   ls1.json   ls3.json   ls5.json    ls6.json   pl2.json   preDeploymentScript.ps1
+#  01_sqlpool01_mcw.sql   clouddrive            ds2.json   ds4.json   foo.sql                                ls2.json   ls4.json   ls6a.json   pl1.json   pl3.json   Synapse-MCW
+# PS /home/taygan>
+
+
+
+# $params = "DATALAKESTORAGEKEY='${storageAccountKey2}'","DATALAKESTORAGEACCOUNTNAME='${dataLakeAccountName}'"
 $uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml.sql"
 Invoke-RestMethod -Uri $uriSql -OutFile "02_sqlpool01_ml.sql"
-Invoke-Sqlcmd -InputFile "02_sqlpool01_ml.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $params
+[IO.File]::ReadAllText("02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEKEY#',"${storageAccountKey2}" > "02_sqlpool01_ml.sql"
+[IO.File]::ReadAllText("02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEACCOUNTNAME#',"${dataLakeAccountName}" > "02_sqlpool01_ml.sql"
+Invoke-Sqlcmd -InputFile "02_sqlpool01_ml.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 
 # Notebook
 $uriNotebook = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/notebook.json"
