@@ -682,22 +682,17 @@ Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl1.name -Defi
 Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl2.name -DefinitionFile "pl2.json"
 Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl3.name -DefinitionFile "pl3.json"
 
-# SQL Scripts
-$uriSql1 = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/00_master_setup.sql"
-Invoke-RestMethod -Uri $uriSql1 -OutFile "00_master_setup.sql"
-$StringArray = "PASSWORD=Synapse2021!"
-Invoke-Sqlcmd -InputFile "00_master_setup.sql" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $StringArray
-
-Invoke-RestMethod -Uri $uriSql1 -OutFile "01_sqlpool01_mcw.sql"
+# SQL Script 1
+$uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/00_master_setup.sql"
+Invoke-RestMethod -Uri $uriSql -OutFile "00_master_setup.sql"
+$params = "PASSWORD=Synapse2021!"
+Invoke-Sqlcmd -InputFile "00_master_setup.sql" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $params
+# SQL Script 2
+$uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/01_sqlpool01_mcw.sql"
+Invoke-RestMethod -Uri $uriSql -OutFile "01_sqlpool01_mcw.sql"
 Invoke-Sqlcmd -InputFile "01_sqlpool01_mcw.sql" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
-
-# -SQLPoolName "master"       -SQLUserName $sqlUserName -SQLPassword $sqlPassword -FileName "00_master_setup"     -Parameters $params
-# -SQLPoolName $sqlPoolName   -SQLUserName $sqlUserName -SQLPassword $sqlPassword -FileName "01_sqlpool01_mcw"    -Parameters $params
-# -SQLPoolName $sqlPoolName   -SQLUserName $sqlUserName -SQLPassword $sqlPassword -FileName "02_sqlpool01_ml"     -Parameters $params
-
-
-# $params = @{
-#     "PASSWORD" = $sqlPassword
-#     "DATALAKESTORAGEKEY" = $dataLakeStorageAccountKey
-#     "DATALAKESTORAGEACCOUNTNAME" = $dataLakeAccountName
-# }
+# SQL Script 3
+$params = "DATALAKESTORAGEKEY=${storageAccountKey2}", "DATALAKESTORAGEACCOUNTNAME=${dataLakeAccountName}"
+$uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml"
+Invoke-RestMethod -Uri $uriSql -OutFile "02_sqlpool01_ml"
+Invoke-Sqlcmd -InputFile "02_sqlpool01_ml" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
