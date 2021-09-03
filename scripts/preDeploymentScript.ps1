@@ -30,7 +30,11 @@ function getDeployment([string]$accessToken, [string]$subscriptionId, [string]$r
         Method = "GET"
         URI = "https://management.azure.com/subscriptions/${subscriptionId}/resourcegroups/${resourceGroupName}/providers/Microsoft.Resources/deployments/${deploymentName}?api-version=2021-04-01"
     }
-    $response = Invoke-RestMethod @params
+    try {
+        $response = Invoke-RestMethod @params
+    } catch {
+        $response = $_.Exception.Response.StatusDescription
+    }
     Return $response
 }
 
