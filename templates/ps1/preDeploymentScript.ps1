@@ -1,3 +1,4 @@
+$timer = [System.Diagnostics.Stopwatch]::StartNew()
 function getUserPrincipalId() {
     $principalId = $null
     Do {
@@ -697,3 +698,7 @@ $params = "DATALAKESTORAGEKEY=${storageAccountKey2}", "DATALAKESTORAGEACCOUNTNAM
 $uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml"
 Invoke-RestMethod -Uri $uriSql -OutFile "02_sqlpool01_ml"
 Invoke-Sqlcmd -InputFile "02_sqlpool01_ml" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
+
+$timer.Stop()
+$totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
+$totalTime
