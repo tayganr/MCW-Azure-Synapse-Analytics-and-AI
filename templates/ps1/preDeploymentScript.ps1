@@ -701,4 +701,4 @@ Invoke-Sqlcmd -InputFile "02_sqlpool01_ml" -ServerInstance "asaworkspacea56885.s
 
 $timer.Stop()
 $totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
-$totalTime
+Write-Output "Duration ${totalTime}"
