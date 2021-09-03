@@ -1,4 +1,5 @@
 $timer = [System.Diagnostics.Stopwatch]::StartNew()
+New-Item "MCW" -ItemType directory
 function deployTemplate([string]$accessToken, [string]$templateLink, [string]$resourceGroupName, [hashtable]$parameters) {
     $randomId = -join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
     $deploymentName = "deployment-${randomId}"
@@ -93,8 +94,8 @@ $linkedService1 = @{
         }
     }
 }
-ConvertTo-Json $linkedService1  | Out-File ls1.json
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService1.name -DefinitionFile "ls1.json"
+ConvertTo-Json $linkedService1 | Out-File "MCW/ls1.json"
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService1.name -DefinitionFile "MCW/ls1.json"
 
 # Linked Service #2 - Data Lake
 $storageAccountKey2 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $dataLakeAccountName)[0].Value
@@ -111,8 +112,8 @@ $linkedService2 = @{
         }
     }
 }
-ConvertTo-Json $linkedService2  | Out-File ls2.json
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService2.name -DefinitionFile "ls2.json"
+ConvertTo-Json $linkedService2 | Out-File "MCW/ls2.json"
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService2.name -DefinitionFile "MCW/ls2.json"
 
 # Linked Service #3 - Key Vault
 $linkedService3 = @{
@@ -125,8 +126,8 @@ $linkedService3 = @{
         }
     }
 }
-ConvertTo-Json $linkedService3  -Depth 10 | Out-File ls3.json
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService3.name -DefinitionFile "ls3.json"
+ConvertTo-Json $linkedService3  -Depth 10 | Out-File "MCW/ls3.json"
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService3.name -DefinitionFile "MCW/ls3.json"
 
 # Linked Service #4 - SQL DWH
 $linkedService4 = @{
@@ -147,8 +148,8 @@ $linkedService4 = @{
         }
     }
 }
-ConvertTo-Json $linkedService4 -Depth 10 | Out-File ls4.json
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService4.name -DefinitionFile "ls4.json"
+ConvertTo-Json $linkedService4 -Depth 10 | Out-File "MCW/ls4.json"
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService4.name -DefinitionFile "MCW/ls4.json"
 
 # Linked Service #5 - SQL DWH Workload 01
 $linkedService5 = @{
@@ -168,8 +169,8 @@ $linkedService5 = @{
         }
     }
 }
-ConvertTo-Json $linkedService5 -Depth 10 | Out-File ls5.json
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService5.name -DefinitionFile "ls5.json"
+ConvertTo-Json $linkedService5 -Depth 10 | Out-File "MCW/ls5.json"
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService5.name -DefinitionFile "MCW/ls5.json"
 
 # Linked Service #6 - SQL DWH Workload 01
 $linkedService6 = @{
@@ -189,8 +190,8 @@ $linkedService6 = @{
         }
     }
 }
-ConvertTo-Json $linkedService6 -Depth 10 | Out-File ls6.json
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService6.name -DefinitionFile "ls6.json"
+ConvertTo-Json $linkedService6 -Depth 10 | Out-File "MCW/ls6.json"
+Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService6.name -DefinitionFile "MCW/ls6.json"
 
 # Datasets
 $dataset1 = @{
@@ -419,14 +420,14 @@ $dataset4 = @{
     }
     type = "Microsoft.Synapse/workspaces/datasets"
 }
-ConvertTo-Json $dataset1 -Depth 10 | Out-File ds1.json
-ConvertTo-Json $dataset2 -Depth 10 | Out-File ds2.json
-ConvertTo-Json $dataset3 -Depth 10 | Out-File ds3.json
-ConvertTo-Json $dataset4 -Depth 10 | Out-File ds4.json
-Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset1.name -DefinitionFile "ds1.json"
-Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset2.name -DefinitionFile "ds2.json"
-Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset3.name -DefinitionFile "ds3.json"
-Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset4.name -DefinitionFile "ds4.json"
+ConvertTo-Json $dataset1 -Depth 10 | Out-File "MCW/ds1.json"
+ConvertTo-Json $dataset2 -Depth 10 | Out-File "MCW/ds2.json"
+ConvertTo-Json $dataset3 -Depth 10 | Out-File "MCW/ds3.json"
+ConvertTo-Json $dataset4 -Depth 10 | Out-File "MCW/ds4.json"
+Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset1.name -DefinitionFile "MCW/ds1.json"
+Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset2.name -DefinitionFile "MCW/ds2.json"
+Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset3.name -DefinitionFile "MCW/ds3.json"
+Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset4.name -DefinitionFile "MCW/ds4.json"
 
 # Pipelines
 $pl1 = @{
@@ -671,42 +672,28 @@ $pl3 = @{
     }
     type = "Microsoft.Synapse/workspaces/pipelines"
 }
-ConvertTo-Json $pl1 -Depth 10 | Out-File pl1.json
-ConvertTo-Json $pl2 -Depth 10 | Out-File pl2.json
-ConvertTo-Json $pl3 -Depth 10 | Out-File pl3.json
-Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl1.name -DefinitionFile "pl1.json"
-Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl2.name -DefinitionFile "pl2.json"
-Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl3.name -DefinitionFile "pl3.json"
+ConvertTo-Json $pl1 -Depth 10 | Out-File "MCW/pl1.json"
+ConvertTo-Json $pl2 -Depth 10 | Out-File "MCW/pl2.json"
+ConvertTo-Json $pl3 -Depth 10 | Out-File "MCW/pl3.json"
+Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl1.name -DefinitionFile "MCW/pl1.json"
+Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl2.name -DefinitionFile "MCW/pl2.json"
+Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl3.name -DefinitionFile "MCW/pl3.json"
 
 # SQL Script 1
 $uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/00_master_setup.sql"
-Invoke-RestMethod -Uri $uriSql -OutFile "00_master_setup.sql"
+Invoke-RestMethod -Uri $uriSql -OutFile "MCW/00_master_setup.sql"
 $params = "PASSWORD=Synapse2021!"
-Invoke-Sqlcmd -InputFile "00_master_setup.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $params
+Invoke-Sqlcmd -InputFile "MCW/00_master_setup.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $params
 # SQL Script 2
 $uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/01_sqlpool01_mcw.sql"
-Invoke-RestMethod -Uri $uriSql -OutFile "01_sqlpool01_mcw.sql"
-Invoke-Sqlcmd -InputFile "01_sqlpool01_mcw.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
+Invoke-RestMethod -Uri $uriSql -OutFile "MCW/01_sqlpool01_mcw.sql"
+Invoke-Sqlcmd -InputFile "MCW/01_sqlpool01_mcw.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 # SQL Script 3
-
-# PS /home/taygan> $params
-# DATALAKESTORAGEKEY=Q5Fg1qAR/N4sSj9MODdLVKU9U7+B7NHveTgMFCq6pPtlCNLqDz0NPzpP66glIRHrneLyayUVW9jyh7esVzEDMA'+CHAR(61)+''+CHAR(61)+'
-# DATALAKESTORAGEACCOUNTNAME=asadatalakec8dc56
-# PS /home/taygan> [IO.File]::ReadAllText("02_sqlpool01_ml.sql") -replace `
-# >>    'DATALAKESTORAGEKEY',"${key}" > foo.sql
-# PS /home/taygan> ls
-#  00_master_setup.sql    02_sqlpool01_ml.sql   ds1.json   ds3.json  'Exercise 7 - Machine Learning.ipynb'   ls1.json   ls3.json   ls5.json    ls6.json   pl2.json   preDeploymentScript.ps1
-#  01_sqlpool01_mcw.sql   clouddrive            ds2.json   ds4.json   foo.sql                                ls2.json   ls4.json   ls6a.json   pl1.json   pl3.json   Synapse-MCW
-# PS /home/taygan>
-
-
-
-# $params = "DATALAKESTORAGEKEY='${storageAccountKey2}'","DATALAKESTORAGEACCOUNTNAME='${dataLakeAccountName}'"
 $uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml.sql"
-Invoke-RestMethod -Uri $uriSql -OutFile "02_sqlpool01_ml.sql"
-[IO.File]::ReadAllText("02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEKEY#',"${storageAccountKey2}" > "foo.sql"
-[IO.File]::ReadAllText("foo.sql") -replace '#DATALAKESTORAGEACCOUNTNAME#',"${dataLakeAccountName}" > "bar.sql"
-Invoke-Sqlcmd -InputFile "bar.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
+Invoke-RestMethod -Uri $uriSql -OutFile "MCW/02_sqlpool01_ml.sql"
+[IO.File]::ReadAllText("MCW/02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEKEY#',"${storageAccountKey2}" > "MCW/foo.sql"
+[IO.File]::ReadAllText("MCW/foo.sql") -replace '#DATALAKESTORAGEACCOUNTNAME#',"${dataLakeAccountName}" > "MCW/bar.sql"
+Invoke-Sqlcmd -InputFile "MCW/bar.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 
 # Notebook
 $uriNotebook = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/notebook.json"
@@ -714,8 +701,11 @@ $notebook = Invoke-RestMethod -Uri $uriNotebook
 foreach ($cell in $notebook.cells) {
     $cell.source = $cell.source.Replace('#SUBSCRIPTION_ID#', $subscriptionId).Replace('#RESOURCE_GROUP_NAME#', $resourceGroupName).Replace('#AML_WORKSPACE_NAME#', $amlWorkspaceName)
 }
-$notebook | ConvertTo-Json -Depth 100 | Out-File "Exercise 7 - Machine Learning.ipynb" -Encoding utf8
-Set-AzSynapseNotebook -WorkspaceName $synapseWorkspaceName -DefinitionFile "Exercise 7 - Machine Learning.ipynb"
+$notebook | ConvertTo-Json -Depth 100 | Out-File "MCW/Exercise 7 - Machine Learning.ipynb" -Encoding utf8
+Set-AzSynapseNotebook -WorkspaceName $synapseWorkspaceName -DefinitionFile "MCW/Exercise 7 - Machine Learning.ipynb"
+
+# Clean-up Files
+# Remove-Item -Recurse -Force MCW
 
 $timer.Stop()
 $totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
