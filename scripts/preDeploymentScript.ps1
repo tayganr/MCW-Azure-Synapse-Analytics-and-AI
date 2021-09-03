@@ -53,11 +53,13 @@ $deploymentName = $deployment.name
 $progress = ('.', '..', '...')
 $provisioningState = ""
 While ($provisioningState -ne "Succeeded") {
-    Foreach ($x in $progress) {
-        Clear-Host
-        Write-Host "Deployment is in progress, this will take approximately 10 minutes"
-        Write-Host "${provisioningState}${x}"
-        Start-Sleep 1
+    1..3 | ForEach-Object {
+        Foreach ($x in $progress) {
+            Clear-Host
+            Write-Host "Deployment is in progress, this will take approximately 10 minutes"
+            Write-Host "${provisioningState}${x}"
+            Start-Sleep 1
+        }
     }
     $provisioningState = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName).properties.provisioningState
 }
