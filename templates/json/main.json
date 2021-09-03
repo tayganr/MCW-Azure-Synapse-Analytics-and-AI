@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "15322546807943339675"
+      "templateHash": "11033948637209364134"
     }
   },
   "parameters": {
@@ -464,6 +464,10 @@
     "keyVaultSecretName": {
       "type": "string",
       "value": "SQL-USER-ASA"
+    },
+    "amlWorkspaceName": {
+      "type": "string",
+      "value": "[format('amlworkspace{0}', variables('suffix'))]"
     }
   }
 }

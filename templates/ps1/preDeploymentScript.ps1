@@ -1,14 +1,4 @@
 $timer = [System.Diagnostics.Stopwatch]::StartNew()
-function getUserPrincipalId() {
-    $principalId = $null
-    Do {
-        $emailAddress = Read-Host -Prompt "Please enter your Azure AD email address"
-        $principalId = (Get-AzAdUser -Mail $emailAddress).id
-        if ($null -eq $principalId) { $principalId = (Get-AzAdUser -UserPrincipalName $emailAddress).Id } 
-        if ($null -eq $principalId) { Write-Host "Unable to find a user within the Azure AD with email address: ${emailAddress}. Please try again." }
-    } until($null -ne $principalId)
-    Return $principalId
-}
 function deployTemplate([string]$accessToken, [string]$templateLink, [string]$resourceGroupName, [hashtable]$parameters) {
     $randomId = -join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
     $deploymentName = "deployment-${randomId}"
@@ -45,9 +35,6 @@ function getDeployment([string]$accessToken, [string]$subscriptionId, [string]$r
 }
 
 # Variables
-# $tenantId = (Get-AzContext).Tenant.Id
-# $principalId = getUserPrincipalId
-# Clear-Host
 $subscriptionId = (Get-AzContext).Subscription.Id
 $principalId = az ad signed-in-user show --query objectId -o tsv
 $suffix = -join ((48..57) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
@@ -69,7 +56,7 @@ While ($provisioningState -ne "Succeeded") {
     Foreach ($x in $progress) {
         Clear-Host
         Write-Host "Deployment is in progress, this will take approximately 10 minutes"
-        Write-Host "Running${x}"
+        Write-Host "${provisioningState}${x}"
         Start-Sleep 1
     }
     $provisioningState = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName).properties.provisioningState
@@ -84,6 +71,7 @@ $keyVaultName = $deployment.Properties.Outputs.keyVaultName.Value
 $sqlPoolName = $deployment.Properties.Outputs.sqlPoolName.Value
 $sqlAdminName = $deployment.Properties.Outputs.sqlAdminName.Value
 $keyVaultSecretName = $deployment.Properties.Outputs.keyVaultSecretName.Value
+$amlWorkspaceName =  $deployment.Properties.Outputs.amlWorkspaceName.Value
 
 # Synapse
 Install-Module Az.Synapse -Force
@@ -697,11 +685,15 @@ Invoke-Sqlcmd -InputFile "01_sqlpool01_mcw.sql" -ServerInstance "${synapseWorksp
 $params = "DATALAKESTORAGEKEY=${storageAccountKey2}", "DATALAKESTORAGEACCOUNTNAME=${dataLakeAccountName}"
 $uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml.sql"
 Invoke-RestMethod -Uri $uriSql -OutFile "02_sqlpool01_ml.sql"
-Invoke-Sqlcmd -InputFile "02_sqlpool01_ml.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
+Invoke-Sqlcmd -InputFile "02_sqlpool01_ml.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $params
 
 # Notebook
 $uriNotebook = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/notebook.json"
-Invoke-RestMethod -Uri $uriNotebook -OutFile "Exercise 7 - Machine Learning.ipynb"
+$notebook = Invoke-RestMethod -Uri $uriNotebook 
+foreach ($cell in $notebook.cells) {
+    $cell.source = $cell.source.Replace('#SUBSCRIPTION_ID#', $subscriptionId).Replace('#RESOURCE_GROUP_NAME#', $resourceGroupName).Replace('#AML_WORKSPACE_NAME#', $amlWorkspaceName)
+}
+$notebook | ConvertTo-Json -Depth 100 | Out-File "Exercise 7 - Machine Learning.ipynb" -Encoding utf8
 Set-AzSynapseNotebook -WorkspaceName $synapseWorkspaceName -DefinitionFile "Exercise 7 - Machine Learning.ipynb"
 
 $timer.Stop()
