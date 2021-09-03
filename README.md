@@ -13,3 +13,5 @@ Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
   ```
 2. Navigate to the [Azure Portal](https://portal.azure.com), open the **Cloud Shell**.
 ![Azure Portal Cloud Shell](https://raw.githubusercontent.com/tayganr/purviewdemo/main/images/azure_portal_cloud_shell.png)
+
+3. **Paste** the code snippet. Wait until the deployment is complete.
