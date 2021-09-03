@@ -44,10 +44,11 @@ function getDeployment([string]$accessToken, [string]$subscriptionId, [string]$r
 }
 
 # Variables
-$tenantId = (Get-AzContext).Tenant.Id
+# $tenantId = (Get-AzContext).Tenant.Id
+# $principalId = getUserPrincipalId
+# Clear-Host
 $subscriptionId = (Get-AzContext).Subscription.Id
-Clear-Host
-$principalId = getUserPrincipalId
+$principalId = az ad signed-in-user show --query objectId -o tsv
 $suffix = -join ((48..57) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
 $location = 'uksouth'
 
