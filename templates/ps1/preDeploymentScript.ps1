@@ -681,3 +681,17 @@ ConvertTo-Json $pl3 -Depth 10 | Out-File pl3.json
 Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl1.name -DefinitionFile "pl1.json"
 Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl2.name -DefinitionFile "pl2.json"
 Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl3.name -DefinitionFile "pl3.json"
+
+# SQL Scripts
+Invoke-Sqlcmd -Query "SELECT TOP 5 * FROM [sys].[types]" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -User "asa.sql.admin" -Password "Synapse2021!"
+
+# -SQLPoolName "master"       -SQLUserName $sqlUserName -SQLPassword $sqlPassword -FileName "00_master_setup"     -Parameters $params
+# -SQLPoolName $sqlPoolName   -SQLUserName $sqlUserName -SQLPassword $sqlPassword -FileName "01_sqlpool01_mcw"    -Parameters $params
+# -SQLPoolName $sqlPoolName   -SQLUserName $sqlUserName -SQLPassword $sqlPassword -FileName "02_sqlpool01_ml"     -Parameters $params
+
+
+# $params = @{
+#     "PASSWORD" = $sqlPassword
+#     "DATALAKESTORAGEKEY" = $dataLakeStorageAccountKey
+#     "DATALAKESTORAGEACCOUNTNAME" = $dataLakeAccountName
+# }
