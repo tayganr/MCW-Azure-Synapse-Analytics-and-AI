@@ -7,7 +7,7 @@
 
 1. **Copy** the PowerShell code snippet below.
 ```powershell
-$uri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/ps1/preDeploymentScript.ps1"
+$uri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/scripts/preDeploymentScript.ps1"
 Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
 ./preDeploymentScript.ps1
   ```
