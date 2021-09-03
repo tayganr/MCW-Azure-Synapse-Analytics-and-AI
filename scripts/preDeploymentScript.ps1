@@ -704,9 +704,9 @@ Invoke-Sqlcmd -InputFile "01_sqlpool01_mcw.sql" -ServerInstance "${synapseWorksp
 # $params = "DATALAKESTORAGEKEY='${storageAccountKey2}'","DATALAKESTORAGEACCOUNTNAME='${dataLakeAccountName}'"
 $uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml.sql"
 Invoke-RestMethod -Uri $uriSql -OutFile "02_sqlpool01_ml.sql"
-[IO.File]::ReadAllText("02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEKEY#',"${storageAccountKey2}" > "02_sqlpool01_ml.sql"
-[IO.File]::ReadAllText("02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEACCOUNTNAME#',"${dataLakeAccountName}" > "02_sqlpool01_ml.sql"
-Invoke-Sqlcmd -InputFile "02_sqlpool01_ml.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
+[IO.File]::ReadAllText("02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEKEY#',"${storageAccountKey2}" > "foo.sql"
+[IO.File]::ReadAllText("foo.sql") -replace '#DATALAKESTORAGEACCOUNTNAME#',"${dataLakeAccountName}" > "bar.sql"
+Invoke-Sqlcmd -InputFile "bar.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 
 # Notebook
 $uriNotebook = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/notebook.json"
