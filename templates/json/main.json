@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "11033948637209364134"
+      "templateHash": "5346001221159647399"
     }
   },
   "parameters": {
@@ -418,7 +418,7 @@
       "properties": {
         "azPowerShellVersion": "3.0",
         "arguments": "[format('-dataLakeAccountName {0} -resourceGroupName {1}', format('asadatalake{0}', variables('suffix')), variables('resourceGroupName'))]",
-        "primaryScriptUri": "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/ps1/postDeploymentScript.ps1",
+        "primaryScriptUri": "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/scripts/postDeploymentScript.ps1",
         "forceUpdateTag": "[guid(resourceGroup().id)]",
         "cleanupPreference": "OnSuccess",
         "retentionInterval": "PT4H "
