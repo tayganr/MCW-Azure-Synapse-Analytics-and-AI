@@ -683,7 +683,13 @@ Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl2.name -Defi
 Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pl3.name -DefinitionFile "pl3.json"
 
 # SQL Scripts
-Invoke-Sqlcmd -Query "SELECT TOP 5 * FROM [sys].[types]" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -User "asa.sql.admin" -Password "Synapse2021!"
+$uriSql1 = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/00_master_setup.sql"
+Invoke-RestMethod -Uri $uriSql1 -OutFile "00_master_setup.sql"
+$StringArray = "PASSWORD=Synapse2021!"
+Invoke-Sqlcmd -InputFile "00_master_setup.sql" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $StringArray
+
+Invoke-RestMethod -Uri $uriSql1 -OutFile "01_sqlpool01_mcw.sql"
+Invoke-Sqlcmd -InputFile "01_sqlpool01_mcw.sql" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 
 # -SQLPoolName "master"       -SQLUserName $sqlUserName -SQLPassword $sqlPassword -FileName "00_master_setup"     -Parameters $params
 # -SQLPoolName $sqlPoolName   -SQLUserName $sqlUserName -SQLPassword $sqlPassword -FileName "01_sqlpool01_mcw"    -Parameters $params
