@@ -695,9 +695,14 @@ Invoke-RestMethod -Uri $uriSql -OutFile "01_sqlpool01_mcw.sql"
 Invoke-Sqlcmd -InputFile "01_sqlpool01_mcw.sql" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 # SQL Script 3
 $params = "DATALAKESTORAGEKEY=${storageAccountKey2}", "DATALAKESTORAGEACCOUNTNAME=${dataLakeAccountName}"
-$uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml"
-Invoke-RestMethod -Uri $uriSql -OutFile "02_sqlpool01_ml"
-Invoke-Sqlcmd -InputFile "02_sqlpool01_ml" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
+$uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml.sql"
+Invoke-RestMethod -Uri $uriSql -OutFile "02_sqlpool01_ml.sql"
+Invoke-Sqlcmd -InputFile "02_sqlpool01_ml.sql" -ServerInstance "asaworkspacea56885.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
+
+
+# Notebook
+$uriNotebook = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/notebook.json"
+Invoke-RestMethod -Uri $uriNotebook -OutFile "Exercise 7 - Machine Learning.ipynb"
 
 $timer.Stop()
 $totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
