@@ -57,8 +57,7 @@ function getDeploymentOps([string]$accessToken, [string]$subscriptionId, [string
 }
 
 function putNotebook([string]$accessToken, [string]$synapseWorkspaceName, [string]$notebookFileName) {
-    # $body = Invoke-RestMethod $notebookUri
-    $body = Get-Content "MCW/${notebookFileName}.json"
+    $body = Get-Content "MCW/${notebookFileName}.json" | ConvertFrom-Json
     $params = @{
         ContentType = "application/json"
         Headers = @{"Authorization"="Bearer ${accessToken}"}
@@ -752,21 +751,6 @@ foreach ($cell in $notebook.cells) {
 $notebook | ConvertTo-Json -Depth 100 | Out-File "MCW/${notebookFileName}.json" -Encoding utf8
 $accessToken = (Get-AzAccessToken -ResourceUrl "https://dev.azuresynapse.net").Token
 putNotebook $accessToken $synapseWorkspaceName $notebookFileName
-
-
-# $uriNotebook = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/notebook.json"
-# $notebook = Invoke-RestMethod -Uri $uriNotebook 
-# foreach ($cell in $notebook.cells) {
-#     $cell.source = $cell.source.Replace('#SUBSCRIPTION_ID#', $subscriptionId).Replace('#RESOURCE_GROUP_NAME#', $resourceGroupName).Replace('#AML_WORKSPACE_NAME#', $amlWorkspaceName)
-# }
-# $notebook | ConvertTo-Json -Depth 100 | Out-File "MCW/Exercise 7 - Machine Learning.ipynb" -Encoding utf8
-# Set-AzSynapseNotebook -WorkspaceName $synapseWorkspaceName -DefinitionFile "MCW/Exercise 7 - Machine Learning.ipynb"
-
-
-# $accessToken = (Get-AzAccessToken -ResourceUrl "https://dev.azuresynapse.net").Token
-# $notebookFileName = "notebook"
-# $notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/${notebookFileName}.json"
-# putNotebook $accessToken $synapseWorkspaceName $notebookFileName $notebookUri
 
 # Clean-up Files
 Remove-Item -Recurse -Force MCW
