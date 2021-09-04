@@ -105,8 +105,9 @@ While ($provisioningState -ne "Succeeded") {
                 }
                 $table += $row
             }
+            $elapsed = "{0:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
             Clear-Host
-            Write-Host "Deployment is in progress, this will take approximately 10 minutes"
+            Write-Host "Deployment is in progress, this will take approximately 10 minutes. Elapsed ${elapsed}"
             Write-Host "${provisioningState}${x}"
             $table | ForEach-Object {[PSCustomObject]$_} | Format-Table -AutoSize
             Start-Sleep 1
