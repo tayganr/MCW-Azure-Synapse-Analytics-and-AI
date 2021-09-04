@@ -758,3 +758,4 @@ Remove-Item -Recurse -Force MCW
 $timer.Stop()
 $totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
 Write-Output "Duration ${totalTime}"
+Write-Output "Resource Group: ${resourceGroupName}"
