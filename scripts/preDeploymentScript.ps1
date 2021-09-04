@@ -56,8 +56,9 @@ function getDeploymentOps([string]$accessToken, [string]$subscriptionId, [string
     Return $response
 }
 
-function putNotebook([string]$accessToken, [string]$synapseWorkspaceName, [string]$notebookFileName, [string]$notebookUri) {
-    $body = Invoke-RestMethod $notebookUri
+function putNotebook([string]$accessToken, [string]$synapseWorkspaceName, [string]$notebookFileName) {
+    # $body = Invoke-RestMethod $notebookUri
+    $body = Get-Content "MCW/${notebookFileName}.json"
     $params = @{
         ContentType = "application/json"
         Headers = @{"Authorization"="Bearer ${accessToken}"}
@@ -107,8 +108,7 @@ While ($provisioningState -ne "Succeeded") {
             Clear-Host
             Write-Host "Deployment is in progress, this will take approximately 10 minutes. Elapsed ${elapsed}"
             Write-Host "${provisioningState}${x}"
-            $formattedTable = $table | ForEach-Object {[PSCustomObject]$_} | Format-Table -AutoSize
-            Write-Host $formattedTable
+            $table | ForEach-Object {[PSCustomObject]$_} | Format-Table -AutoSize
             Start-Sleep 1
         }
     }
@@ -743,6 +743,17 @@ Invoke-RestMethod -Uri $uriSql -OutFile "MCW/02_sqlpool01_ml.sql"
 Invoke-Sqlcmd -InputFile "MCW/bar.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 
 # Notebook
+$notebookFileName = "notebook"
+$notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/${notebookFileName}.json"
+$notebook = Invoke-RestMethod -Uri $notebookUri 
+foreach ($cell in $notebook.cells) {
+    $cell.source = $cell.source.Replace('#SUBSCRIPTION_ID#', $subscriptionId).Replace('#RESOURCE_GROUP_NAME#', $resourceGroupName).Replace('#AML_WORKSPACE_NAME#', $amlWorkspaceName)
+}
+$notebook | ConvertTo-Json -Depth 100 | Out-File "MCW/${notebookFileName}.json" -Encoding utf8
+$accessToken = (Get-AzAccessToken -ResourceUrl "https://dev.azuresynapse.net").Token
+putNotebook $accessToken $synapseWorkspaceName $notebookFileName
+
+
 # $uriNotebook = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/notebook.json"
 # $notebook = Invoke-RestMethod -Uri $uriNotebook 
 # foreach ($cell in $notebook.cells) {
@@ -750,10 +761,12 @@ Invoke-Sqlcmd -InputFile "MCW/bar.sql" -ServerInstance "${synapseWorkspaceName}.
 # }
 # $notebook | ConvertTo-Json -Depth 100 | Out-File "MCW/Exercise 7 - Machine Learning.ipynb" -Encoding utf8
 # Set-AzSynapseNotebook -WorkspaceName $synapseWorkspaceName -DefinitionFile "MCW/Exercise 7 - Machine Learning.ipynb"
-$accessToken = (Get-AzAccessToken -ResourceUrl "https://dev.azuresynapse.net").Token
-$notebookFileName = "notebook"
-$notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/${notebookFileName}.json"
-putNotebook $accessToken $synapseWorkspaceName $notebookFileName $notebookUri
+
+
+# $accessToken = (Get-AzAccessToken -ResourceUrl "https://dev.azuresynapse.net").Token
+# $notebookFileName = "notebook"
+# $notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/${notebookFileName}.json"
+# putNotebook $accessToken $synapseWorkspaceName $notebookFileName $notebookUri
 
 # Clean-up Files
 Remove-Item -Recurse -Force MCW
