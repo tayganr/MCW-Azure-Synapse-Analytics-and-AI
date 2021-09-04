@@ -1,0 +1,36 @@
+{
+    "name": "myNotebook",
+    "properties": {
+      "description": "A sample Notebook",
+      "nbformat": 4,
+      "nbformat_minor": 2,
+      "metadata": {
+        "language_info": {
+          "name": "python"
+        }
+      },
+      "cells": [
+        {
+          "cell_type": "code",
+          "metadata": {},
+          "source": [
+            "def my_function():\n",
+            " print(\"Hello from a function\")\n",
+            "\n",
+            "my_function()"
+          ],
+          "attachments": {},
+          "outputs": [
+            {
+              "execution_count": 3,
+              "output_type": "execute_result",
+              "data": {
+                "text/plain": "Hello from a function"
+              },
+              "metadata": {}
+            }
+          ]
+        }
+      ]
+    }
+  }
