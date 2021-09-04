@@ -745,7 +745,7 @@ Invoke-Sqlcmd -InputFile "MCW/bar.sql" -ServerInstance "${synapseWorkspaceName}.
 $notebookFileName = "notebook"
 $notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/${notebookFileName}.json"
 $notebook = Invoke-RestMethod -Uri $notebookUri 
-foreach ($cell in $notebook.cells) {
+foreach ($cell in $notebook.properties.cells) {
     $cell.source = $cell.source.Replace('#SUBSCRIPTION_ID#', $subscriptionId).Replace('#RESOURCE_GROUP_NAME#', $resourceGroupName).Replace('#AML_WORKSPACE_NAME#', $amlWorkspaceName)
 }
 $notebook | ConvertTo-Json -Depth 100 | Out-File "MCW/${notebookFileName}.json" -Encoding utf8
@@ -754,6 +754,7 @@ putNotebook $accessToken $synapseWorkspaceName $notebookFileName
 
 # Clean-up Files
 Remove-Item -Recurse -Force MCW
+Remove-Item preDeploymentScript.ps1
 
 $timer.Stop()
 $totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
