@@ -756,7 +756,7 @@ $notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Anal
 putNotebook $accessToken $synapseWorkspaceName $notebookFileName $notebookUri
 
 # Clean-up Files
-# Remove-Item -Recurse -Force MCW
+Remove-Item -Recurse -Force MCW
 
 $timer.Stop()
 $totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
