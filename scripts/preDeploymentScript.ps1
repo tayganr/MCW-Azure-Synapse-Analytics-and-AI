@@ -1,5 +1,7 @@
 $timer = [System.Diagnostics.Stopwatch]::StartNew()
-New-Item "MCW" -ItemType directory
+if(!(Test-Path -Path "MCW" )){
+    New-Item "MCW" -ItemType directory
+}
 function deployTemplate([string]$accessToken, [string]$templateLink, [string]$resourceGroupName, [hashtable]$parameters) {
     $randomId = -join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
     $deploymentName = "deployment-${randomId}"
@@ -106,7 +108,7 @@ While ($provisioningState -ne "Succeeded") {
         }
     }
     $provisioningState = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName).properties.provisioningState
-    $deploymentOperations = getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName
+    $deploymentOperations = getDeploymentOps $accessToken $subscriptionId $resourceGroupName $deploymentName
 }
 
 # Get Outputs
