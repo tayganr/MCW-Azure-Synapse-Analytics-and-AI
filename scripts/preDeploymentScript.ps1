@@ -62,15 +62,13 @@ function putNotebook([string]$accessToken, [string]$synapseWorkspaceName, [strin
         ContentType = "application/json"
         Headers = @{"Authorization"="Bearer ${accessToken}"}
         Method = "PUT"
-        Body = $body
-        URI =   "https://${synapseWorkspaceName}.dev.azuresynapse.net/notebooks/{$notebookFileName}?api-version=2020-12-01"
+        Body = ($body | ConvertTo-Json -Depth 100)
+        URI =   "https://${synapseWorkspaceName}.dev.azuresynapse.net/notebooks/${notebookFileName}?api-version=2020-12-01"
     }
     try {
         $response = Invoke-RestMethod @params
-        Write-Output $response
     } catch {
-        $response = $_.Exception.Response.StatusDescription
-        Write-Output $response
+        $response = $_.Exception.Response
     }
     Return $response
 }
@@ -109,7 +107,8 @@ While ($provisioningState -ne "Succeeded") {
             Clear-Host
             Write-Host "Deployment is in progress, this will take approximately 10 minutes. Elapsed ${elapsed}"
             Write-Host "${provisioningState}${x}"
-            $table | ForEach-Object {[PSCustomObject]$_} | Format-Table -AutoSize
+            $formattedTable = $table | ForEach-Object {[PSCustomObject]$_} | Format-Table -AutoSize
+            Write-Host $formattedTable
             Start-Sleep 1
         }
     }
@@ -752,8 +751,8 @@ Invoke-Sqlcmd -InputFile "MCW/bar.sql" -ServerInstance "${synapseWorkspaceName}.
 # $notebook | ConvertTo-Json -Depth 100 | Out-File "MCW/Exercise 7 - Machine Learning.ipynb" -Encoding utf8
 # Set-AzSynapseNotebook -WorkspaceName $synapseWorkspaceName -DefinitionFile "MCW/Exercise 7 - Machine Learning.ipynb"
 $accessToken = (Get-AzAccessToken -ResourceUrl "https://dev.azuresynapse.net").Token
-$notebookFileName = "myNotebook.json"
-$notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/${notebookFileName}"
+$notebookFileName = "notebook"
+$notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/${notebookFileName}.json"
 putNotebook $accessToken $synapseWorkspaceName $notebookFileName $notebookUri
 
 # Clean-up Files
