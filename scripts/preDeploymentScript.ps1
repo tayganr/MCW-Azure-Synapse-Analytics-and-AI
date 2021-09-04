@@ -36,7 +36,7 @@ function getDeployment([string]$accessToken, [string]$subscriptionId, [string]$r
     try {
         $response = Invoke-RestMethod @params
     } catch {
-        $response = $_.Exception.Response.StatusDescription
+        $response = $_.Exception.Response
     }
     Return $response
 }
@@ -49,8 +49,9 @@ function getDeploymentOps([string]$accessToken, [string]$subscriptionId, [string
     }
     try {
         $response = Invoke-RestMethod @params
+
     } catch {
-        $response = $_.Exception.Response.StatusDescription
+        $response = $_.Exception.Response
     }
     Return $response
 }
@@ -95,15 +96,19 @@ $provisioningState = ""
 While ($provisioningState -ne "Succeeded") {
     1..3 | ForEach-Object {
         Foreach ($x in $progress) {
+            $table = @()
+            ForEach ($op in $deploymentOperations.value) {
+                $row = @{
+                    provisioningState = $op.properties.provisioningState
+                    resourceType = $op.properties.targetResource.resourceType
+                    resourceName = $op.properties.targetResource.resourceName   
+                }
+                $table += $row
+            }
             Clear-Host
             Write-Host "Deployment is in progress, this will take approximately 10 minutes"
             Write-Host "${provisioningState}${x}"
-            ForEach ($op in $deploymentOperations.value) {
-                $resourceName = $item.properties.targetResource.resourceName
-                $resourceType = $item.properties.targetResource.resourceType
-                $resourceState = $item.properties.provisioningState
-                Write-Host "${resourceState}`t${resourceType}`t${resourceName}"
-            }
+            $table | ForEach-Object {[PSCustomObject]$_} | Format-Table -AutoSize
             Start-Sleep 1
         }
     }
