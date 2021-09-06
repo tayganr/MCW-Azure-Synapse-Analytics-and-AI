@@ -158,7 +158,7 @@ $linkedService2 = @{
         }
     }
 }
-ConvertTo-Json $linkedService2 | Out-File "MCW/ls2.json"
+ConvertTo-Json $linkedService2 -Depth 10 | Out-File "MCW/ls2.json"
 Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService2.name -DefinitionFile "MCW/ls2.json"
 
 # Linked Service #3 - Key Vault
