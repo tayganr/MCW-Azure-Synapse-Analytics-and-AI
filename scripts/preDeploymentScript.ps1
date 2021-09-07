@@ -200,8 +200,8 @@ foreach ($uri in $pipelines) {
 # SQL Script 1
 $uriSql = "${assets}/sql_scripts/00_master_setup.sql"
 Invoke-RestMethod -Uri $uriSql -OutFile "MCW/00_master_setup.sql"
-$params = "PASSWORD=Synapse2021!"
-Invoke-Sqlcmd -InputFile "MCW/00_master_setup.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $params
+[IO.File]::ReadAllText("MCW/00_master_setup.sql") -replace '#PASSWORD#',"Synapse2021!" > "MCW/sql1.sql"
+Invoke-Sqlcmd -InputFile "MCW/sql1.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!"
 # SQL Script 2
 $uriSql = "${assets}/sql_scripts/01_sqlpool01_mcw.sql"
 Invoke-RestMethod -Uri $uriSql -OutFile "MCW/01_sqlpool01_mcw.sql"
