@@ -69,6 +69,30 @@ function putNotebook([string]$accessToken, [string]$synapseWorkspaceName, [strin
     Return $response
 }
 
+# Validate Default Subscription
+$currentSubscriptionId = (Get-AzContext).Subscription.Id
+$currentSubscriptionName = (Get-AzContext).Subscription.Name
+$YesOrNo = ""
+while("y","n" -notcontains $YesOrNo ){ 
+    Clear-Host
+    Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})" -ForegroundColor Black -BackgroundColor Yellow
+    $YesOrNo = Read-Host "Is this correct (y/n)"
+}
+if ($YesOrNo -eq 'n') {
+    $NewSubscriptionId = ""
+    Clear-Host
+    Get-AzSubscription | Select-Object Id, Name
+}
+while($NewSubscriptionId.Length -ne 36) {
+    $NewSubscriptionId = Read-Host "Please copy/paste the correct Subscription ID from the list above"
+}
+if ($NewSubscriptionId.Length -eq 36) {
+    $context = Set-AzContext -Subscription $NewSubscriptionId
+    $currentSubscriptionId = $context.Subscription.Id
+    $currentSubscriptionName = $context.Subscription.Name
+    Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})"
+}
+
 # Variables
 $principalId = az ad signed-in-user show --query objectId -o tsv
 if ($principalId) {
