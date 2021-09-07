@@ -1,6 +1,6 @@
 ## Exercise 6: Security
 
-[< Previous Exercise](../exercises/exercise05.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise07.md)
+[< Previous Exercise](../exercises/exercise05.md#exercise-5-synapse-pipelines-and-cognitive-search-optional) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#azure-synapse-analytics-and-ai-hands-on-lab)** - [Next Exercise >](../exercises/exercise07.md#exercise-7-machine-learning)
 
 **Duration**: 30 minutes
 

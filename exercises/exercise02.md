@@ -1,6 +1,6 @@
 ## Exercise 2: Create and populate the supporting tables in the SQL Pool
 
-[< Previous Exercise](../exercises/exercise01.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise03.md)
+[< Previous Exercise](../exercises/exercise01.md#exercise-1-accessing-the-azure-synapse-analytics-workspace) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#azure-synapse-analytics-and-ai-hands-on-lab)** - [Next Exercise >](../exercises/exercise03.md#exercise-3-exploring-raw-parquet)
 
 **Duration**: 120 minutes
 

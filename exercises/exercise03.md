@@ -1,6 +1,6 @@
 ## Exercise 3: Exploring raw parquet
 
-[< Previous Exercise](../exercises/exercise02.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise04.md)
+[< Previous Exercise](../exercises/exercise02.md#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#azure-synapse-analytics-and-ai-hands-on-lab)** - [Next Exercise >](../exercises/exercise04.md#exercise-4-exploring-raw-text-based-data-with-azure-synapse-sql-serverless)
 
 **Duration**: 30 minutes
 

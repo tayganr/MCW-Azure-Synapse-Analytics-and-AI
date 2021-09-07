@@ -1,6 +1,6 @@
 ## Exercise 4: Exploring raw text based data with Azure Synapse SQL Serverless
 
-[< Previous Exercise](../exercises/exercise03.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise05.md)
+[< Previous Exercise](../exercises/exercise03.md#exercise-3-exploring-raw-parquet) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#azure-synapse-analytics-and-ai-hands-on-lab)** - [Next Exercise >](../exercises/exercise05.md#exercise-5-synapse-pipelines-and-cognitive-search-optional)
 
 **Duration**: 15 minutes
 

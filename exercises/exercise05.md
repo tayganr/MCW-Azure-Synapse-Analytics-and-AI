@@ -1,6 +1,6 @@
 ## Exercise 5: Synapse Pipelines and Cognitive Search (Optional)
 
-[< Previous Exercise](../exercises/exercise04.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise06.md)
+[< Previous Exercise](../exercises/exercise04.md#exercise-4-exploring-raw-text-based-data-with-azure-synapse-sql-serverless) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#azure-synapse-analytics-and-ai-hands-on-lab)** - [Next Exercise >](../exercises/exercise06.md#exercise-6-security)
 
 **Duration**: 45 minutes
 
