@@ -1,0 +1,85 @@
+{
+	"name": "ASAMCW - Exercise 8 - ExecuteDataAnalystAndCEOQueries",
+	"properties": {
+		"activities": [
+			{
+				"userProperties": [],
+				"dependsOn": [],
+				"typeProperties": {
+					"activities": [
+						{
+							"name": "Workload 1 for CEO",
+							"type": "Lookup",
+							"dependsOn": [],
+							"userProperties": [],
+							"policy": {
+								"retryIntervalInSeconds": 30,
+								"secureInput": false,
+								"retry": 0,
+								"timeout": "7.00:00:00",
+								"secureOutput": false
+							},
+							"typeProperties": {
+								"dataset": {
+									"type": "DatasetReference",
+									"referenceName": "asamcw_wwi_salesmall_workload1_asa"
+								},
+								"source": {
+									"sqlReaderQuery": "select count(X.A) from (\\nselect CAST(CustomerId as nvarchar(20)) as A from wwi_mcw.SaleSmall) X where A like '%3%'",
+									"queryTimeout": "02:00:00",
+									"type": "SqlDWSource"
+								}
+							}
+						}
+					],
+					"items": {
+						"value": "@range(120)",
+						"type": "Expression"
+					}
+				},
+				"type": "ForEach",
+				"name": "CEO"
+			},
+			{
+				"userProperties": [],
+				"dependsOn": [],
+				"typeProperties": {
+					"activities": [
+						{
+							"name": "Workload 2 for Data Analyst",
+							"type": "Lookup",
+							"dependsOn": [],
+							"userProperties": [],
+							"policy": {
+								"retryIntervalInSeconds": 30,
+								"secureInput": false,
+								"retry": 0,
+								"timeout": "7.00:00:00",
+								"secureOutput": false
+							},
+							"typeProperties": {
+								"dataset": {
+									"type": "DatasetReference",
+									"referenceName": "asamcw_wwi_salesmall_workload2_asa"
+								},
+								"source": {
+									"sqlReaderQuery": "select count(X.A) from (\\nselect CAST(CustomerId as nvarchar(20)) as A from wwi_mcw.SaleSmall) X where A like '%3%'",
+									"queryTimeout": "02:00:00",
+									"type": "SqlDWSource"
+								}
+							}
+						}
+					],
+					"items": {
+						"value": "@range(120)",
+						"type": "Expression"
+					}
+				},
+				"type": "ForEach",
+				"name": "Analyst"
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

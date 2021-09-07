@@ -1,0 +1,110 @@
+{
+	"name": "ASAMCW - Exercise 2 - Copy Product Information",
+	"properties": {
+		"activities": [
+			{
+				"outputs": [
+					{
+						"type": "DatasetReference",
+						"referenceName": "asamcw_product_asa"
+					}
+				],
+				"name": "Copy Product Information",
+				"dependsOn": [],
+				"userProperties": [],
+				"inputs": [
+					{
+						"type": "DatasetReference",
+						"referenceName": "asamcw_product_csv"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						},
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"type": "DelimitedTextSource"
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"type": "LinkedServiceReference",
+							"referenceName": null
+						},
+						"path": "staging"
+					},
+					"sink": {
+						"polyBaseSettings": {
+							"rejectValue": 0,
+							"useTypeDefault": true,
+							"rejectType": "value"
+						},
+						"disableMetricsCollection": false,
+						"preCopyScript": "truncate table wwi_mcw.Product",
+						"type": "SqlDWSink",
+						"allowPolyBase": true
+					},
+					"translator": {
+						"mappings": [
+							{
+								"source": {
+									"ordinal": 1,
+									"type": "String"
+								},
+								"sink": {
+									"name": "ProductId",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 2,
+									"type": "String"
+								},
+								"sink": {
+									"name": "Seasonality",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 3,
+									"type": "String"
+								},
+								"sink": {
+									"name": "Price",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 4,
+									"type": "String"
+								},
+								"sink": {
+									"name": "Profit",
+									"type": "Decimal"
+								}
+							}
+						],
+						"type": "TabularTranslator"
+					}
+				},
+				"policy": {
+					"retryIntervalInSeconds": 30,
+					"secureInput": false,
+					"retry": 0,
+					"timeout": "7.00:00:00",
+					"secureOutput": false
+				},
+				"type": "Copy"
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

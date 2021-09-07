@@ -488,8 +488,8 @@ $pl1 = @{
                     timeout = "7.00:00:00"
                     retry = 0
                     retryIntervalInSeconds = 30
-                    secureOutput = false
-                    secureInput = false
+                    secureOutput = $false
+                    secureInput = $false
                 }
                 userProperties = @()
                 typeProperties = @{
@@ -497,7 +497,7 @@ $pl1 = @{
                         type = "DelimitedTextSource"
                         storeSettings = @{
                             type = "AzureBlobStorageReadSettings"
-                            recursive = true
+                            recursive = $true
                         }
                         formatSettings = @{
                             type = "DelimitedTextReadSettings"
@@ -506,15 +506,15 @@ $pl1 = @{
                     sink = @{
                         type = "SqlDWSink"
                         preCopyScript = "truncate table wwi_mcw.Product"
-                        allowPolyBase = true
+                        allowPolyBase = $true
                         polyBaseSettings = @{
                             rejectValue = 0
                             rejectType = "value"
-                            useTypeDefault = true
+                            useTypeDefault = $true
                         }
-                        disableMetricsCollection = false
+                        disableMetricsCollection = $false
                     }
-                    enableStaging = true
+                    enableStaging = $true
                     stagingSettings = @{
                         linkedServiceName = @{
                             referenceName = $linkedService1.name
@@ -609,8 +609,8 @@ $pl2 = @{
                                 timeout = "7.00:00:00"
                                 retry = 0
                                 retryIntervalInSeconds = 30
-                                secureOutput = false
-                                secureInput = false
+                                secureOutput = $false
+                                secureInput = $false
                             }
                             userProperties = @()
                             typeProperties = @{
@@ -656,8 +656,8 @@ $pl3 = @{
                                 timeout = "7.00:00:00"
                                 retry = 0
                                 retryIntervalInSeconds = 30
-                                secureOutput = false
-                                secureInput = false
+                                secureOutput = $false
+                                secureInput = $false
                             }
                             userProperties = @()
                             typeProperties = @{
@@ -694,8 +694,8 @@ $pl3 = @{
                                 timeout = "7.00:00:00"
                                 retry = 0
                                 retryIntervalInSeconds = 30
-                                secureOutput = false
-                                secureInput = false
+                                secureOutput = $false
+                                secureInput = $false
                             }
                             userProperties = @()
                             typeProperties = @{
