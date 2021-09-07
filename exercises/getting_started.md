@@ -5,7 +5,7 @@
 ## :thinking: Prerequisites
 
 * An active [Azure subscription](https://azure.microsoft.com/en-us/free/).
-* Sufficient access to create resources and register an application.
+* Sufficient access to create resources and perform RBAC assignments.
 
 <div align="right"><a href="#getting-started">↥ back to top</a></div>
 
