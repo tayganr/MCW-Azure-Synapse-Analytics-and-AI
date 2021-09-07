@@ -1,6 +1,6 @@
 ## Exercise 1: Accessing the Azure Synapse Analytics workspace
 
-[< Getting Started](../exercises/getting_started.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#azure-synapse-analytics-and-ai-hands-on-lab)** - [Next Exercise >](../exercises/exercise02.md#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool)
+[< Getting Started](../exercises/getting_started.md#getting-started) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#azure-synapse-analytics-and-ai-hands-on-lab)** - [Next Exercise >](../exercises/exercise02.md#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool)
 
 **Duration**: 5 minutes
 
