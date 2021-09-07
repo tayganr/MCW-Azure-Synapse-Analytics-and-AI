@@ -95,17 +95,16 @@ if ($TargetSubscriptionId.Length -eq 36) {
     $context = Set-AzContext -Subscription $TargetSubscriptionId
     $registeredRps = Get-AzResourceProvider | Select-Object ProviderNamespace   
     Write-Host "Checking that the required resource providers are registered..."
-    if ($registeredRps -match "Microsoft.Authorization") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.Search") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.CognitiveServices") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.Insights") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.KeyVault") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.MachineLearningServices") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.ManagedIdentity") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.Resources") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.Storage") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.Synapse") { Write-Host "OK" } else { $context = $null }
-    if ($registeredRps -match "Microsoft.Blah!!!") { Write-Host "OK" } else { $context = $null }
+    if ($registeredRps -match "Microsoft.Authorization") { Write-Host "OK - Microsoft.Authorization" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Authorization" }
+    if ($registeredRps -match "Microsoft.Search") { Write-Host "OK - Microsoft.Search" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Search" }
+    if ($registeredRps -match "Microsoft.CognitiveServices") { Write-Host "OK - Microsoft.CognitiveServices" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.CognitiveServices" }
+    if ($registeredRps -match "Microsoft.Insights") { Write-Host "OK - Microsoft.Insights" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Insights" }
+    if ($registeredRps -match "Microsoft.KeyVault") { Write-Host "OK - Microsoft.KeyVault" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.KeyVault" }
+    if ($registeredRps -match "Microsoft.MachineLearningServices") { Write-Host "OK - Microsoft.MachineLearningServices" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.MachineLearningServices" }
+    if ($registeredRps -match "Microsoft.ManagedIdentity") { Write-Host "OK - Microsoft.ManagedIdentity" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.ManagedIdentity" }
+    if ($registeredRps -match "Microsoft.Resources") { Write-Host "OK - Microsoft.Resources" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Resources" }
+    if ($registeredRps -match "Microsoft.Storage") { Write-Host "OK - Microsoft.Storage" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Storage" }
+    if ($registeredRps -match "Microsoft.Synapse") { Write-Host "OK - Microsoft.Synapse" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Synapse" }
 }
 if ($context) {
     $principalId = az ad signed-in-user show --query objectId -o tsv
