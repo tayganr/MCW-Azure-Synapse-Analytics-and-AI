@@ -20,7 +20,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 - The Azure Function returns the results to skillset. The skillset then extracts only the product names and costs and sends that to a configure knowledge store that writes the extracted data to JSON files in Azure Blob Storage.
 - The Synapse pipeline reads these JSON files from Azure Storage in a Data Flow activity and performs an upsert against the product catalog table in the Synapse SQL Pool.
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-5-synapse-pipelines-and-cognitive-search-optional">↥ back to top</a></div>
 
 ### Task 1: Create the invoice storage container
 
@@ -78,7 +78,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
     >**Example**: https://asastore{{suffix}.blob.core.windows.net/invoices?sv=2019-12-12&ss=bfqt&srt ...
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-5-synapse-pipelines-and-cognitive-search-optional">↥ back to top</a></div>
 
 ### Task 2: Create and train an Azure Forms Recognizer model and setup Cognitive Search
 
@@ -169,7 +169,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
     >**Note**: If you receive an exception related to SystemExit, this is a known issue in the Python debugger and can be safely ignored. Continue or Terminate the debug execution of the script.
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-5-synapse-pipelines-and-cognitive-search-optional">↥ back to top</a></div>
 
 ### Task 3: Configure a skillset with Form Recognizer
 
@@ -288,7 +288,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
     ![The invoices-json container is shown with two folders. A JSON file is shown in the blob window.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-020.png "Contents of the invoices-json container")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-5-synapse-pipelines-and-cognitive-search-optional">↥ back to top</a></div>
 
 ### Task 4: Create the Synapse Pipeline
 
@@ -495,4 +495,4 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
     ![show the data in the databases](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-047.png)
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-5-synapse-pipelines-and-cognitive-search-optional">↥ back to top</a></div>

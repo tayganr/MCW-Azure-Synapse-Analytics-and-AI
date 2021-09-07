@@ -14,7 +14,7 @@ Using Azure Synapse Analytics, data scientists are no longer required to use sep
 
 In this exercise, you will create multiple machine learning models. You will learn how to consume these models in your notebook. You will also deploy a model as a web service to Azure Container Instances and consume the service.
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-7-machine-learning">↥ back to top</a></div>
 
 ### Task 1: Create a SQL Datastore and source Dataset
 
@@ -83,7 +83,7 @@ In this exercise, you will create multiple machine learning models. You will lea
 
     ![The dataset Confirm details screen is displayed showing a summary of the choices from the previous steps.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_dataset_confirmdetails.png "The dataset Confirm details screen")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-7-machine-learning">↥ back to top</a></div>
 
 ### Task 2: Create compute infrastructure
 
@@ -129,7 +129,7 @@ In this exercise, you will create multiple machine learning models. You will lea
 
     ![The new compute cluster configure settings form is displayed populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_cluster_configsettings.png "The new compute cluster Configure settings form")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-7-machine-learning">↥ back to top</a></div>
 
 ### Task 3: Use a notebook in AML Studio to prepare data and create a Product Seasonality Classifier model using XGBoost
 
@@ -151,7 +151,7 @@ In this exercise, you will create multiple machine learning models. You will lea
 
 >**Note**: Running this notebook in its entirety is required for the next task.
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-7-machine-learning">↥ back to top</a></div>
 
 ### Task 4: Leverage Automated ML to create and deploy a Product Seasonality Classifier model
 
@@ -200,4 +200,4 @@ In this exercise, you will create multiple machine learning models. You will lea
 
     ![The service endpoint details screen is displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automl_modelserviceendpointdetails.png "The service endpoint details screen")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-7-machine-learning">↥ back to top</a></div>

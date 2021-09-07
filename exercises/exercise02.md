@@ -30,7 +30,7 @@ Table design performance considerations
 | Round robin distribution | Default distribution, when little is known about the data or how it will be used. Use this distribution for staging tables. |
 | Replicated tables | Smaller lookup tables, less than 1.5 GB in size. |
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool">↥ back to top</a></div>
 
 ### Task 1: Create the sale table
 
@@ -78,7 +78,7 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool">↥ back to top</a></div>
 
 ### Task 2: Populate the sale table
 
@@ -247,7 +247,7 @@ The data that we will be retrieving to populate the sale table is currently stor
     select count(TransactionId) from wwi_mcw.SaleSmall;
   ```
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool">↥ back to top</a></div>
 
 ### Task 3: Create the customer information table
 
@@ -286,7 +286,7 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool">↥ back to top</a></div>
 
 ### Task 4: Populate the customer information table
 
@@ -389,7 +389,7 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
     select * from wwi_mcw.CustomerInfo;
   ```
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>  
+<div align="right"><a href="#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool">↥ back to top</a></div>  
 
 ### Task 5: Create the campaign analytics table
 
@@ -431,7 +431,7 @@ The campaign analytics table will be queried primarily for dashboard and KPI pur
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool">↥ back to top</a></div>
 
 ### Task 6: Populate the campaign analytics table
 
@@ -661,7 +661,7 @@ Similar to the customer information table, we will also be populating the campai
     select count(Region) from wwi_mcw.CampaignAnalytics;
   ```
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool">↥ back to top</a></div>
 
 ### Task 7: Populate the product table
 
@@ -681,4 +681,4 @@ When the lab environment was provisioned, the **wwi_mcw.Product** table and data
     select * from wwi_mcw.Product;
   ```
 
-  <div align="right"><a href="#placeholder">↥ back to top</a></div>
+  <div align="right"><a href="#exercise-2-create-and-populate-the-supporting-tables-in-the-sql-pool">↥ back to top</a></div>

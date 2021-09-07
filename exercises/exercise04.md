@@ -10,6 +10,8 @@
 
 A common format for exporting and storing data is with text based files. These can delimited text files such as CSV as well as JSON structured data files. Azure Synapse Analytics also provides ways of querying into these types of raw files to gain valuable insights into the data without having to wait for them to be processed.
 
+<div align="right"><a href="#exercise-4-exploring-raw-text-based-data-with-azure-synapse-sql-serverless">↥ back to top</a></div>
+
 ### Task 1: Query CSV data
 
 1. Create a new SQL script by selecting **Develop** from the left menu, then in the **Develop** blade, expanding the **+** button and selecting **SQL script**.
@@ -68,7 +70,7 @@ A common format for exporting and storing data is with text based files. These c
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-4-exploring-raw-text-based-data-with-azure-synapse-sql-serverless">↥ back to top</a></div>
 
 ### Task 2: Query JSON data
 
@@ -107,4 +109,4 @@ A common format for exporting and storing data is with text based files. These c
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-4-exploring-raw-text-based-data-with-azure-synapse-sql-serverless">↥ back to top</a></div>

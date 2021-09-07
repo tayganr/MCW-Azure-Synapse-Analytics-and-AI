@@ -14,7 +14,7 @@
 #task-3-use-a-notebook-in-aml-studio-to-prepare-data-and-create-a-product-seasonality-classifier-model-using-xgboost
 #task-4-leverage-automated-ml-to-create-and-deploy-a-product-seasonality-classifier-model
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-6-security">↥ back to top</a></div>
 
 ### Task 1: Column level security
 
@@ -80,7 +80,7 @@ It is important to identify data columns of that hold sensitive information. Typ
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-6-security">↥ back to top</a></div>
 
 ### Task 2: Row level security
 
@@ -167,7 +167,7 @@ In many organizations it is important to filter certain rows of data by user. In
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-6-security">↥ back to top</a></div>
 
 ### Task 3: Dynamic data masking
 
@@ -245,4 +245,4 @@ As an alternative to column level security, SQL Administrators also have the opt
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
-<div align="right"><a href="#placeholder">↥ back to top</a></div>
+<div align="right"><a href="#exercise-6-security">↥ back to top</a></div>
