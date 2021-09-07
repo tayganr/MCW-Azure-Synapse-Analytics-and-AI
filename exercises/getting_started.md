@@ -7,6 +7,7 @@
 * An active [Azure subscription](https://azure.microsoft.com/en-us/free/).
 * Sufficient access within the Azure subscription to create resources and perform RBAC assignments.
 * Access to [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview).
+* Setup Azure credentials within the Azure Cloud Shell (i.e. `az login`)
 
 
 <div align="right"><a href="#getting-started">↥ back to top</a></div>
