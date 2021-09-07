@@ -320,5 +320,4 @@ output dataLakeAccountName string = synapseStorageAccount.name
 output keyVaultName string = keyVault.name
 output sqlPoolName string = synapseWorkspace::sqlPool.name
 output sqlAdminName string = synapseWorkspace.properties.sqlAdministratorLogin
-output keyVaultSecretName string = keyVault::secret.name
 output amlWorkspaceName string = mlWorkspace.name

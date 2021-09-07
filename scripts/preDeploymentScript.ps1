@@ -123,7 +123,6 @@ $dataLakeAccountName = $deployment.Properties.Outputs.dataLakeAccountName.Value
 $keyVaultName = $deployment.Properties.Outputs.keyVaultName.Value
 $sqlPoolName = $deployment.Properties.Outputs.sqlPoolName.Value
 $sqlAdminName = $deployment.Properties.Outputs.sqlAdminName.Value
-$keyVaultSecretName = $deployment.Properties.Outputs.keyVaultSecretName.Value
 $amlWorkspaceName =  $deployment.Properties.Outputs.amlWorkspaceName.Value
 
 # Keys
@@ -134,17 +133,6 @@ $storageAccountKey2 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroup
 Install-Module Az.Synapse -Force
 
 # Linked Services
-$resourceGroupName = "synapse-rg-ui9pc"
-$synapseWorkspaceName = "asaworkspace4539c7"
-$storageAccountName = "asastore4539c7"
-$storageAccountKey1 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $storageAccountName)[0].Value
-$dataLakeAccountName = "asadatalake4539c7"
-$storageAccountKey2 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $dataLakeAccountName)[0].Value
-$keyVaultName = "asakeyvault4539c7"
-$sqlPoolName = "SQLPool01"
-$sqlAdminName = "asa.sql.admin"
-$keyVaultSecretName = "SQL-USER-ASA"
-
 $assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
 $linkedServices = @(
     "${assets}/linked_services/key_vault.json"
@@ -182,7 +170,6 @@ foreach ($uri in $linkedServices) {
 }
 
 # Datasets
-$assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
 $datasets = @(
     "${assets}/datasets/asamcw_product_asa.json"
     "${assets}/datasets/asamcw_product_csv.json"
@@ -198,7 +185,6 @@ foreach ($uri in $datasets) {
 }
 
 # Pipelines
-$assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
 $pipelines = @(
     "${assets}/pipelines/ASAMCW - Exercise 2 - Copy Product Information.json"
     "${assets}/pipelines/ASAMCW - Exercise 8 - ExecuteBusinessAnalystQueries.json"

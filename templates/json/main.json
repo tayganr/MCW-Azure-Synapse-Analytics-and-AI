@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "5346001221159647399"
+      "templateHash": "5103792098010695670"
     }
   },
   "parameters": {
@@ -460,10 +460,6 @@
     "sqlAdminName": {
       "type": "string",
       "value": "[reference(resourceId('Microsoft.Synapse/workspaces', format('asaworkspace{0}', variables('suffix')))).sqlAdministratorLogin]"
-    },
-    "keyVaultSecretName": {
-      "type": "string",
-      "value": "SQL-USER-ASA"
     },
     "amlWorkspaceName": {
       "type": "string",
