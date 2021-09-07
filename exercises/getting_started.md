@@ -1,6 +1,6 @@
 # Getting Started
 
-**[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#getting-started)** - [Next Exercise >](../exercises/exercise01.md#exercise-1-accessing-the-azure-synapse-analytics-workspace)
+**[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#azure-synapse-analytics-and-ai-hands-on-lab)** - [Next Exercise >](../exercises/exercise01.md#exercise-1-accessing-the-azure-synapse-analytics-workspace)
 
 ## :thinking: Prerequisites
 
