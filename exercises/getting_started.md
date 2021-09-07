@@ -9,7 +9,7 @@
 
 <div align="right"><a href="#getting-started">↥ back to top</a></div>
 
-## :test_tube: Usage
+## :test_tube: Lab Environment Setup
 
 1. **Copy** the PowerShell code snippet below.
 ```powershell
