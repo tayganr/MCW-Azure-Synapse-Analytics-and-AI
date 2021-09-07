@@ -169,15 +169,12 @@ foreach ($uri in $linkedServices) {
     }
     elseif ($name -eq "sqlpool01") {
         $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=${sqlAdminName}"
-        $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
     }
     elseif ($name -eq "sqlpool01_workload01") {
         $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload01"
-        $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
     }
     elseif ($name -eq "sqlpool01_workload02") {
         $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload02"
-        $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
     }
     $filepath = "MCW/linked_service.json"
     ConvertTo-Json $linkedService -Depth 10 | Out-File $filepath
