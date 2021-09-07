@@ -55,7 +55,6 @@ function getDeploymentOps([string]$accessToken, [string]$subscriptionId, [string
     }
     Return $response
 }
-
 function putNotebook([string]$accessToken, [string]$synapseWorkspaceName, [string]$notebookFileName) {
     $body = Get-Content "MCW/${notebookFileName}.json" | ConvertFrom-Json
     $params = @{
@@ -78,6 +77,7 @@ $subscriptionId = (Get-AzContext).Subscription.Id
 $principalId = az ad signed-in-user show --query objectId -o tsv
 $suffix = -join ((48..57) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
 $location = 'uksouth'
+$assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
 
 # Create Resource Group
 $resourceGroup = New-AzResourceGroup -Name "synapse-rg-${suffix}" -Location $location
@@ -133,7 +133,6 @@ $storageAccountKey2 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroup
 Install-Module Az.Synapse -Force
 
 # Linked Services
-$assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
 $linkedServices = @(
     "${assets}/linked_services/key_vault.json"
     "${assets}/linked_services/blob_storage.json"
@@ -199,16 +198,16 @@ foreach ($uri in $pipelines) {
 }
 
 # SQL Script 1
-$uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/00_master_setup.sql"
+$uriSql = "${assets}/sql_scripts/00_master_setup.sql"
 Invoke-RestMethod -Uri $uriSql -OutFile "MCW/00_master_setup.sql"
 $params = "PASSWORD=Synapse2021!"
 Invoke-Sqlcmd -InputFile "MCW/00_master_setup.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!" -Variable $params
 # SQL Script 2
-$uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/01_sqlpool01_mcw.sql"
+$uriSql = "${assets}/sql_scripts/01_sqlpool01_mcw.sql"
 Invoke-RestMethod -Uri $uriSql -OutFile "MCW/01_sqlpool01_mcw.sql"
 Invoke-Sqlcmd -InputFile "MCW/01_sqlpool01_mcw.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 # SQL Script 3
-$uriSql = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/02_sqlpool01_ml.sql"
+$uriSql = "${assets}/sql_scripts/02_sqlpool01_ml.sql"
 Invoke-RestMethod -Uri $uriSql -OutFile "MCW/02_sqlpool01_ml.sql"
 [IO.File]::ReadAllText("MCW/02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEKEY#',"${storageAccountKey2}" > "MCW/foo.sql"
 [IO.File]::ReadAllText("MCW/foo.sql") -replace '#DATALAKESTORAGEACCOUNTNAME#',"${dataLakeAccountName}" > "MCW/bar.sql"
@@ -216,7 +215,7 @@ Invoke-Sqlcmd -InputFile "MCW/bar.sql" -ServerInstance "${synapseWorkspaceName}.
 
 # Notebook
 $notebookFileName = "notebook"
-$notebookUri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/${notebookFileName}.json"
+$notebookUri = "${assets}/notebooks/${notebookFileName}.json"
 $notebook = Invoke-RestMethod -Uri $notebookUri 
 foreach ($cell in $notebook.properties.cells) {
     $cell.source = @($cell.source.Replace('#SUBSCRIPTION_ID#', $subscriptionId).Replace('#RESOURCE_GROUP_NAME#', $resourceGroupName).Replace('#AML_WORKSPACE_NAME#', $amlWorkspaceName))
