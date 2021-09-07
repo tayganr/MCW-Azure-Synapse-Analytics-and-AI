@@ -12,11 +12,13 @@
 ## :test_tube: Lab Environment Setup
 
 1. **Copy** the PowerShell code snippet below.
+
 ```powershell
 $uri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/scripts/preDeploymentScript.ps1"
 Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
 ./preDeploymentScript.ps1
   ```
+  
 2. Navigate to the [Azure Portal](https://portal.azure.com), open the **Cloud Shell**.
 
 ![Azure Portal Cloud Shell](https://raw.githubusercontent.com/tayganr/purviewdemo/main/images/azure_portal_cloud_shell.png)
