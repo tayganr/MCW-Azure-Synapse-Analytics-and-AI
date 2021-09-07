@@ -1,6 +1,6 @@
 # Azure Synapse Analytics and AI Hands-on Lab
 
-**[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise01.md)
+**[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](exercises/exercise01.md)
 
 ## Abstract
 
