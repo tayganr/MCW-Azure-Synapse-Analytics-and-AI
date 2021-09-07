@@ -90,7 +90,7 @@ if ($NewSubscriptionId.Length -eq 36) {
     $context = Set-AzContext -Subscription $NewSubscriptionId
     $currentSubscriptionId = $context.Subscription.Id
     $currentSubscriptionName = $context.Subscription.Name
-    Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})"
+    Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})" -ForegroundColor Black -BackgroundColor Yellow
 }
 
 # Variables
