@@ -68,6 +68,8 @@ A common format for exporting and storing data is with text based files. These c
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 2: Query JSON data
 
 1. Create a new SQL script by selecting **Develop** from the left menu, then in the **Develop** blade, expanding the **+** button and selecting **SQL script**.
@@ -104,3 +106,5 @@ A common format for exporting and storing data is with text based files. These c
 4. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>

@@ -14,6 +14,8 @@
 #task-3-use-a-notebook-in-aml-studio-to-prepare-data-and-create-a-product-seasonality-classifier-model-using-xgboost
 #task-4-leverage-automated-ml-to-create-and-deploy-a-product-seasonality-classifier-model
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 1: Column level security
 
 It is important to identify data columns of that hold sensitive information. Types of sensitive information could be social security numbers, email addresses, credit card numbers, financial totals, and more. Azure Synapse Analytics allows you define permissions that prevent users or roles select privileges on specific columns.
@@ -77,6 +79,8 @@ It is important to identify data columns of that hold sensitive information. Typ
 3. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
 
 ### Task 2: Row level security
 
@@ -163,6 +167,8 @@ In many organizations it is important to filter certain rows of data by user. In
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 3: Dynamic data masking
 
 As an alternative to column level security, SQL Administrators also have the option of masking sensitive data. This will result in data being obfuscated when returned in queries. The data is still stored in a pristine state in the table itself. SQL Administrators can grant unmask privileges to users that have permissions to see this data.
@@ -238,3 +244,5 @@ As an alternative to column level security, SQL Administrators also have the opt
 3. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>

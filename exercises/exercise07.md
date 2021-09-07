@@ -10,14 +10,11 @@
 * [Task 3: Use a notebook in AML Studio to prepare data and create a Product Seasonality Classifier model using XGBoost](#task-3-use-a-notebook-in-aml-studio-to-prepare-data-and-create-a-product-seasonality-classifier-model-using-xgboost)
 * [Task 4: Leverage Automated ML to create and deploy a Product Seasonality Classifier model](#task-4-leverage-automated-ml-to-create-and-deploy-a-product-seasonality-classifier-model)
 
-
-
-
-
-
 Using Azure Synapse Analytics, data scientists are no longer required to use separate tooling to create and deploy machine learning models.
 
 In this exercise, you will create multiple machine learning models. You will learn how to consume these models in your notebook. You will also deploy a model as a web service to Azure Container Instances and consume the service.
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
 
 ### Task 1: Create a SQL Datastore and source Dataset
 
@@ -86,6 +83,8 @@ In this exercise, you will create multiple machine learning models. You will lea
 
     ![The dataset Confirm details screen is displayed showing a summary of the choices from the previous steps.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_dataset_confirmdetails.png "The dataset Confirm details screen")
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 2: Create compute infrastructure
 
 1. From the left menu of Machine Learning Studio, select **Compute**.
@@ -130,6 +129,8 @@ In this exercise, you will create multiple machine learning models. You will lea
 
     ![The new compute cluster configure settings form is displayed populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_cluster_configsettings.png "The new compute cluster Configure settings form")
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 3: Use a notebook in AML Studio to prepare data and create a Product Seasonality Classifier model using XGBoost
 
 1. In Azure Machine Learning (AML) Studio, select **Notebooks** from the left menu.
@@ -149,6 +150,8 @@ In this exercise, you will create multiple machine learning models. You will lea
 5. Review and run each cell in the notebook individually to gain understanding of the functionality being demonstrated.
 
 >**Note**: Running this notebook in its entirety is required for the next task.
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
 
 ### Task 4: Leverage Automated ML to create and deploy a Product Seasonality Classifier model
 
@@ -196,3 +199,5 @@ In this exercise, you will create multiple machine learning models. You will lea
 10. Review the details of the deployed model service endpoint.
 
     ![The service endpoint details screen is displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automl_modelserviceendpointdetails.png "The service endpoint details screen")
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>

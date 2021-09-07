@@ -30,6 +30,8 @@ Table design performance considerations
 | Round robin distribution | Default distribution, when little is known about the data or how it will be used. Use this distribution for staging tables. |
 | Replicated tables | Smaller lookup tables, less than 1.5 GB in size. |
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 1: Create the sale table
 
 Over the past 5 years, Wide World Importers has amassed over 3 billion rows of sales data. With this quantity of data, the storage consumed would be greater than 2 GB. While we will be using only a subset of this data for the lab, we will design the table for the production environment. Using the guidance outlined in the current Exercise description, we can ascertain that we will need a **Clustered Columnstore** table with a **Hash** table distribution based on the **CustomerId** field which will be used in most queries. For further performance gains, the table will be partitioned by transaction date to ensure queries that include dates or date arithmetic are returned in a favorable amount of time.
@@ -75,6 +77,8 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
 4. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
 
 ### Task 2: Populate the sale table
 
@@ -243,6 +247,8 @@ The data that we will be retrieving to populate the sale table is currently stor
     select count(TransactionId) from wwi_mcw.SaleSmall;
   ```
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 3: Create the customer information table
 
 Over the past 5 years, Wide World Importers has amassed over 3 billion rows of sales data. With this quantity of data, the customer information lookup table is estimated to have over 100 million rows but will consume less than 1.5 GB of storage. While we will be using only a subset of this data for the lab, we will design the table for the production environment. Using the guidance outlined in the Exercising description, we can ascertain that we will need a **Clustered Columnstore** table with a **Replicated** table distribution to hold customer data.
@@ -279,6 +285,8 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
 4. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
 
 ### Task 4: Populate the customer information table
 
@@ -380,7 +388,9 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
   ```sql
     select * from wwi_mcw.CustomerInfo;
   ```
-  
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>  
+
 ### Task 5: Create the campaign analytics table
 
 The campaign analytics table will be queried primarily for dashboard and KPI purposes. Performance is a large factor in the design of this table, and as such  we can ascertain that we will need a **Clustered Columnstore** table with a **Hash** table distribution based on the **Region** field which will fairly evenly distribute the data.
@@ -420,6 +430,8 @@ The campaign analytics table will be queried primarily for dashboard and KPI pur
 4. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
    ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
 
 ### Task 6: Populate the campaign analytics table
 
@@ -649,6 +661,8 @@ Similar to the customer information table, we will also be populating the campai
     select count(Region) from wwi_mcw.CampaignAnalytics;
   ```
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 7: Populate the product table
 
 When the lab environment was provisioned, the **wwi_mcw.Product** table and datasets required for its population were created. Throughout this exercise, you have gained experience creating datasets, data flows, and pipelines. The population of the product table would be repetitive, so we will simply trigger an existing pipeline to populate this table.
@@ -666,3 +680,5 @@ When the lab environment was provisioned, the **wwi_mcw.Product** table and data
   ```sql
     select * from wwi_mcw.Product;
   ```
+
+  <div align="right"><a href="#placeholder">↥ back to top</a></div>

@@ -14,6 +14,8 @@ In Azure Synapse Analytics, you have the possibility of using either the Synapse
 
 In this exercise, you will explore the data lake using both options.
 
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
+
 ### Task 1: Query sales Parquet data with Synapse SQL Serverless
 
 When you query Parquet files using Synapse SQL Serverless, you can explore the data with T-SQL syntax.
@@ -64,6 +66,8 @@ When you query Parquet files using Synapse SQL Serverless, you can explore the d
     > Notice how we updated the path to include all Parquet files in all subfolders of `sale-small/Year=2019`.
 
     The output should be **339507246** records.
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
 
 ### Task 2: Query sales Parquet data with Azure Synapse Spark
 
@@ -128,3 +132,5 @@ When you query Parquet files using Synapse SQL Serverless, you can explore the d
     ```
 
  > We import required Python libraries to use aggregation functions and types defined in the schema to successfully execute the query.
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>

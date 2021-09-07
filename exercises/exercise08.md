@@ -17,6 +17,8 @@ You can monitor active SQL requests using the SQL requests area of the Monitor H
 
 Pipeline runs can be monitored using the Monitor Hub and selecting Pipeline runs. Here you can filter pipeline runs and drill in to view the activity runs associated with the pipeline run and monitor the running of in-progress pipelines.
 
+<div align="right"><a href="#exercise-8-monitoring">↥ back to top</a></div>
+
 ### Task 1: Workload importance
 
 Running mixed workloads can pose resource challenges on busy systems. Solution architects seek ways to separate classic data warehousing activities (such as loading, transforming, and querying data) to ensure that enough resources exist to hit SLAs.
@@ -120,6 +122,8 @@ Setting importance in Synapse SQL for Azure Synapse allows you to influence the 
 18. Select **Run** from the toolbar menu to execute the SQL command. You should see an output similar to the following that shows query executions for the `asa.sql.workload01` user having a **high** importance. Also note that the 'asa.sql.workload02' queries are in **Suspended** status while the high priority queries are being run.
 
     ![SQL query results showing asa.sql.workload01 queries with a higher importance than those queries from asa.sql.workload02.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-query-4-results.png "SQL script")
+
+<div align="right"><a href="#exercise-8-monitoring">↥ back to top</a></div>
 
 ### Task 2: Workload isolation
 
@@ -240,6 +244,8 @@ Users should avoid a workload management solution that configures 100% workload 
 
   ![The SQL results pane is shown with multiple queries being run in parallel.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/multiple_parallel_queries_workload02.png "More than 2 queries being run in parallel")
 
+<div align="right"><a href="#exercise-8-monitoring">↥ back to top</a></div>
+
 ### Task 3: Monitoring with Dynamic Management Views
 
 For a programmatic experience when monitoring SQL Analytics via T-SQL, the service provides a set of Dynamic Management Views (DMVs). These views are useful when actively troubleshooting and identifying performance bottlenecks with your workload.
@@ -328,6 +334,8 @@ All logins to your data warehouse are logged to `sys.dm_pdw_exec_sessions`. This
 
     > When a DSQL plan is taking longer than expected, the cause can be a complex plan with many DSQL steps or just one step taking a long time. If the plan is many steps with several move operations, consider optimizing your table distributions to reduce data movement.
 
+<div align="right"><a href="#exercise-8-monitoring">↥ back to top</a></div>
+
 ### Task 4: Orchestration Monitoring with the Monitor Hub
 
 1. Let's run a pipeline to monitor its execution in the next step. To do this, select the `Integrate` item from the left menu. **Run** the **Exercise 8 - Execute Business Analyst Queries** Pipeline.
@@ -341,6 +349,8 @@ All logins to your data warehouse are logged to `sys.dm_pdw_exec_sessions`. This
 3. Hover over the running pipeline and select **Cancel** to cancel the execution of the current instance of the pipeline.
 
     ![The Cancel option is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex7-task4-03.png "Cancel")
+
+<div align="right"><a href="#exercise-8-monitoring">↥ back to top</a></div>
 
 ### Task 5: Monitoring SQL Requests with the Monitor Hub
 
@@ -359,3 +369,5 @@ All logins to your data warehouse are logged to `sys.dm_pdw_exec_sessions`. This
     ![The request content link is displayed over a SQL request.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex7-task5-03.png "SQL requests")
 
 5. You may now return to the **Monitor** hub and cancel the in-progress pipeline run.
+
+<div align="right"><a href="#exercise-8-monitoring">↥ back to top</a></div>

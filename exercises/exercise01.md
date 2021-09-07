@@ -4,7 +4,12 @@
 
 **Duration**: 5 minutes
 
+**Contents**
+* [Task 1: Launching Synapse Studio](#task-1-launching-synapse-studio)
+
 All exercises in this lab utilize the workspace Synapse Studio user interface. This exercise will outline the steps to launch Synapse Studio. Unless otherwise specified, all instruction including menu navigation will occur in Synapse Studio.
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
 
 ### Task 1: Launching Synapse Studio
 
@@ -23,3 +28,5 @@ All exercises in this lab utilize the workspace Synapse Studio user interface. T
 5. On the **Overview** tab of the Synapse Workspace page, select the **Launch Synapse Studio** item from the top toolbar. Alternatively you can select the Workspace web URL link.
 
     ![On the Synapse workspace resource screen, the Overview pane is shown with the Launch Synapse Studio button highlighted in the top toolbar. The Workspace web URL value is also highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/workspaceresource_launchsynapsestudio.png "Launching Synapse Studio")
+
+<div align="right"><a href="#placeholder">↥ back to top</a></div>
