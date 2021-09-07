@@ -82,21 +82,19 @@ while ("y", "n" -notcontains $YesOrNo ) {
     $YesOrNo = Read-Host "Is this correct (y/n)"
 }
 if ($YesOrNo -eq 'n') {
-    $NewSubscriptionId = ""
+    $TargetSubscriptionId = ""
     Clear-Host
     Get-AzSubscription | Select-Object Id, Name | out-host
+} else {
+    $TargetSubscriptionId = $currentSubscriptionId
 }
-while ($NewSubscriptionId.Length -ne 36) {
-    $NewSubscriptionId = Read-Host "Please copy/paste the correct Subscription ID from the list above"
+while ($TargetSubscriptionId.Length -ne 36) {
+    $TargetSubscriptionId = Read-Host "Please copy/paste the correct Subscription ID from the list above"
 }
-if ($NewSubscriptionId.Length -eq 36) {
-    $context = Set-AzContext -Subscription $NewSubscriptionId
+if ($TargetSubscriptionId.Length -eq 36) {
+    $context = Set-AzContext -Subscription $TargetSubscriptionId
 }
 if ($context) {
-    # Variables
-    $currentSubscriptionId = $context.Subscription.Id
-    $currentSubscriptionName = $context.Subscription.Name
-    Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})" -ForegroundColor Black -BackgroundColor Yellow
     $principalId = az ad signed-in-user show --query objectId -o tsv
     if ($principalId) {
         $subscriptionId = (Get-AzContext).Subscription.Id
