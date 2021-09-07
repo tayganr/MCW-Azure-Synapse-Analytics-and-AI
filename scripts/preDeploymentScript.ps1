@@ -1,7 +1,4 @@
 $timer = [System.Diagnostics.Stopwatch]::StartNew()
-if(!(Test-Path -Path "MCW" )){
-    New-Item "MCW" -ItemType directory
-}
 function deployTemplate([string]$accessToken, [string]$templateLink, [string]$resourceGroupName, [hashtable]$parameters) {
     $randomId = -join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
     $deploymentName = "deployment-${randomId}"
@@ -73,8 +70,15 @@ function putNotebook([string]$accessToken, [string]$synapseWorkspaceName, [strin
 }
 
 # Variables
+try {
+    $principalId = az ad signed-in-user show --query objectId -o tsv
+} catch {
+    exit
+}
 $subscriptionId = (Get-AzContext).Subscription.Id
-$principalId = az ad signed-in-user show --query objectId -o tsv
+if(!(Test-Path -Path "MCW" )){
+    New-Item "MCW" -ItemType directory
+}
 $suffix = -join ((48..57) + (97..122) | Get-Random -Count 5 | ForEach-Object {[char]$_})
 $location = 'uksouth'
 $assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
