@@ -13,7 +13,7 @@
 
 ## :test_tube: Lab Environment Setup
 
-1. **Copy** the PowerShell code snippet below.
+1. **Copy** the PowerShell code snippet.
 
 ```powershell
 $uri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/scripts/preDeploymentScript.ps1"
