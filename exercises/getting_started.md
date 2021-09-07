@@ -6,6 +6,8 @@
 
 * An active [Azure subscription](https://azure.microsoft.com/en-us/free/).
 * Sufficient access to create resources and perform RBAC assignments.
+* Access to [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview).
+
 
 <div align="right"><a href="#getting-started">↥ back to top</a></div>
 
@@ -18,12 +20,14 @@ $uri = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-an
 Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
 ./preDeploymentScript.ps1
   ```
-  
-2. Navigate to the [Azure Portal](https://portal.azure.com), open the **Cloud Shell**.
 
-![Azure Portal Cloud Shell](https://raw.githubusercontent.com/tayganr/purviewdemo/main/images/azure_portal_cloud_shell.png)
+2. Navigate to the [Azure Portal](https://portal.azure.com), open the **Cloud Shell** OR open Cloud Shell by clicking the icon in the top-right corner (or open directly via [https://shell.azure.com/](https://shell.azure.com/)).
 
-3. **Paste** the code snippet. Wait until the deployment is complete.
+![Azure Portal Cloud Shell](../media/azure_portal_cloud_shell.png)
+
+3. Ensure the Cloud Shell is seto to **PowerShell**, **Paste** the code snippet, follow the prompts and wait until the deployment is complete (~15 minutes).
+
+![Switch Cloud Shell Type](../media/cloud_shell_powershell.png)
 
 
 <div align="right"><a href="#getting-started">↥ back to top</a></div>

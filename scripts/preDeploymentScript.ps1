@@ -91,12 +91,12 @@ while ($NewSubscriptionId.Length -ne 36) {
 }
 if ($NewSubscriptionId.Length -eq 36) {
     $context = Set-AzContext -Subscription $NewSubscriptionId
-    $currentSubscriptionId = $context.Subscription.Id
-    $currentSubscriptionName = $context.Subscription.Name
-    Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})" -ForegroundColor Black -BackgroundColor Yellow
 }
 if ($context) {
     # Variables
+    $currentSubscriptionId = $context.Subscription.Id
+    $currentSubscriptionName = $context.Subscription.Name
+    Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})" -ForegroundColor Black -BackgroundColor Yellow
     $principalId = az ad signed-in-user show --query objectId -o tsv
     if ($principalId) {
         $subscriptionId = (Get-AzContext).Subscription.Id
