@@ -5,9 +5,14 @@
 **Duration**: 30 minutes
 
 **Contents**
-* [Task 1: Column level security](#)
-* [Task 2: Row level security](#)
-* [Task 3: Dynamic data masking](#)
+* [Task 1: Column level security](#task-1-column-level-security)
+* [Task 2: Row level security](#task-2-row-level-security)
+* [Task 3: Dynamic data masking](#task-3-dynamic-data-masking)
+
+#task-1-create-a-sql-datastore-and-source-dataset
+#task-2-create-compute-infrastructure
+#task-3-use-a-notebook-in-aml-studio-to-prepare-data-and-create-a-product-seasonality-classifier-model-using-xgboost
+#task-4-leverage-automated-ml-to-create-and-deploy-a-product-seasonality-classifier-model
 
 ### Task 1: Column level security
 

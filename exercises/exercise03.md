@@ -5,8 +5,8 @@
 **Duration**: 30 minutes
 
 **Contents**
-* [Task 1: Query sales Parquet data with Synapse SQL Serverless](#)
-* [Task 2: Query sales Parquet data with Azure Synapse Spark](#)
+* [Task 1: Query sales Parquet data with Synapse SQL Serverless](#task-1-query-sales-parquet-data-with-synapse-sql-serverless)
+* [Task 2: Query sales Parquet data with Azure Synapse Spark](#task-2-query-sales-parquet-data-with-azure-synapse-spark)
 
 Understanding data through data exploration is one of the core challenges faced today by data engineers and data scientists. Depending on the underlying structure of the data as well as the specific requirements of the exploration process, different data processing engines will offer varying degrees of performance, complexity, and flexibility.
 

@@ -5,11 +5,11 @@
 **Duration**: 45 minutes
 
 **Contents**
-* [Task 1: Workload importance](#)
-* [Task 2: Workload isolation](#)
-* [Task 3: Monitoring with Dynamic Management Views](#)
-* [Task 4: Orchestration Monitoring with the Monitor Hub](#)
-* [Task 5: Monitoring SQL Requests with the Monitor Hub](#)
+* [Task 1: Workload importance](#task-1-workload-importance)
+* [Task 2: Workload isolation](#task-2-workload-isolation)
+* [Task 3: Monitoring with Dynamic Management Views](#task-3-monitoring-with-dynamic-management-views)
+* [Task 4: Orchestration Monitoring with the Monitor Hub](#task-4-orchestration-monitoring-with-the-monitor-hub)
+* [Task 5: Monitoring SQL Requests with the Monitor Hub](#task-5-monitoring-sql-requests-with-the-monitor-hub)
 
 Azure Synapse Analytics provides a rich monitoring experience within the Azure portal to surface insights regarding your data warehouse workload.
 

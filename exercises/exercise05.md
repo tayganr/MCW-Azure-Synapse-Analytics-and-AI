@@ -5,10 +5,10 @@
 **Duration**: 45 minutes
 
 **Contents**
-* [Task 1: Create the invoice storage container](#)
-* [Task 2: Create and train an Azure Forms Recognizer model and setup Cognitive Search](#)
-* [Task 3: Configure a skillset with Form Recognizer](#)
-* [Task 4: Create the Synapse Pipeline](#)
+* [Task 1: Create the invoice storage container](#task-1-create-the-invoice-storage-container)
+* [Task 2: Create and train an Azure Forms Recognizer model and setup Cognitive Search](#task-2-create-and-train-an-azure-forms-recognizer-model-and-setup-cognitive-search)
+* [Task 3: Configure a skillset with Form Recognizer](#task-3-configure-a-skillset-with-form-recognizer)
+* [Task 4: Create the Synapse Pipeline](#task-4-create-the-synapse-pipeline)
 
 In this exercise you will create a Synapse Pipeline that will orchestrate updating the part prices from a supplier invoice. You will accomplish this by a combination of a Synapse Pipeline with an Azure Cognitive Search Skillset that invokes the Form Recognizer service as a custom skill. The pipeline will work as follows:
 

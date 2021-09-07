@@ -5,8 +5,8 @@
 **Duration**: 15 minutes
 
 **Contents**
-* [Task 1: Query CSV data](#)
-* [Task 2: Query JSON data](#)
+* [Task 1: Query CSV data](#task-1-query-csv-data)
+* [Task 2: Query JSON data](#task-2-query-json-data)
 
 A common format for exporting and storing data is with text based files. These can delimited text files such as CSV as well as JSON structured data files. Azure Synapse Analytics also provides ways of querying into these types of raw files to gain valuable insights into the data without having to wait for them to be processed.
 
