@@ -21,7 +21,7 @@ Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
 ./preDeploymentScript.ps1
   ```
 
-2. Navigate to the [Azure Portal](https://portal.azure.com), open the **Cloud Shell** OR open Cloud Shell by clicking the icon in the top-right corner (or open directly via [https://shell.azure.com/](https://shell.azure.com/)).
+2. Open **Cloud Shell** either via the [Azure Portal](https://portal.azure.com) (as per the screen snippet below) or directly via [https://shell.azure.com/](https://shell.azure.com/).
 
 ![Azure Portal Cloud Shell](../media/azure_portal_cloud_shell.png)
 
