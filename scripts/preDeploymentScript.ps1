@@ -240,240 +240,26 @@ ConvertTo-Json $linkedService6 -Depth 10 | Out-File "MCW/ls6.json"
 Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService6.name -DefinitionFile "MCW/ls6.json"
 
 # Datasets
-$dataset1 = @{
-    name = "asamcw_product_asa"
-    properties = @{
-        linkedServiceName = @{
-            referenceName = $linkedService4.name
-            type = "LinkedServiceReference"
-        }
-        type = "AzureSqlDWTable"
-        schema = @(
-            @{
-                name = "ProductId"
-                type = "smallint"
-                precision = 5
-            }
-            @{
-                name = "Seasonality"
-                type = "tinyint"
-                precision = 3
-            }
-            @{
-                name = "Price"
-                type = "decimal"
-                precision = 6
-                scale = 2
-            }
-            @{
-                name = "Profit"
-                type = "decimal"
-                precision = 6
-                scale = 2
-            }
-        )
-        typeProperties = @{
-            schema = "wwi_mcw"
-            table = "Product"
-        }
-    }
-    type = "Microsoft.Synapse/workspaces/datasets"
+$linkedService2 = @{
+    name = "asadatalake4539c7"
 }
-$dataset2 = @{
-    name = "asamcw_product_csv"
-    properties = @{
-        linkedServiceName = @{
-            referenceName = $linkedService2.name
-            type = "LinkedServiceReference"
-        }
-        annotations = @()
-        type = "DelimitedText"
-        typeProperties = @{
-            location = @{
-                type = "AzureBlobStorageLocation"
-                fileName = "generator-product.csv"
-                folderPath = "data-generators/generator-product"
-                container = "wwi-02"
-            }
-            columnDelimiter = ""
-            escapeChar = "\\"
-            quoteChar = '\"'
-        }
-        schema = @(
-            @{
-                type = "String"
-            }
-            @{
-                type = "String"
-            }
-            @{
-                type = "String"
-            }
-            @{
-                type = "String"
-            }
-        )
+$synapseWorkspaceName = "asaworkspace4539c7"
+$assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
+$datasets = @(
+    "${assets}/datasets/asamcw_product_asa.json"
+    "${assets}/datasets/asamcw_product_csv.json"
+    "${assets}/datasets/asamcw_wwi_salesmall_workload1_asa.json"
+    "${assets}/datasets/asamcw_wwi_salesmall_workload2_asa.json"
+)
+foreach ($datasetUri in $datasets) {
+    $dataset = Invoke-RestMethod -Uri $datasetUri -Headers @{"Cache-Control"="no-cache"}
+    if ($dataset.name -eq "asamcw_product_csv") {
+        $dataset.properties.linkedServiceName.referenceName = $linkedService2.name
     }
-    type = "Microsoft.Synapse/workspaces/datasets"
+    $filepath = "MCW/dataset.json"
+    ConvertTo-Json $dataset -Depth 10 | Out-File $filepath
+    Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset.name -DefinitionFile $filepath
 }
-$dataset3 = @{
-    name = "asamcw_wwi_salesmall_workload1_asa"
-    properties = @{
-        linkedServiceName = @{
-            referenceName = $linkedService5.name
-            type = "LinkedServiceReference"
-        }
-        annotations = @()
-        type = "AzureSqlDWTable"
-        schema = @(
-            @{
-                name = "TransactionId"
-                type = "uniqueidentifier"
-            }
-            @{
-                name = "CustomerId"
-                type = "int"
-                precision = 10
-            }
-            @{
-                name = "ProductId"
-                type = "smallint"
-                precision = 5
-            }
-            @{
-                name = "Quantity"
-                type = "tinyint"
-                precision = 3
-            }
-            @{
-                name = "Price"
-                type = "decimal"
-                precision = 9
-                scale = 2
-            }
-            @{
-                name = "TotalAmount"
-                type = "decimal"
-                precision = 9
-                scale = 2
-            }
-            @{
-                name = "TransactionDateId"
-                type = "int"
-                precision = 10
-            }
-            @{
-                name = "ProfitAmount"
-                type = "decimal"
-                precision = 9
-                scale = 2
-            }
-            @{
-                name = "Hour"
-                type = "tinyint"
-                precision = 3
-            }
-            @{
-                name = "Minute"
-                type = "tinyint"
-                precision = 3
-            }
-            @{
-                name = "StoreId"
-                type = "smallint"
-                precision = 5
-            }
-        )
-        typeProperties = @{
-            schema = "wwi_mcw"
-            table = "SaleSmall"
-        }
-    }
-    type = "Microsoft.Synapse/workspaces/datasets"
-}
-$dataset4 = @{
-    name = "asamcw_wwi_salesmall_workload2_asa"
-    properties = @{
-        linkedServiceName = @{
-            referenceName = $linkedService6.name
-            type = "LinkedServiceReference"
-        }
-        annotations = @()
-        type = "AzureSqlDWTable"
-        schema = @(
-            @{
-                name = "TransactionId"
-                type = "uniqueidentifier"
-            }
-            @{
-                name = "CustomerId"
-                type = "int"
-                precision = 10
-            }
-            @{
-                name = "ProductId"
-                type = "smallint"
-                precision = 5
-            }
-            @{
-                name = "Quantity"
-                type = "tinyint"
-                precision = 3
-            }
-            @{
-                name = "Price"
-                type = "decimal"
-                precision = 9
-                scale = 2
-            }
-            @{
-                name = "TotalAmount"
-                type = "decimal"
-                precision = 9
-                scale = 2
-            }
-            @{
-                name = "TransactionDateId"
-                type = "int"
-                precision = 10
-            }
-            @{
-                name = "ProfitAmount"
-                type = "decimal"
-                precision = 9
-                scale = 2
-            }
-            @{
-                name = "Hour"
-                type = "tinyint"
-                precision = 3
-            }
-            @{
-                name = "Minute"
-                type = "tinyint"
-                precision = 3
-            }
-            @{
-                name = "StoreId"
-                type = "smallint"
-                precision = 5
-            }
-        )
-        typeProperties = @{
-            schema = "wwi_mcw"
-            table = "SaleSmall"
-        }
-    }
-    type = "Microsoft.Synapse/workspaces/datasets"
-}
-ConvertTo-Json $dataset1 -Depth 10 | Out-File "MCW/ds1.json"
-ConvertTo-Json $dataset2 -Depth 10 | Out-File "MCW/ds2.json"
-ConvertTo-Json $dataset3 -Depth 10 | Out-File "MCW/ds3.json"
-ConvertTo-Json $dataset4 -Depth 10 | Out-File "MCW/ds4.json"
-Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset1.name -DefinitionFile "MCW/ds1.json"
-Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset2.name -DefinitionFile "MCW/ds2.json"
-Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset3.name -DefinitionFile "MCW/ds3.json"
-Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset4.name -DefinitionFile "MCW/ds4.json"
 
 # Pipelines
 $assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
@@ -483,11 +269,13 @@ $pipelines = @(
     "${assets}/pipelines/ASAMCW - Exercise 8 - ExecuteDataAnalystAndCEOQueries.json"
 )
 foreach ($pipelineUri in $pipelines) {
-    $pipeline = Invoke-RestMethod -Uri $pipelineUri
-    Write-Output $pipeline.properties.activities[0].typeProperties.stagingSettings.linkedServiceName.referenceName
-    # $filepath = "MCW/pipeline.json"
-    # ConvertTo-Json $pipeline -Depth 10 | Out-File $filepath
-    # Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pipeline.name -DefinitionFile $filepath
+    $pipeline = Invoke-RestMethod -Uri $pipelineUri -Headers @{"Cache-Control"="no-cache"}
+    if ($pipeline.name -eq "ASAMCW - Exercise 2 - Copy Product Information") {
+        $pipeline.properties.activities[0].typeProperties.stagingSettings.linkedServiceName.referenceName = $linkedService1.name
+    }
+    $filepath = "MCW/pipeline.json"
+    ConvertTo-Json $pipeline -Depth 10 | Out-File $filepath
+    Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pipeline.name -DefinitionFile $filepath
 }
 
 # SQL Script 1
