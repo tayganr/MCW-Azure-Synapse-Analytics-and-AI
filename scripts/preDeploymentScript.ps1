@@ -147,9 +147,9 @@ $keyVaultSecretName = "SQL-USER-ASA"
 
 $assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
 $linkedServices = @(
+    "${assets}/linked_services/key_vault.json"
     "${assets}/linked_services/blob_storage.json"
     "${assets}/linked_services/data_lake.json"
-    "${assets}/linked_services/key_vault.json"
     "${assets}/linked_services/sqlpool01.json"
     "${assets}/linked_services/sqlpool01_workload01.json"
     "${assets}/linked_services/sqlpool01_workload02.json"
@@ -169,17 +169,14 @@ foreach ($uri in $linkedServices) {
     }
     elseif ($name -eq "sqlpool01") {
         $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=${sqlAdminName}"
-        $linkedService.properties.typeProperties.password.store.referenceName = $keyVaultName
         $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
     }
     elseif ($name -eq "sqlpool01_workload01") {
         $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload01"
-        $linkedService.properties.typeProperties.password.store.referenceName = $keyVaultName
         $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
     }
     elseif ($name -eq "sqlpool01_workload02") {
         $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload02"
-        $linkedService.properties.typeProperties.password.store.referenceName = $keyVaultName
         $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
     }
     $filepath = "MCW/linked_service.json"
