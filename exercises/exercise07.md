@@ -4,6 +4,12 @@
 
 **Duration**: 60 minutes
 
+**Contents**
+* [Task 1: Create a SQL Datastore and source Dataset](#)
+* [Task 2: Create compute infrastructure](#)
+* [Task 3: Use a notebook in AML Studio to prepare data and create a Product Seasonality Classifier model using XGBoost](#)
+* [Task 4: Leverage Automated ML to create and deploy a Product Seasonality Classifier model](#)
+
 Using Azure Synapse Analytics, data scientists are no longer required to use separate tooling to create and deploy machine learning models.
 
 In this exercise, you will create multiple machine learning models. You will learn how to consume these models in your notebook. You will also deploy a model as a web service to Azure Container Instances and consume the service.

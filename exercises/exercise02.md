@@ -4,6 +4,15 @@
 
 **Duration**: 120 minutes
 
+**Contents**
+* [Task 1: Create the sale table](#task-1-create-the-sale-table)
+* [Task 2: Populate the sale table](#task-2-populate-the-sale-table)
+* [Task 3: Create the customer information table](#task-3-create-the-customer-information-table)
+* [Task 4: Populate the customer information table](#task-4-populate-the-customer-information-table)
+* [Task 5: Create the campaign analytics table](#task-5-create-the-campaign-analytics-table)
+* [Task 6: Populate the campaign analytics table](#task-6-populate-the-campaign-analytics-table)
+* [Task 7: Populate the product table](#task-7-populate-the-product-table)
+
 The first step in querying meaningful data is to create tables to house the data. In this case, we will create four different tables: SaleSmall, CustomerInfo, CampaignAnalytics, and Sales. When designing tables in Azure Synapse Analytics, we need to take into account the expected amount of data in each table, as well as how each table will be used. Utilize the following guidance when designing your tables to ensure the best experience and performance.
 
 Table design performance considerations

@@ -4,6 +4,11 @@
 
 **Duration**: 30 minutes
 
+**Contents**
+* [Task 1: Column level security](#)
+* [Task 2: Row level security](#)
+* [Task 3: Dynamic data masking](#)
+
 ### Task 1: Column level security
 
 It is important to identify data columns of that hold sensitive information. Types of sensitive information could be social security numbers, email addresses, credit card numbers, financial totals, and more. Azure Synapse Analytics allows you define permissions that prevent users or roles select privileges on specific columns.

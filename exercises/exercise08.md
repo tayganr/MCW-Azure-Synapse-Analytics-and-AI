@@ -4,6 +4,13 @@
 
 **Duration**: 45 minutes
 
+**Contents**
+* [Task 1: Workload importance](#)
+* [Task 2: Workload isolation](#)
+* [Task 3: Monitoring with Dynamic Management Views](#)
+* [Task 4: Orchestration Monitoring with the Monitor Hub](#)
+* [Task 5: Monitoring SQL Requests with the Monitor Hub](#)
+
 Azure Synapse Analytics provides a rich monitoring experience within the Azure portal to surface insights regarding your data warehouse workload.
 
 You can monitor active SQL requests using the SQL requests area of the Monitor Hub. This includes details like the pool, submitter, duration, queued duration, workload group assigned, importance, and the request content.
