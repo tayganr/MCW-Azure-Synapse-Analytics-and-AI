@@ -27,14 +27,13 @@ Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
 
 ## :books: Exercises
 
-1. [Exercise 1: Accessing the Azure Synapse Analytics workspace](exercises/exercise01.md)
-2. [Exercise 2: Create and populate the supporting tables in the SQL Pool](exercises/exercise02.md)
-3. [Exercise 3: Exploring raw parquet](exercises/exercise03.md)
-4. [Exercise 4: Exploring raw text based data with Azure Synapse SQL Serverless](exercises/exercise04.md)
-5. [Exercise 5: Synapse Pipelines and Cognitive Search (Optional)](exercises/exercise05.md)
-6. [Exercise 6: Security](exercises/exercise06.md)
-7. [Exercise 7: Machine Learning](exercises/exercise07.md)
-8. [Exercise 8: Monitoring](exercises/exercise08.md)
+1. [Exercise 1: Accessing the Azure Synapse Analytics workspace](../exercises/exercise01.md)
+2. [Exercise 2: Create and populate the supporting tables in the SQL Pool](../exercises/exercise02.md)
+3. [Exercise 3: Exploring raw parquet](../exercises/exercise03.md)
+4. [Exercise 4: Exploring raw text based data with Azure Synapse SQL Serverless](../exercises/exercise04.md)
+5. [Exercise 5: Synapse Pipelines and Cognitive Search (Optional)](../exercises/exercise05.md)
+6. [Exercise 6: Security](../exercises/exercise06.md)
+7. [Exercise 7: Machine Learning](../exercises/exercise07.md)
+8. [Exercise 8: Monitoring](../exercises/exercise08.md)
 
 <div align="right"><a href="#getting-started">↥ back to top</a></div>
-
