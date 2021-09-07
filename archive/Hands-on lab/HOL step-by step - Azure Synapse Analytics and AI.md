@@ -85,7 +85,7 @@ In this lab various features of Azure Synapse Analytics will be explored. Azure 
 
 ## Solution architecture
 
-![Architecture diagram explained in the next paragraph.](media/archdiagram.png "Architecture Diagram")
+![Architecture diagram explained in the next paragraph.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/archdiagram.png "Architecture Diagram")
 
 This lab explores the cold data scenario of ingesting various types of raw data files. These files can exist anywhere. The file types used in this lab are CSV, parquet, and JSON. This data will be ingested into Synapse Analytics via Pipelines. From there, the data can be transformed and enriched using various tools such as data flows, Synapse Spark, and Synapse SQL (both provisioned and serverless). Once processed, data can be queried using Synapse SQL tooling. Azure Synapse Studio also provides the ability to author notebooks to further process data, create datasets, train, and create machine learning models. These models can then be stored in a storage account or even in a SQL table. These models can then be consumed via various methods, including T-SQL. The foundational component supporting all aspects of Azure Synapse Analytics is the ADLS Gen 2 Data Lake.
 
@@ -143,17 +143,17 @@ All exercises in this lab utilize the workspace Synapse Studio user interface. T
 
 2. Expand the left menu, and select the **Resource groups** item.
   
-    ![The Azure Portal left menu is expanded with the Resource groups item highlighted.](media/azureportal_leftmenu_resourcegroups.png "Azure Portal Resource Groups menu item")
+    ![The Azure Portal left menu is expanded with the Resource groups item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/azureportal_leftmenu_resourcegroups.png "Azure Portal Resource Groups menu item")
 
 3. From the list of resource groups, select `WorkspaceResourceGroup`.
   
 4. From the list of resources, select the **Synapse Workspace** resource, `asaworkspace{suffix}`.
   
-    ![In the resource list, the Synapse Workspace item is selected.](media/resourcelist_synapseworkspace.png "The resource group listing")
+    ![In the resource list, the Synapse Workspace item is selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/resourcelist_synapseworkspace.png "The resource group listing")
 
 5. On the **Overview** tab of the Synapse Workspace page, select the **Launch Synapse Studio** item from the top toolbar. Alternatively you can select the Workspace web URL link.
 
-    ![On the Synapse workspace resource screen, the Overview pane is shown with the Launch Synapse Studio button highlighted in the top toolbar. The Workspace web URL value is also highlighted.](media/workspaceresource_launchsynapsestudio.png "Launching Synapse Studio")
+    ![On the Synapse workspace resource screen, the Overview pane is shown with the Launch Synapse Studio button highlighted in the top toolbar. The Workspace web URL value is also highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/workspaceresource_launchsynapsestudio.png "Launching Synapse Studio")
 
 ## Exercise 2: Create and populate the supporting tables in the SQL Pool
 
@@ -182,11 +182,11 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
 
 1. Expand the left menu and select the **Develop** item. From the **Develop** blade, expand the **+** button and select the **SQL script** item.
 
-    ![The left menu is expanded with the Develop item selected. The Develop blade has the + button expanded with the SQL script item highlighted.](media/develop_newsqlscript_menu.png "The Develop Hub")
+    ![The left menu is expanded with the Develop item selected. The Develop blade has the + button expanded with the SQL script item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop_newsqlscript_menu.png "The Develop Hub")
 
 2. In the query tab toolbar menu, ensure you connect to your SQL Pool, `SQLPool01`.
 
-    ![The query tab toolbar menu is displayed with the Connect to set to the SQL Pool.](media/querytoolbar_connecttosqlpool.png "Connecting to the SQL Pool")
+    ![The query tab toolbar menu is displayed with the Connect to set to the SQL Pool.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_connecttosqlpool.png "Connecting to the SQL Pool")
 
 3. In the query window, copy and paste the following query to create the customer information table. Then select the **Run** button in the query tab toolbar.
 
@@ -220,7 +220,7 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
 
 4. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 ### Task 2: Populate the sale table
 
@@ -230,7 +230,7 @@ The data that we will be retrieving to populate the sale table is currently stor
 
 1. Review the presence of the **asadatalake{SUFFIX}** linked service, by selecting **Manage** from the left menu, and selecting **Linked services** from the blade menu. Filter the linked services by the term **asadatalake** to find the **asadatalake{SUFFIX}** item. Further investigating this item will unveil that it makes a connection to the storage account using a storage account key.
   
-   ![The Manage item is selected from the left menu. The Linked services menu item is selected on the blade. On the Linked services screen the term asadatalake{SUFFIX} is entered in the search box and the asadatalake{SUFFIX} Azure Blob Storage item is selected from the filtered results list.](media/manage_linkedservices_solliancepublicdata.png "Searching for a linked service")
+   ![The Manage item is selected from the left menu. The Linked services menu item is selected on the blade. On the Linked services screen the term asadatalake{SUFFIX} is entered in the search box and the asadatalake{SUFFIX} Azure Blob Storage item is selected from the filtered results list.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/manage_linkedservices_solliancepublicdata.png "Searching for a linked service")
 
 2. The sale data for each day is stored in a separate parquet file which is placed in storage following a known convention. In this lab, we are interested in populating the Sale table with only 2018 and 2019 data. Investigate the structure of the data by selecting the **Data** tab, and in the **Data** pane, select the **Linked** tab, expanding the **Azure Data Lake Storage Gen 2** item, and expanding the `asadatalake{SUFFIX}` Storage account.
 
@@ -247,11 +247,11 @@ The data that we will be retrieving to populate the sale table is currently stor
 
 4. In the **New integration dataset** blade, with the **All** tab selected, choose the **Azure Data Lake Storage Gen2** item. Select **Continue**.
 
-    ![The New dataset blade is displayed with the All tab selected, the Azure Data Lake Storage Gen2 item is selected from the list.](media/new_dataset_type_selection.png "Defining a new Dataset")
+    ![The New dataset blade is displayed with the All tab selected, the Azure Data Lake Storage Gen2 item is selected from the list.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/new_dataset_type_selection.png "Defining a new Dataset")
 
 5. In the **Select format** screen, choose the **Parquet** item. Select **Continue**.
 
-    ![In the Select format screen, the Parquet item is highlighted.](media/dataset_format_parquet.png "Selecting Parquet")
+    ![In the Select format screen, the Parquet item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_format_parquet.png "Selecting Parquet")
 
 6. In the **Set properties** blade, populate the form as follows then select **OK**.
   
@@ -263,13 +263,13 @@ The data that we will be retrieving to populate the sale table is currently stor
    | File path - Folder | Enter **sale-small**. |
    | Import schema | **From connection/store** |
 
-    ![The Set properties blade is displayed with fields populated with the values from the preceding table.](media/dataset_salesparquet_propertiesform.png "Dataset form")
+    ![The Set properties blade is displayed with fields populated with the values from the preceding table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_salesparquet_propertiesform.png "Dataset form")
 
 7. Now we will need to define the destination dataset for our data. In this case we will be storing sale data in our SQL Pool. Create a new dataset by expanding the **+** button on the **Data** blade and selecting **Integration dataset**.
 
 8. On the **New integration dataset** blade, enter **Azure Synapse** as a search term and select the **Azure Synapse Analytics** item. Select **Continue**.
 
-    ![The New integration dataset form is shown with Azure Synapse entered in the search box and the Azure Synapse Analytics item highlighted.](media/dataset_azuresynapseanalytics.png "Azure Synapse Analytics Dataset")
+    ![The New integration dataset form is shown with Azure Synapse entered in the search box and the Azure Synapse Analytics item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_azuresynapseanalytics.png "Azure Synapse Analytics Dataset")
 
 9. On the **Set properties** blade, set the field values to the following, then select **OK**.
 
@@ -280,23 +280,23 @@ The data that we will be retrieving to populate the sale table is currently stor
    | Table name | **wwi_mcw.SaleSmall** |  
    | Import schema | **From connection/store** |
 
-    ![The Set properties blade is populated with the values specified in the preceding table.](media/dataset_saleasaform.png "Dataset form")
+    ![The Set properties blade is populated with the values specified in the preceding table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_saleasaform.png "Dataset form")
 
 10. In the top toolbar, select **Publish all** to publish the new dataset definitions. When prompted, select the **Publish** button to deploy the changes to the workspace.
 
-    ![The top toolbar is displayed with the Publish all button highlighted.](media/publishall_toolbarmenu.png "Publish changes")
+    ![The top toolbar is displayed with the Publish all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/publishall_toolbarmenu.png "Publish changes")
 
 11. Since we want to filter on multiple sale year folders (Year=2018 and Year=2019) and copy only the 2018 and 2019 sales data, we will need to create a data flow to define the specific data that we wish to retrieve from our source dataset. To create a new data flow, start by selecting **Develop** from the left menu, and in the **Develop** blade, expand the **+** button and select **Data flow**.
 
-    ![From the left menu, the Develop item is selected. From the Develop blade the + button is expanded with the Data flow item highlighted.](media/develop_newdataflow_menu.png "Creating a data flow")
+    ![From the left menu, the Develop item is selected. From the Develop blade the + button is expanded with the Data flow item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop_newdataflow_menu.png "Creating a data flow")
 
 12. In the side pane on the **General** tab, name the data flow by entering **ASAMCW_Exercise_2_2018_and_2019_Sales** in the **Name** field.
 
-    ![The General tab is displayed with ASAMCW_Exercise_2_2018_and_2019_Sales entered as the name of the data flow.](media/dataflow_generaltab_name.png "Naming the data flow")
+    ![The General tab is displayed with ASAMCW_Exercise_2_2018_and_2019_Sales entered as the name of the data flow.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_generaltab_name.png "Naming the data flow")
 
 13. In the data flow designer window, select the **Add Source** box.
 
-    ![The Add source box is highlighted in the data flow designer window.](media/dataflow_addsourcebox.png "Adding a data flow source")
+    ![The Add source box is highlighted in the data flow designer window.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_addsourcebox.png "Adding a data flow source")
 
 14. With the added source selected in the designer, in the lower pane with the **Source settings** tab selected, set the following field values:
   
@@ -306,7 +306,7 @@ The data that we will be retrieving to populate the sale table is currently stor
     | Source type | **Integration Dataset** |
     | Dataset | **asamcw_sales_parquet** |
 
-    ![The Source settings tab is selected displaying the Output stream name set to salesdata and the selected dataset being asamcw_sales_parquet.](media/dataflow_source_sourcesettings.png "Defining the source")
+    ![The Source settings tab is selected displaying the Output stream name set to salesdata and the selected dataset being asamcw_sales_parquet.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_source_sourcesettings.png "Defining the source")
 
 15. Select the **Source options** tab, and add the following as **Wildcard paths**, this will ensure that we only pull data from the parquet files for the sales years of 2018 and 2019:
 
@@ -314,11 +314,11 @@ The data that we will be retrieving to populate the sale table is currently stor
 
     2. sale-small/Year=2019/\*/\*/\*/\*
 
-      ![The Source options tab is selected with the above wildcard paths highlighted.](media/dataflow_source_sourceoptions.png "Setting wildcard paths on the source")
+      ![The Source options tab is selected with the above wildcard paths highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_source_sourceoptions.png "Setting wildcard paths on the source")
 
 16. At the bottom right of the **salesdata** source, expand the **+** button and select the **Sink** item located in the **Destination** section of the menu.
 
-      ![The + button is highlighted toward the bottom right of the source element on the data flow designer.](media/dataflow_source_additem.png "Adding another data flow activity")
+      ![The + button is highlighted toward the bottom right of the source element on the data flow designer.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_source_additem.png "Adding another data flow activity")
 
 17. In the designer, select the newly added **Sink** element and in the bottom pane with the **Sink** tab selected, fill the form as follows:
 
@@ -329,7 +329,7 @@ The data that we will be retrieving to populate the sale table is currently stor
     | Sink type | **Integration Dataset** |
     | Dataset | **asamcw_sale_asa** |
 
-    ![The Sink tab is displayed with the form populated with the values from the preceding table.](media/dataflow_sink_sinktab.png "Defining the data flow sink")
+    ![The Sink tab is displayed with the form populated with the values from the preceding table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_sink_sinktab.png "Defining the data flow sink")
 
 18. Select the **Mapping** tab and toggle the **Auto mapping** setting to the off position. You will need to select Input columns for the following:
   
@@ -340,11 +340,11 @@ The data that we will be retrieving to populate the sale table is currently stor
     | Hour | Hour |
     | Minute | Minute |
 
-    ![The Mapping tab is selected with the Auto mapping toggle set to the off position. The + Add mapping button is highlighted along with the mapping entries specified in the preceding table.](media/dataflow_sink_mapping.png "Mapping columns")
+    ![The Mapping tab is selected with the Auto mapping toggle set to the off position. The + Add mapping button is highlighted along with the mapping entries specified in the preceding table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_sink_mapping.png "Mapping columns")
 
 19. In the top toolbar, select **Publish all** to publish the new dataset definitions. When prompted, select the **Publish** button to deploy the new data flow to the workspace.
 
-    ![The top toolbar is displayed with the Publish all button highlighted.](media/publishall_toolbarmenu.png "Publishing changes")
+    ![The top toolbar is displayed with the Publish all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/publishall_toolbarmenu.png "Publishing changes")
 
 20. We can now use this data flow as an activity in a pipeline. Create a new pipeline by selecting **Integrate** from the left menu, and in the **Integrate** blade, expand the **+** button and select **Pipeline**.
 
@@ -352,7 +352,7 @@ The data that we will be retrieving to populate the sale table is currently stor
 
 22. From the **Activities** menu, expand the **Move & transform** section and drag an instance of **Data flow** to the design surface of the pipeline.
   
-    ![The Activities menu of the pipeline is displayed with the Move and transform section expanded. An arrow indicating a drag operation shows adding a Data flow activity to the design surface of the pipeline.](media/pipeline_sales_dataflowactivitymenu.png "Drag and drop of the data flow activity")
+    ![The Activities menu of the pipeline is displayed with the Move and transform section expanded. An arrow indicating a drag operation shows adding a Data flow activity to the design surface of the pipeline.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_sales_dataflowactivitymenu.png "Drag and drop of the data flow activity")
 
 23. Select the **Settings** tab and set the form fields to the following values:
 
@@ -363,11 +363,11 @@ The data that we will be retrieving to populate the sale table is currently stor
     | Staging storage folder - Container | Enter **staging**. |
     | Staging storage folder - Folder | Enter **mcwsales**. |
 
-    ![The data flow activity Settings tab is displayed with the fields specified in the preceding table highlighted.](media/pipeline_sales_dataflowsettings.png "Data flow activity settings")
+    ![The data flow activity Settings tab is displayed with the fields specified in the preceding table highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_sales_dataflowsettings.png "Data flow activity settings")
 
 24. In the top toolbar, select **Publish all** to publish the new dataset definitions. When prompted, select the **Publish** button to commit the changes.
 
-    ![The top toolbar is displayed with the Publish all button highlighted.](media/publishall_toolbarmenu.png "Publishing changes")
+    ![The top toolbar is displayed with the Publish all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/publishall_toolbarmenu.png "Publishing changes")
 
 25. Once published, expand the **Add trigger** item on the pipeline designer toolbar, and select **Trigger now**. In the **Pipeline run** blade, select **OK** to proceed with the latest published configuration. You will see notification toast windows indicating the pipeline is running and when it has completed.
 
@@ -375,13 +375,13 @@ The data that we will be retrieving to populate the sale table is currently stor
 
 26. View the status of the pipeline run by locating the **ASAMCW - Exercise 2 - Copy Sale Data** pipeline in the Integrate blade. Expand the actions menu, and select the **Monitor** item.
 
-    ![In the Integrate blade, the Action menu is displayed with the Monitor item selected on the ASAMCW - Exercise 2 - Copy Sale Data pipeline.](media/orchestrate_pipeline_monitor_copysaledata.png "Monitoring a pipeline")
+    ![In the Integrate blade, the Action menu is displayed with the Monitor item selected on the ASAMCW - Exercise 2 - Copy Sale Data pipeline.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/orchestrate_pipeline_monitor_copysaledata.png "Monitoring a pipeline")
   
 27. You should see a run of the pipeline we created in the **Pipeline runs** table showing as in progress. It will take approximately 45 minutes for this pipeline operation to complete. You will need to refresh this table from time to time to see updated progress. Once it has completed. You should see the pipeline run displayed with a Status of **Succeeded**.
 
     > **Note**: _Feel free to proceed to the following tasks in this exercise while this pipeline runs_.
 
-    ![On the pipeline runs screen, a successful pipeline run is highlighted in the table.](media/pipeline_run_sales_successful.png "Successful pipeline indicator")
+    ![On the pipeline runs screen, a successful pipeline run is highlighted in the table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_run_sales_successful.png "Successful pipeline indicator")
 
 28. Verify the table has populated by creating a new query. Select the **Develop** item from the left menu, and in the **Develop** blade, expand the **+** button, and select **SQL script**. In the query window, be sure to connect to the SQL Pool database (`SQLPool01`), then paste and run the following query. When complete, select the **Discard all** button from the top toolbar.
 
@@ -395,11 +395,11 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
 
 1. Expand the left menu and select the **Develop** item. From the **Develop** blade, expand the **+** button and select the **SQL script** item.
 
-    ![The left menu is expanded with the Develop item selected. The Develop blade has the + button expanded with the SQL script item highlighted.](media/develop_newsqlscript_menu.png "Adding a SQL script")
+    ![The left menu is expanded with the Develop item selected. The Develop blade has the + button expanded with the SQL script item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop_newsqlscript_menu.png "Adding a SQL script")
 
 2. In the query tab toolbar menu, ensure you connect to your SQL Pool, `SQLPool01`.
 
-    ![The query tab toolbar menu is displayed with the Connect to set to the SQL Pool.](media/querytoolbar_connecttosqlpool.png "Connecting to the SQL Pool")
+    ![The query tab toolbar menu is displayed with the Connect to set to the SQL Pool.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_connecttosqlpool.png "Connecting to the SQL Pool")
 
 3. In the query window, copy and paste the following query to create the customer information table. Then select the **Run** button in the query tab toolbar.
   
@@ -420,25 +420,25 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
     GO
    ```
 
-   ![The query tab toolbar is displayed with the Run button selected.](media/querytoolbar_run.png "Running the query")
+   ![The query tab toolbar is displayed with the Run button selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_run.png "Running the query")
 
 4. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 ### Task 4: Populate the customer information table
 
 1. We will need to do is define a source dataset that will represent the information that we are copying over. This dataset will reference the CSV file containing customer information. From the left menu, select **Data**. From the **Data** blade, expand the **+** button and select **Integration Dataset**.
 
-    ![The Data item is selected from the left menu. On the Data blade, the + button is expanded with the Dataset item highlighted.](media/data_newdatasetmenu.png "Creating a new Dataset")
+    ![The Data item is selected from the left menu. On the Data blade, the + button is expanded with the Dataset item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/data_newdatasetmenu.png "Creating a new Dataset")
 
 2. On the **New integration dataset** blade, with the **Azure** tab selected, choose the **Azure Data Lake Gen2** item. Select **Continue**.  
   
-    ![On the New dataset blade, the All tab is selected and the Azure Data Lake Gen2 item is highlighted.](media/newdataset_azuredatalakegen2.png "Selecting Azure Data Lake Gen2 as the dataset type")
+    ![On the New dataset blade, the All tab is selected and the Azure Data Lake Gen2 item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/newdataset_azuredatalakegen2.png "Selecting Azure Data Lake Gen2 as the dataset type")
 
 3. On the **Select format** blade, select **CSV Delimited Text**. Select **Continue**.
 
-    ![On the Select format blade the CSV Delimited Text item is highlighted.](media/newdataset_selectfileformat_csv.png "Defining the dataset format to be CSV")
+    ![On the Select format blade the CSV Delimited Text item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/newdataset_selectfileformat_csv.png "Defining the dataset format to be CSV")
 
 4. On the **Set properties** blade, set the fields to the following values, then select **OK**.
 
@@ -452,13 +452,13 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
    | First row as header | Checked |
    | Import schema | Select **From connection/store**. |
 
-    ![The Set properties form is displayed with the values specified in the previous table.](media/customerinfodatasetpropertiesform.png "Configuring the dataset")
+    ![The Set properties form is displayed with the values specified in the previous table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/customerinfodatasetpropertiesform.png "Configuring the dataset")
 
 5. Now we will need to define the destination dataset for our data. In this case we will be storing customer information data in our SQL Pool. On the **Data** blade, expand the **+** button and select **Integration dataset**.
 
 6. On the **New integration dataset** blade, enter **Azure Synapse** as a search term and select the **Azure Synapse Analytics** item. Select **Continue**.
 
-    ![The New integration dataset form is shown with Azure Synapse entered in the search box and the Azure Synapse Analytics item highlighted.](media/dataset_azuresynapseanalytics.png "Azure Synapse Analytics Dataset")
+    ![The New integration dataset form is shown with Azure Synapse entered in the search box and the Azure Synapse Analytics item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_azuresynapseanalytics.png "Azure Synapse Analytics Dataset")
 
 7. On the **Set properties** blade, set the field values to the following, then select **OK**.
 
@@ -469,31 +469,31 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
    | Table name | **wwi_mcw.CustomerInfo** |  
    | Import schema | **From connection/store** |
 
-    ![The Set properties blade is populated with the values specified in the preceding table.](media/dataset_customerinfoasaform.png "Configuration form for the dataset")
+    ![The Set properties blade is populated with the values specified in the preceding table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_customerinfoasaform.png "Configuration form for the dataset")
 
 8. In the top toolbar, select **Publish all** to publish the new dataset definitions. When prompted, select the **Publish** button to commit the changes.
 
-    ![The top toolbar is displayed with the Publish all button highlighted.](media/publishall_toolbarmenu.png "Publishing changes")
+    ![The top toolbar is displayed with the Publish all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/publishall_toolbarmenu.png "Publishing changes")
 
 9. Next, we will define a pipeline to populate data into the CustomerInfo table. From the left menu, select **Integrate**. From the Integrate blade, select the **+** button and select the **Pipeline** item.
 
-    ![The Integrate menu item is selected from the left menu. On the Integrate blade, the + button is expanded with the Pipeline item highlighted.](media/orchestrate_newpipelinemenu.png "The Integrate Hub")
+    ![The Integrate menu item is selected from the left menu. On the Integrate blade, the + button is expanded with the Pipeline item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/orchestrate_newpipelinemenu.png "The Integrate Hub")
 
 10. In the **Properties** blade, enter **ASAMCW - Exercise 2 - Copy Customer Information** in the **Name** field.
 
-    ![The General tab is shown with the name field populated as described above.](media/pipeline_customerinfo_generaltab.png "Naming the pipeline")
+    ![The General tab is shown with the name field populated as described above.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_customerinfo_generaltab.png "Naming the pipeline")
 
 11. In the **Activities** menu, expand the **Move & transform** item. Drag an instance of the **Copy data** activity to the design surface of the pipeline.
 
-    ![In the Activities menu, the Move and transform section is expanded. An arrow denotes an instance of the Copy data activity being dragged over to the design surface of the pipeline.](media/pipeline_addcopydataactivity.png "Adding a copy activity to the pipeline")
+    ![In the Activities menu, the Move and transform section is expanded. An arrow denotes an instance of the Copy data activity being dragged over to the design surface of the pipeline.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_addcopydataactivity.png "Adding a copy activity to the pipeline")
 
 12. Select the **Copy data** activity on the pipeline design surface. In the bottom pane, on the **General** tab, enter **Copy Customer Information Data** in the **Name** field.
 
-    ![The General tab is selected with the Name field set to Copy Customer Information Data.](media/pipeline_copycustomerinformation_general.png "Naming the Copy data activity")
+    ![The General tab is selected with the Name field set to Copy Customer Information Data.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_copycustomerinformation_general.png "Naming the Copy data activity")
 
 13. Select the **Source** tab in the bottom pane. In the **Source dataset** field, select **asamcw_customerinfo_csv**.
 
-    ![The Source tab is selected with the Source dataset field set to asamcw_customerinfo_csv.](media/pipeline_copycustomerinformation_source.png "Selecting a source dataset")
+    ![The Source tab is selected with the Source dataset field set to asamcw_customerinfo_csv.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_copycustomerinformation_source.png "Selecting a source dataset")
   
 14. Select the **Sink** tab in the bottom pane. In the **Sink dataset** field, select **asamcw_customerinfo_asa**, for the **Copy method** field, select **Bulk insert**, and for **Pre-copy script** enter:
 
@@ -501,25 +501,25 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
       truncate table wwi_mcw.CustomerInfo
     ```
 
-    ![The Sink tab is selected with the Sink dataset field set to asamcw_customerinfo_asa, the Copy method set to Bulk insert, and the Pre-copy script field set to the previous query.](media/pipeline_copycustomerinformation_sink.png "Selecting the sink dataset")
+    ![The Sink tab is selected with the Sink dataset field set to asamcw_customerinfo_asa, the Copy method set to Bulk insert, and the Pre-copy script field set to the previous query.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_copycustomerinformation_sink.png "Selecting the sink dataset")
   
 15. Select the **Mapping** tab in the bottom pane. Select the **Import schemas** button. You will notice that Azure Synapse Analytics automated the mapping for us since the field names and types match.
 
-    ![The Mapping tab is selected in the bottom pane. The source to destination field mapping is shown.](media/pipeline_copycustomerinformation_mapping.png "Source to destination field mapping")
+    ![The Mapping tab is selected in the bottom pane. The source to destination field mapping is shown.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_copycustomerinformation_mapping.png "Source to destination field mapping")
 
 16. In the top toolbar, select **Publish all** to publish the new dataset definitions. When prompted, select the **Publish** button to commit the changes.
 
-    ![The top toolbar is displayed with the Publish all button highlighted.](media/publishall_toolbarmenu.png "Publishing changes")
+    ![The top toolbar is displayed with the Publish all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/publishall_toolbarmenu.png "Publishing changes")
 
 17. Once published, expand the **Add trigger** item on the pipeline designer toolbar, and select **Trigger now**. In the **Pipeline run** blade, select **OK** to proceed with the latest published configuration. You will see notification toast windows indicating the pipeline is running and when it has completed.
 
 18. View the status of the completed run by locating the **ASAMCW - Exercise 2 - Copy Customer Information** pipeline in the Integrate blade. Expand the actions menu, and select the **Monitor** item.
 
-    ![In the Integrate blade, the Action menu is displayed with the Monitor item selected on the ASAMCW - Exercise 2 - Copy Customer Information pipeline.](media/pipeline_copycustomerinformation_monitormenu.png "Monitoring the pipeline")
+    ![In the Integrate blade, the Action menu is displayed with the Monitor item selected on the ASAMCW - Exercise 2 - Copy Customer Information pipeline.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_copycustomerinformation_monitormenu.png "Monitoring the pipeline")
   
 19. You should see a successful run of the pipeline we created in the **Pipeline runs** table.
   
-    ![On the pipeline runs screen, a successful pipeline run is highlighted in the table.](media/pipeline_run_customerinfo_successful.png "Successful pipeline run indicator")
+    ![On the pipeline runs screen, a successful pipeline run is highlighted in the table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_run_customerinfo_successful.png "Successful pipeline run indicator")
 
 20. Verify the table has populated by creating a new query. Remember from **Task 1**, select the **Develop** item from the left menu, and in the **Develop** blade, expand the **+** button, and select **SQL script**. In the query window, be sure to connect to the SQL Pool database (`SQLPool01`), then paste and run the following query. When complete, select the **Discard all** button from the top toolbar.
 
@@ -533,11 +533,11 @@ The campaign analytics table will be queried primarily for dashboard and KPI pur
 
 1. Expand the left menu and select the **Develop** item. From the **Develop** blade, expand the **+** button and select the **SQL script** item.
 
-    ![The left menu is expanded with the Develop item selected. The Develop blade has the + button expanded with the SQL script item highlighted.](media/develop_newsqlscript_menu.png "Creating a new SQL script")
+    ![The left menu is expanded with the Develop item selected. The Develop blade has the + button expanded with the SQL script item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop_newsqlscript_menu.png "Creating a new SQL script")
 
 2. In the query tab toolbar menu, ensure you connect to your SQL Pool, `SQLPool01`.
 
-    ![The query tab toolbar menu is displayed with the Connect to set to the SQL Pool.](media/querytoolbar_connecttosqlpool.png "Connecting to the SQL Pool")
+    ![The query tab toolbar menu is displayed with the Connect to set to the SQL Pool.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_connecttosqlpool.png "Connecting to the SQL Pool")
 
 3. In the query window, copy and paste the following query to create the campaign analytics table. Then select the **Run** button in the query tab toolbar.
 
@@ -561,11 +561,11 @@ The campaign analytics table will be queried primarily for dashboard and KPI pur
     );  
     ```
 
-    ![The query tab toolbar is displayed with the Run button selected.](media/querytoolbar_run.png "Running the query")
+    ![The query tab toolbar is displayed with the Run button selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_run.png "Running the query")
 
 4. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 ### Task 6: Populate the campaign analytics table
 
@@ -573,15 +573,15 @@ Similar to the customer information table, we will also be populating the campai
 
 1. The source dataset will reference the CSV file containing campaign analytics information. From the left menu, select **Data**. From the **Data** blade, expand the **+** button and select **Integration dataset**.
 
-    ![The Data item is selected from the left menu. On the Data blade, the + button is expanded with the Dataset item highlighted.](media/data_newdatasetmenu.png "Creating a new dataset")
+    ![The Data item is selected from the left menu. On the Data blade, the + button is expanded with the Dataset item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/data_newdatasetmenu.png "Creating a new dataset")
 
 2. On the **New integration dataset** blade, with the **All** tab selected, choose the **Azure Data Lake Storage Gen2** item. Select **Continue**.  
   
-    ![The New dataset blade is displayed with the All tab selected, the Azure Data Lake Storage Gen2 item is selected from the list.](media/new_dataset_type_selection.png "Selecting the dataset type")
+    ![The New dataset blade is displayed with the All tab selected, the Azure Data Lake Storage Gen2 item is selected from the list.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/new_dataset_type_selection.png "Selecting the dataset type")
 
 3. On the **Select format** blade, select **CSV Delimited Text**. Select **Continue**.
 
-    ![On the Select format blade the CSV Delimited Text item is highlighted.](media/newdataset_selectfileformat_csv.png "Selecting the dataset format")
+    ![On the Select format blade the CSV Delimited Text item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/newdataset_selectfileformat_csv.png "Selecting the dataset format")
 
 4. On the **Set properties** blade, set the fields to the following values, then select **OK**. You may choose to preview the data which will show a sample of the CSV file. Notice that since we are not setting the first row as the header, the header columns appear as the first row. Also, notice that the city and state values do not appear. This is because of the mismatch in the number of columns in the header row compared to the rest of the file. Soon, we will exclude the first row as we transform the data.
 
@@ -595,7 +595,7 @@ Similar to the customer information table, we will also be populating the campai
    | First row as header | Unchecked |
    | Import schema | Select **From connection/store** |
 
-    ![The Set properties form is displayed with the values specified in the previous table.](media/campaignanalyticsdatasetpropertiesform.png)
+    ![The Set properties form is displayed with the values specified in the previous table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/campaignanalyticsdatasetpropertiesform.png)
 
 5. On the **Connection** tab of **asamcw_campainganalytics_csv** dataset, ensure the following field values are set:
 
@@ -608,7 +608,7 @@ Similar to the customer information table, we will also be populating the campai
 
 7. On the **New integration dataset** blade, enter **Azure Synapse** as a search term and select the **Azure Synapse Analytics** item. Select **Continue**.
 
-    ![The New integration dataset form is shown with Azure Synapse entered in the search box and the Azure Synapse Analytics item highlighted.](media/dataset_azuresynapseanalytics.png "Azure Synapse Analytics Dataset")
+    ![The New integration dataset form is shown with Azure Synapse entered in the search box and the Azure Synapse Analytics item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_azuresynapseanalytics.png "Azure Synapse Analytics Dataset")
   
 8. On the **Set properties** blade, set the field values to the following, then select **OK**.
 
@@ -619,23 +619,23 @@ Similar to the customer information table, we will also be populating the campai
    | Table name | **wwi_mcw.CampaignAnalytics** |  
    | Import schema | Select **From connection/store**. |
 
-    ![The Set properties blade is populated with the values specified in the preceding table.](media/dataset_campaignanalyticsasaform.png "The dataset configuration form")
+    ![The Set properties blade is populated with the values specified in the preceding table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_campaignanalyticsasaform.png "The dataset configuration form")
 
 9. In the top toolbar, select **Publish all** to publish the new dataset definitions. When prompted, select the **Publish** button to commit the changes.
 
-    ![The top toolbar is displayed with the Publish all button highlighted.](media/publishall_toolbarmenu.png "Publish changes")
+    ![The top toolbar is displayed with the Publish all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/publishall_toolbarmenu.png "Publish changes")
 
 10. Since our source data is malformed and does not contain an Analyst column, we will need to create a data flow to transform the source data. A data flow allows you to graphically define dataset filters and transformations without writing code. These data flows can be leveraged as an activity in an orchestration pipeline. Create a new data flow, start by selecting **Develop** from the left menu, and in the **Develop** blade, expand the **+** button and select **Data flow**.
 
-    ![From the left menu, the Develop item is selected. From the Develop blade the + button is expanded with the Data flow item highlighted.](media/develop_newdataflow_menu.png "Create a new data flow")
+    ![From the left menu, the Develop item is selected. From the Develop blade the + button is expanded with the Data flow item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop_newdataflow_menu.png "Create a new data flow")
 
 11. In the **Properties** blade name the data flow by entering **ASAMCW_Exercise_2_Campaign_Analytics_Data** in the **Name** field.
 
-    ![The Properties blade is displayed with ASAMCW_Exercise_2_Campaign_Analytics_Data entered as the name of the data flow.](media/dataflow_campaignanalytics_propertiesblade.png "Naming the data flow")
+    ![The Properties blade is displayed with ASAMCW_Exercise_2_Campaign_Analytics_Data entered as the name of the data flow.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_propertiesblade.png "Naming the data flow")
 
 12. In the data flow designer window, select the **Add Source** box.
 
-    ![The Add source box is highlighted in the data flow designer window.](media/dataflow_addsourcebox.png "Adding a data flow source")
+    ![The Add source box is highlighted in the data flow designer window.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_addsourcebox.png "Adding a data flow source")
 
 13. Under **Source settings**, configure the following:
 
@@ -646,11 +646,11 @@ Similar to the customer information table, we will also be populating the campai
     | Dataset | **asamcw_campaignanalytics_csv** |
     | Skip line count | Enter **1**. |  
 
-    ![The Source settings tab is displayed with a form populated with the values defined in the preceding table.](media/dataflow_campaignanalytics_sourcesettings.png "The data flow configuration form")
+    ![The Source settings tab is displayed with a form populated with the values defined in the preceding table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_sourcesettings.png "The data flow configuration form")
 
 14. When you create data flows, certain features are enabled by turning on debug, such as previewing data and importing a schema (projection). Due to the amount of time it takes to enable this option, as well as environmental constraints of the lab environment, we will bypass these features. The data source has a schema we need to set. To do this, select **Script** from the right side of the dataflow designer toolbar menu.
 
-    ![A portion of the dataflow designer toolbar is shown with the Script icon highlighted.](media/dataflow_toolbarscriptmenu.png "The data flow script icon")
+    ![A portion of the dataflow designer toolbar is shown with the Script icon highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_toolbarscriptmenu.png "The data flow script icon")
 
 15. Replace the script with the following to provide the column mappings (`output`), then select **OK**:
 
@@ -676,11 +676,11 @@ Similar to the customer information table, we will also be populating the campai
 
 16. Select the **campaignanalyticscsv** data source, then select **Projection**. The projection should display the following schema:
 
-    ![The Projection tab is displayed with columns defined as described in the column mapping script.](media/dataflow_campaignanalytics_projectiontab.png "The column mappings of the source")
+    ![The Projection tab is displayed with columns defined as described in the column mapping script.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_projectiontab.png "The column mappings of the source")
 
 17. Select the **+** to the bottom right of the **campaignanalyticscsv** source, then select the **Select** schema modifier from the context menu.
 
-    ![The + button on the bottom right of the campaignanalyticscsv source is highlighted.](media/dataflow_campaignanalytics_addstep.png "Adding a Select schema modifier")
+    ![The + button on the bottom right of the campaignanalyticscsv source is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_addstep.png "Adding a Select schema modifier")
 
 18. In the bottom pane, under **Select settings**, configure the following:
 
@@ -700,7 +700,7 @@ Similar to the customer information table, we will also be populating the campai
       - City
       - State
 
-    ![The Select settings tab is displayed with the form filled as described in the preceding table.](media/dataflow_mapcampaignanalytics_selectsettings.png "Configuring the Select schema modifier")
+    ![The Select settings tab is displayed with the form filled as described in the preceding table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_mapcampaignanalytics_selectsettings.png "Configuring the Select schema modifier")
 
 19. Select the **+** to the right of the **mapCampaignAnalytics** source, then select the **Derived Column** schema modifier from the context menu.
 
@@ -718,7 +718,7 @@ Similar to the customer information table, we will also be populating the campai
     | RevenueTarget | **toDecimal(replace(concat(toString(RevenueTargetPart1), toString(RevenueTarget)), '\\\\', ''), 10, 2, '$###,###.##')** | Concatenate the **RevenueTargetPart1** and **RevenueTarget** fields, replace the invalid `\` character, then convert and format the data to a decimal type. |
     | Analyst | **iif(isNull(City), '',  replace('DataAnalyst'+ City,' ',''))** | If the city field is null, assign an empty string to the Analyst field, otherwise concatenate DataAnalyst to the City value, removing all spaces. |
 
-    ![The derived column's settings are displayed as described.](media/dataflow_campaignanalytics_derivedcolumns.png "Deriving columns based on expressions")
+    ![The derived column's settings are displayed as described.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_derivedcolumns.png "Deriving columns based on expressions")
 
 21. Select the **+** to the right of the **convertandaddcolumns** step, then select the **Select** schema modifier from the context menu.
 
@@ -729,7 +729,7 @@ Similar to the customer information table, we will also be populating the campai
     | Output stream name  | Enter **selectcampaignanalyticscolumns**. |
     | Input columns | Delete the **RevenuePart1** and **RevenueTargetPart1** columns. |
 
-    ![The Select settings are displayed showing the updated column mappings.](media/dataflow_campaignanalytics_select2.png "Configuring the Select schema modifier")
+    ![The Select settings are displayed showing the updated column mappings.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_select2.png "Configuring the Select schema modifier")
 
 23. Select the **+** to the right of the **selectcampaignanalyticscolumns** step, then select the **Sink** destination from the context menu.
 
@@ -740,29 +740,29 @@ Similar to the customer information table, we will also be populating the campai
     | Output stream name  | Enter **campaignanlyticsasa**. |
     | Dataset | **asamcw_campaignanalytics_asa** |
 
-    ![The Sink settings form is displayed populated with the values defined in the previous table.](media/dataflow_campaignanalytics_sink.png "Configuring the data flow sink")
+    ![The Sink settings form is displayed populated with the values defined in the previous table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_sink.png "Configuring the data flow sink")
 
 25. Select **Settings** tab, and for **Table action** select **Truncate table**.
 
-    ![The sink Settings tab is displayed with the Table action set to Truncate table.](media/dataflow_campaignanalytics_sinksettings.png "Truncate table action")
+    ![The sink Settings tab is displayed with the Table action set to Truncate table.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_sinksettings.png "Truncate table action")
 
 26. Your completed data flow should look similar to the following:
 
-    ![The completed data flow is displayed.](media/dataflow_campaignanalytics_complete.png "The completed data flow")
+    ![The completed data flow is displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataflow_campaignanalytics_complete.png "The completed data flow")
   
 27. Select **Publish all** to save your new data flow.
 
-    ![Publish all is highlighted.](media/publishall_toolbarmenu.png "Publish all")
+    ![Publish all is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/publishall_toolbarmenu.png "Publish all")
 
 28. Now that the data flow is published, we can use it in a pipeline. Create a new pipeline by selecting **Integrate** from the left menu, then in the **Integrate** blade, expand the **+** button and select **Pipeline**.
 
 29. In the **Properties** pane on the right side of the pipeline designer. Enter **ASAMCW - Exercise 2 - Copy Campaign Analytics Data** in the **Name** field.
 
-    ![The pipeline properties blade is displayed with the Name field populated with ASAMCW - Exercise 2 - Copy Campaign Analytics Data.](media/pipeline_properties_blade.png "Naming the pipeline")
+    ![The pipeline properties blade is displayed with the Name field populated with ASAMCW - Exercise 2 - Copy Campaign Analytics Data.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_properties_blade.png "Naming the pipeline")
 
 30. From the **Activities** menu, expand the **Move & transform** section and drag an instance of **Data flow** to the design surface of the pipeline.
   
-    ![The Activities menu of the pipeline is displayed with the Move and transform section expanded. An arrow indicating a drag operation shows adding a Data flow activity to the design surface of the pipeline.](media/pipeline_sales_dataflowactivitymenu.png "Adding a data flow activity to the pipeline")
+    ![The Activities menu of the pipeline is displayed with the Move and transform section expanded. An arrow indicating a drag operation shows adding a Data flow activity to the design surface of the pipeline.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_sales_dataflowactivitymenu.png "Adding a data flow activity to the pipeline")
 
 31. In the **Adding data flow** blade, select the data flow **ASAMCW_Exercise_2_Campaign_Analytics_Data**, then **Finish**. Select the Mapping Data Flow activity on the design surface.
 
@@ -775,17 +775,17 @@ Similar to the customer information table, we will also be populating the campai
     | Staging storage folder - Container | Enter **staging**. |
     | Staging storage folder - Directory | Enter **mcwcampaignanalytics**. |
 
-    ![The data flow activity Settings tab is displayed with the fields specified in the preceding table highlighted.](media/pipeline_campaigndata_dataflowsettings.png "Configuring the data flow activity")
+    ![The data flow activity Settings tab is displayed with the fields specified in the preceding table highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_campaigndata_dataflowsettings.png "Configuring the data flow activity")
 
 33. In the top toolbar, select **Publish all** to publish the new pipeline. When prompted, select the **Publish** button to commit the changes.
 
-    ![The top toolbar is displayed with the Publish all button highlighted.](media/publishall_toolbarmenu.png "Publish changes")
+    ![The top toolbar is displayed with the Publish all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/publishall_toolbarmenu.png "Publish changes")
 
 34. Once published, expand the **Add trigger** item on the pipeline designer toolbar, and select **Trigger now**. In the **Pipeline run** blade, select **OK** to proceed with the latest published configuration. You will see notification toast window indicating the pipeline is running and when it has completed.
 
 35. View the status of the pipeline run by locating the **ASAMCW - Exercise 2 - Copy Campaign Analytics Data** pipeline in the Integrate blade. Expand the actions menu, and select the **Monitor** item.
 
-    ![In the Integrate blade, the Action menu is displayed with the Monitor item selected on the ASAMCW - Exercise 2 - Copy Campaign Analytics Data pipeline.](media/orchestrate_pipeline_monitor_copycampaigndata.png "Monitoring the pipeline run")
+    ![In the Integrate blade, the Action menu is displayed with the Monitor item selected on the ASAMCW - Exercise 2 - Copy Campaign Analytics Data pipeline.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/orchestrate_pipeline_monitor_copycampaigndata.png "Monitoring the pipeline run")
 
 36. You should see a run of the pipeline we created in the **Pipeline runs** table showing as in progress. You will need to refresh this table from time to time to see updated progress. Once it has completed. You should see the pipeline run displayed with a Status of **Succeeded**.
 
@@ -835,11 +835,11 @@ When you query Parquet files using Synapse SQL Serverless, you can explore the d
 
 4. Navigate to the **wwi-02/sale-small/Year=2010/Quarter=Q4/Month=12/Day=20101231** folder. Right-click on the **sale-small-20101231-snappy.parquet** file, select **New SQL script**, then **Select TOP 100 rows**.
 
-    ![The Storage accounts section is expanded with the context menu visible on the asadatalake{SUFFIX} account with the Select TOP 100 rows option highlighted.](media/data-hub-parquet-select-rows.png "Querying parquet data in SQL Serverless")
+    ![The Storage accounts section is expanded with the context menu visible on the asadatalake{SUFFIX} account with the Select TOP 100 rows option highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/data-hub-parquet-select-rows.png "Querying parquet data in SQL Serverless")
 
 5. Ensure the **Built-in** Synapse SQL Serverless pool is selected in the **Connect to** dropdown list above the query window, then run the query. Data is loaded by the Synapse SQL Serverless endpoint and processed as if was coming from any regular relational database.
 
-    ![The Built-in SQL on-demand connection is highlighted on the query window toolbar.](media/sql-on-demand-selected.png "SQL on-demand")
+    ![The Built-in SQL on-demand connection is highlighted on the query window toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-on-demand-selected.png "SQL on-demand")
 
 6. Modify the SQL query to perform aggregates and grouping operations to better understand the data. Replace the query with the following, making sure that the file path in **OPENROWSET** matches your current file path, be sure to substitute `asadatalake{SUFFIX}` for the appropriate value in your environment:
 
@@ -856,7 +856,7 @@ When you query Parquet files using Synapse SQL Serverless, you can explore the d
         ) AS [r] GROUP BY r.TransactionDate, r.ProductId;
     ```
 
-    ![The T-SQL query above is displayed within the query window.](media/sql-serverless-aggregates.png "Query window")
+    ![The T-SQL query above is displayed within the query window.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-serverless-aggregates.png "Query window")
 
 7. Now let's figure out how many records are contained within the Parquet files for 2019 data. This information is important for planning how we optimize for importing the data into Azure Synapse Analytics. To do this, replace your query with the following (be sure to update the name of your data lake in BULK statement, by replacing `asadatalake{SUFFIX}`):
 
@@ -878,13 +878,13 @@ When you query Parquet files using Synapse SQL Serverless, you can explore the d
 
 1. Select **Data** from the left menu, select the **Linked** tab, then browse to the data lake storage account `asadatalake{SUFFIX}` to  **wwi-02/sale-small/Year=2010/Quarter=Q4/Month=12/Day=20101231**, then right-click the Parquet file and select **New notebook** then **Load to DataFrame**.
 
-    ![The Parquet file is displayed with the New notebook and Load to DataFrame menu items highlighted.](media/new-spark-notebook-sales.png "New notebook")
+    ![The Parquet file is displayed with the New notebook and Load to DataFrame menu items highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/new-spark-notebook-sales.png "New notebook")
 
 2. This will generate a notebook with PySpark code to load the data in a dataframe and display 100 rows with the header.
 
 3. Attach the notebook to a Spark pool.
 
-    ![The Spark pool list is displayed.](media/attach-spark-pool.png "Attach to Spark pool")
+    ![The Spark pool list is displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/attach-spark-pool.png "Attach to Spark pool")
 
 4. Select **Run all** on the notebook toolbar to execute the notebook.
 
@@ -894,7 +894,7 @@ When you query Parquet files using Synapse SQL Serverless, you can explore the d
 
 5. Create a new cell underneath by selecting **{} Add code** when hovering over the blank space at the bottom of the notebook.
 
-    ![The Add Code menu option is highlighted.](media/new-cell.png "Add code")
+    ![The Add Code menu option is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/new-cell.png "Add code")
 
 6. The Spark engine can analyze the Parquet files and infer the schema. To do this, enter the following in the new cell:
 
@@ -950,7 +950,7 @@ A common format for exporting and storing data is with text based files. These c
 
 2. Ensure **Built-in** is selected in the **Connect to** dropdown list above the query window.
 
-    ![The Built-in SQL on-demand connection is highlighted on the query window toolbar.](media/sql-on-demand-selected.png "SQL on-demand")
+    ![The Built-in SQL on-demand connection is highlighted on the query window toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-on-demand-selected.png "SQL on-demand")
 
 3. In this scenario, we will be querying into the CSV file that was used to populate the product table. This file is located in the `asadatalake{SUFFIX}` account at: **wwi-02/data-generators/generator-product.csv**. We will select all data from this file. Copy and paste the following query into the query window and select **Run** from the query window toolbar menu. Remember to replace `asadatalake{SUFFIX}` with your storage account name.
 
@@ -996,11 +996,11 @@ A common format for exporting and storing data is with text based files. These c
 
 5. After you have run the previous query, switch the view on the **Results** tab to **Chart** to see a visualization of the aggregation of this data. Feel free to experiment with the chart settings to obtain the best visualization!
 
-    ![The result of the previous aggregation query is displayed as a chart in the Results pane.](media/querycsv_serverless_chart.png "Aggregation query results")
+    ![The result of the previous aggregation query is displayed as a chart in the Results pane.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querycsv_serverless_chart.png "Aggregation query results")
 
 6. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 ### Task 2: Query JSON data
 
@@ -1008,7 +1008,7 @@ A common format for exporting and storing data is with text based files. These c
 
 2. Ensure **Built-in** is selected in the **Connect to** dropdown list above the query window.
 
-    ![The Built-in SQL on-demand connection is highlighted on the query window toolbar.](media/sql-on-demand-selected.png "SQL on-demand")
+    ![The Built-in SQL on-demand connection is highlighted on the query window toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-on-demand-selected.png "SQL on-demand")
 
 3. Replace the query with the following, remember to replace `asadatalake{SUFFIX}` with the name of your storage account:
 
@@ -1037,7 +1037,7 @@ A common format for exporting and storing data is with text based files. These c
 
 4. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 ## Exercise 5: Synapse Pipelines and Cognitive Search (Optional)
 
@@ -1057,11 +1057,11 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 1. In the Azure Portal, navigate to the lab resource group and select the **asastore{suffix}** storage account.
 
-    ![The lab resources list is shown with the asastore storage account highlighted.](media/ex5-task1a-000.png "Lab resource group listing")
+    ![The lab resources list is shown with the asastore storage account highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1a-000.png "Lab resource group listing")
   
 2. From the left menu, beneath **Blob service**, select **Containers**. From the top toolbar menu of the **Containers** screen, select **+ Container**.
   
-    ![The Containers screen is displayed with Containers selected from the left menu, and + Container selected from the toolbar.](media/ex5-task1a-001.png "Azure Storage Container screen")
+    ![The Containers screen is displayed with Containers selected from the left menu, and + Container selected from the toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1a-001.png "Azure Storage Container screen")
 
 3. On the **New container** blade, name the container **invoices**, and select **Create**, we will keep the default values for the remaining fields.
 
@@ -1071,17 +1071,17 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 6. Beneath **BLOB CONTAINERS**, select the **invoices** container, then from the taskbar menu, select **+ New Folder**
 
-    ![The Storage Explorer (preview) screen is shown with Storage Explorer selected from the left menu. In the hierarchical menu, the BLOB CONTAINERS item expanded with the invoices item selected. The + New Folder button is highlighted in the taskbar menu.](media/storageexplorer_invoicesnewfolder.png "Azure Storage Explorer")
+    ![The Storage Explorer (preview) screen is shown with Storage Explorer selected from the left menu. In the hierarchical menu, the BLOB CONTAINERS item expanded with the invoices item selected. The + New Folder button is highlighted in the taskbar menu.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/storageexplorer_invoicesnewfolder.png "Azure Storage Explorer")
 
 7. In the **Create New Virtual Directory** blade, name the directory **Test**, then select **OK**. This will automatically move you into the new **Test** folder.
 
-    ![The Create New Virtual Directory form is displayed with Test entered in the name field.](media/storageexplorer_createnewvirtualdirectoryblade.png "Create New Virtual Directory form")
+    ![The Create New Virtual Directory form is displayed with Test entered in the name field.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/storageexplorer_createnewvirtualdirectoryblade.png "Create New Virtual Directory form")
 
 8. From the taskbar, select **Upload**. Upload all invoices located in **Hands-on lab/artifacts/sample_invoices/Test**. These files are Invoice_6.pdf and Invoice_7.pdf.
 
 9. Return to the root **invoices** folder by selecting the **invoices** breadcrumb from the location textbox found beneath the taskbar.
 
-    ![A portion of the Storage Explorer window is displayed with the invoices breadcrumb selected from the location textbox.](media/storageexplorer_breadcrumbnav.png "Storage Explorer breadcrumb navigation")
+    ![A portion of the Storage Explorer window is displayed with the invoices breadcrumb selected from the location textbox.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/storageexplorer_breadcrumbnav.png "Storage Explorer breadcrumb navigation")
 
 10. From the taskbar, select **+ New Folder** once again. This time creating a folder named **Train**. This will automatically move you into the new **Train** folder.
 
@@ -1089,21 +1089,21 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 12. From the left menu, select **Access keys**.
 
-    ![The left menu is displayed with the Access keys link highlighted.](media/ex5-task1a-003.png "The Access keys menu item")
+    ![The left menu is displayed with the Access keys link highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1a-003.png "The Access keys menu item")
 
 13. Copy the **Connection string** value beneath **key1**. Save it to notepad, Visual Studio Code, or another text file. We'll use this several times
 
-    ![The copy button is selected next to the key1 connection string.](media/ex5-task1a-004.png "Copying the key1 connection string value")
+    ![The copy button is selected next to the key1 connection string.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1a-004.png "Copying the key1 connection string value")
 
 14. From the left menu, beneath **Settings**, select **Shared access signature**.
 
 15. Make sure all the checkboxes are selected and choose **Generate SAS and connection string**.
 
-    ![The configuration form is displayed for SAS generation.](media/ex5-task1a-012.png "SAS Configuration form")
+    ![The configuration form is displayed for SAS generation.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1a-012.png "SAS Configuration form")
 
 16. Copy the generated **Blob service SAS URL** to the same text file as above.
 
-    ![The SAS form is shown with the shared access signature blob service SAS URL highlighted.](media/ex5-task1a-013.png "The SAS URL")
+    ![The SAS form is shown with the shared access signature blob service SAS URL highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1a-013.png "The SAS URL")
 
 17. Modify the SAS URL that you just copied and add the **invoices** container name directly before the **?** character.
 
@@ -1113,11 +1113,11 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 1. Browse to your Azure Portal homepage, select **+ Create a resource**, then search for and select **Form Recognizer** from the search results.
 
-    ![The New resource screen is shown with Form Recognizer entered into the search text boxes and selected from the search results.](media/ex5-task2a-01.png "New resource search form")
+    ![The New resource screen is shown with Form Recognizer entered into the search text boxes and selected from the search results.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-01.png "New resource search form")
 
 2. Select **Create**.
 
-    ![The Form Recognizer overview screen is displayed with the Create button highlighted.](media/ex5-task2a-02.png "The Form Recognizer overview form")
+    ![The Form Recognizer overview screen is displayed with the Create button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-02.png "The Form Recognizer overview form")
 
 3. Enter the following configuration settings, then select **Create**:
 
@@ -1130,29 +1130,29 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
     | Pricing Tier | Select **Free F0**. |
     | Confirmation checkbox | Checked. |
   
-    ![The Form Recognizer configuration screen is displayed populated with the preceding values.](media/ex5-task2a-03.png "Form Recognizer configuration screen")
+    ![The Form Recognizer configuration screen is displayed populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-03.png "Form Recognizer configuration screen")
 
 4. Wait for the service to provision then navigate to the resource.
 
 5. From the left menu, select **Keys and Endpoint**.
 
-    ![The left side navigation is shown with the Keys and Endpoint item highlighted.](media/ex5-task2a-04.png "Left menu navigation")
+    ![The left side navigation is shown with the Keys and Endpoint item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-04.png "Left menu navigation")
 
 6. Copy and Paste both **KEY 1** and the **ENDPOINT** values. Put these in the same location as the storage connection string you copied earlier.
 
-    ![The Keys and Endpoint screen is shown with KEY 1 and ENDPOINT values highlighted.](media/ex5-task2a-05.png "The Keys and Endpoint screen")
+    ![The Keys and Endpoint screen is shown with KEY 1 and ENDPOINT values highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-05.png "The Keys and Endpoint screen")
 
 7. Browse to your Azure Portal homepage, select **+ Create a new resource**, then search for and create a new instance of **Azure Cognitive Search**.
 
-    ![The Azure Cognitive Search overview screen is displayed.](media/ex5-task1-006.png "Azure Cognititve Search Overview screen")
+    ![The Azure Cognitive Search overview screen is displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-006.png "Azure Cognititve Search Overview screen")
 
 8. Choose the subscription and the resource group you've been using for this lab. Set the URL of the Cognitive Search Service to a unique value, relating to search. Then, switch the pricing tier to **Free**.
 
-    ![The configuration screen for Cognitive Search is displayed populated as described above.](media/ex5-task1-007.png "Cognitive Search service configuration")
+    ![The configuration screen for Cognitive Search is displayed populated as described above.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-007.png "Cognitive Search service configuration")
 
 9. Select **Review + create**.
 
-    ![displaying the review + create button](media/ex5-task1-008.png "The review and create button")
+    ![displaying the review + create button](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-008.png "The review and create button")
 
 10. Select **Create**.
 
@@ -1160,11 +1160,11 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 12. From the left menu, select **Keys**, copy the **Primary admin key** and paste it into your text document. Also make note of the name of your search service resource.
 
-    ![They Keys page of the Search service resource is shown with the Primary admin key value highlighted.](media/ex5-task3-010.png "Cognitive search keys")
+    ![They Keys page of the Search service resource is shown with the Primary admin key value highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-010.png "Cognitive search keys")
 
 13. Also make note of the name of your search service in the text document.
 
-    ![The Search Service name is highlighted on the Keys screen.](media/ex5-task3-011.png "Search service name")
+    ![The Search Service name is highlighted on the Keys screen.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-011.png "Search service name")
 
 14. Open Visual Studio Code.
 
@@ -1178,21 +1178,21 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
     - Line 18: The KEY1 value for your Form Recognizer Service.
 
-    ![The source code listing of pocformreader.py is displayed with the lines mentioned above highlighted.](media/ex5-task2a-06.png "The source listing of pocofrmreader.py")
+    ![The source code listing of pocformreader.py is displayed with the lines mentioned above highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-06.png "The source listing of pocofrmreader.py")
 
 17. Save the file.
 
 18. Select Run, then Start Debugging.
 
-    ![The VS Code File menu is shown with Run selected and Start Debugging highlighted.](media/ex5-task2a-07.png "The VS Code File menu")
+    ![The VS Code File menu is shown with Run selected and Start Debugging highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-07.png "The VS Code File menu")
 
 19. In the **Debug Configuration**, select to debug the **Python File - Debug the currently active Python File** value.
 
-    ![The Debug Configuration selection is shown with Python File - Debug the currently active Python File highlighted.](media/ex5-task2a-08.png "Debug Configuration selection")
+    ![The Debug Configuration selection is shown with Python File - Debug the currently active Python File highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-08.png "Debug Configuration selection")
 
 20. This process will take a few minutes to complete. When it completes, you should see an output similar to what is seen in the screenshot below. The output should also contain a modelId. Copy and paste this value into your text file to use later
 
-    ![A sample output of the python script is shown with a modelId value highlighted.](media/ex5-task2a-09.png "Visual Studio Code output window")
+    ![A sample output of the python script is shown with a modelId value highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task2a-09.png "Visual Studio Code output window")
 
     >**Note**: If you receive an error stating the **requests** module is not found, from the terminal window in Visual Studio code, execute: **pip install requests**
 
@@ -1204,15 +1204,15 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 2. In Visual Studio Code open the folder **Hands-on lab/environment-setup/functions**.
 
-   ![The file structure of the /environment-setup/functions folder is shown.](media/ex5-task1-001.png "The file structure of the functions folder")
+   ![The file structure of the /environment-setup/functions folder is shown.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-001.png "The file structure of the functions folder")
 
 3. In the **GetInvoiceData/\_\_init\_\_.py** file, update lines 66, 68, 70, and 73 with the appropriate values for your environment, the values that need replacing are located between **\<\<** and **\>\>** values.
 
-   ![The __init__.py code listing is displayed.](media/ex5-task1-step2.png "The __init__.py code listing")
+   ![The __init__.py code listing is displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-step2.png "The __init__.py code listing")
 
 4. Use the Azure Functions extension to publish to a new Azure function. If you don't see the Azure Functions panel, go to the **View** menu, select **Open View...** and choose **Azure**. If the panel shows the **Sign-in to Azure** link, select it and log into Azure. Select the **Publish** button at the top of the panel.
 
-   ![The Azure Functions extension panel in VS Code is displayed highlighting the button to publish the function.](media/ex5-task1-002.png "The Azure Function panel")
+   ![The Azure Functions extension panel in VS Code is displayed highlighting the button to publish the function.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-002.png "The Azure Function panel")
 
     - If prompted for a subscription, select the same subscription as your Synapse workspace.
 
@@ -1222,21 +1222,21 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
     - Give this function a unique name, relative to form recognition.
 
-        ![The Create new function App in Azure dialog is shown with the name populated.](media/ex5-task1-003.png "The Create new function App in Azure dialog")
+        ![The Create new function App in Azure dialog is shown with the name populated.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-003.png "The Create new function App in Azure dialog")
 
     - For the runtime select Python 3.7.
 
-        ![The python runtime version selection dialog is shown with Python 3.7 highlighted.](media/ex5-task1-004.png "Setting the Python runtime version")
+        ![The python runtime version selection dialog is shown with Python 3.7 highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-004.png "Setting the Python runtime version")
 
     - Deploy the function to the same region as your Synapse workspace.
 
-        ![The Region selection dialog is shown.](media/ex5-task1-005.png "The region selection dialog")
+        ![The Region selection dialog is shown.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-005.png "The region selection dialog")
 
 5. Once publishing has completed, return to the Azure Portal and search for a resource group that was created with the same name as the Azure Function App.
 
 6. Within this resource group, open the **Function App** resource with the same name.
 
-   ![A resource listing is shown with the Function App highlighted.](media/formrecognizerresourcelist.png "Resource group listing")
+   ![A resource listing is shown with the Function App highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/formrecognizerresourcelist.png "Resource group listing")
 
 7. From the left menu, beneath the **Functions** heading, select **Functions**.
 
@@ -1244,31 +1244,31 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 9. From the toolbar menu of the **GetInvoiceData** screen, select the **Get Function Url** item, then copy this value to your text document for later reference.
 
-    ![The GetInvoiceData function screen is shown with the Get Function Url button highlighted in the taskbar and the URL displayed in a textbox.](media/azurefunctionurlvalue.png "GetInvoiceData function screen")
+    ![The GetInvoiceData function screen is shown with the Get Function Url button highlighted in the taskbar and the URL displayed in a textbox.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/azurefunctionurlvalue.png "GetInvoiceData function screen")
 
 10. Now that we have the function published and all our resources created, we can create the skillset. This will be accomplished using **Postman**. Open Postman.
 
 11. From the **File** menu, select **Import** and choose to import the postman collection from **Hands-on lab/environment-setup/skillset** named **InvoiceKnowledgeStore.postman_collection.json**.
 
-    ![The Postman File menu is expanded with the Import option selected.](media/ex5-task3-004.png "Postman File menu")
+    ![The Postman File menu is expanded with the Import option selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-004.png "Postman File menu")
 
-    ![The Postman file import screen is displayed with the Upload files button highlighted.](media/ex5-task3-005.png "The Postman Import Screen")
+    ![The Postman file import screen is displayed with the Upload files button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-005.png "The Postman Import Screen")
 
-    ![The file selection dialog is shown with the file located in the skillset folder highlighted.](media/ex5-task3-006.png "File selection dialog")
+    ![The file selection dialog is shown with the file located in the skillset folder highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-006.png "File selection dialog")
 
 12. Select **Import**.
 
 13. In Postman, the Collection that was imported will give you 4 items in the **Create a KnowledgeStore** collection. These are: Create Index, Create Datasource, Create the skillset, and Create the Indexer.
 
-    ![The Collections pane is shown with the Create a KnowledgeStore collection expanded with the four items indicated above.](media/ex5-task3-007.png "The Postman Collections Pane")
+    ![The Collections pane is shown with the Create a KnowledgeStore collection expanded with the four items indicated above.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-007.png "The Postman Collections Pane")
 
 14. The first thing we need to do, is edit some properties that will affect each of the calls in the collection. Hover over the **Create a KnowledgeStore** collection, and select the ellipsis button **...**, and then select **Edit**.
 
-    ![In Postman, the ellipsis is expanded next to the Create a KnowledgeStore collection with the edit menu option selected.](media/ex5-task3-008.png "Editing the Postman Collection")
+    ![In Postman, the ellipsis is expanded next to the Create a KnowledgeStore collection with the edit menu option selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-008.png "Editing the Postman Collection")
 
 15. In the Edit Collection screen, select the **Variables** tab.
 
-    ![In the Edit Collection screen, the Variables tab is selected.](media/ex5-task3-009.png "Edit Collection variables screen")
+    ![In the Edit Collection screen, the Variables tab is selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-009.png "Edit Collection variables screen")
 
 16. We are going to need to edit each one of these variables to match the following:
 
@@ -1287,47 +1287,47 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 17. Select **Update** to update the collection with the modified values.
 
-    ![The Edit Collection Variables screen is shown with a sampling of modified values.](media/ex5-task3-014.png "The Edit Collection Values screen")
+    ![The Edit Collection Variables screen is shown with a sampling of modified values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-014.png "The Edit Collection Values screen")
 
 18. Expand the **Create a KnowledgeStore** collection, and select the **Create Index** call, then select the **Body** tab and review the content. For this call, and every subsequent call from Postman - ensure the Content Type is set to **JSON**.
 
-    ![The Create Index call is selected from the collection, and the Body tab is highlighted.](media/ex5-task3-015.png "The Create Index Call")
+    ![The Create Index call is selected from the collection, and the Body tab is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-015.png "The Create Index Call")
 
-    ![The Postman Body tab is selected with the JSON item highlighted.](media/postman_jsoncontenttype.png "The Postman Body tab")
+    ![The Postman Body tab is selected with the JSON item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/postman_jsoncontenttype.png "The Postman Body tab")
 
 19. Select "Send".
 
-    ![The Postman send button is selected.](media/ex5-task3-016.png "Send button")
+    ![The Postman send button is selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-016.png "Send button")
 
 20. You should get a response that the index was created.
 
-    ![The Create Index response is displayed in Postman with the Status of 201 Created highlighted.](media/ex5-task3-017.png "The Create Index call response")
+    ![The Create Index response is displayed in Postman with the Status of 201 Created highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-017.png "The Create Index call response")
 
 21. Do the same steps for the **Create Datasource, Create the Skillset, and Create the indexer** calls.
 
 22. After you Send the Indexer request, if you navigate to your search service you should see your indexer running, indicated by the in-progress indicator. It will take a couple of minutes to run.
 
-    ![The invoice-indexer is shown with a status of in-progress.](media/ex5-task3-018.png "The invoice-indexer status")
+    ![The invoice-indexer is shown with a status of in-progress.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-018.png "The invoice-indexer status")
 
 23. Once the indexer has run, it will show two successful documents. If you go to your Blob storage account, **asastore{suffix}** and look in the **invoices-json** container you will see two folders with .json documents in them.
 
-    ![The execution history of the invoice-indexer is shown as successful.](media/ex5-task3-019.png "The execution history of the invoice-indexer")
+    ![The execution history of the invoice-indexer is shown as successful.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-019.png "The execution history of the invoice-indexer")
 
-    ![The invoices-json container is shown with two folders. A JSON file is shown in the blob window.](media/ex5-task3-020.png "Contents of the invoices-json container")
+    ![The invoices-json container is shown with two folders. A JSON file is shown in the blob window.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-020.png "Contents of the invoices-json container")
 
 ### Task 4: Create the Synapse Pipeline
 
 1. Open your Synapse workspace.
 
-    ![The Azure Synapse Workspace resource screen is shown with the Launch Synapse Studio button highlighted.](media/ex5-task4-001.png)
+    ![The Azure Synapse Workspace resource screen is shown with the Launch Synapse Studio button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-001.png)
 
 2. Expand the left menu and select the **Develop** item. From the **Develop** blade, expand the **+** button and select the **SQL script** item.
 
-    ![The left menu is expanded with the Develop item selected. The Develop blade has the + button expanded with the SQL script item highlighted.](media/develop_newsqlscript_menu.png "Creating a new SQL script")
+    ![The left menu is expanded with the Develop item selected. The Develop blade has the + button expanded with the SQL script item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop_newsqlscript_menu.png "Creating a new SQL script")
 
 3. In the query tab toolbar menu, ensure you connect to your SQL Pool, `SQLPool01`.
 
-    ![The query tab toolbar menu is displayed with the Connect to set to the SQL Pool.](media/querytoolbar_connecttosqlpool.png "Connecting to the SQL Pool")
+    ![The query tab toolbar menu is displayed with the Connect to set to the SQL Pool.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_connecttosqlpool.png "Connecting to the SQL Pool")
 
 4. In the query window, copy and paste the following query to create the invoice information table. Then select the **Run** button in the query tab toolbar.
 
@@ -1345,83 +1345,83 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 5. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 6. Select the **Integrate** hub from the left navigation.
 
-    ![The Integrate hub is selected from the left navigation.](media/ex5-task4-012.png "The Integrate hub")
+    ![The Integrate hub is selected from the left navigation.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-012.png "The Integrate hub")
 
 7. In the Integrate blade, expand the **+** button and then select **Pipeline** to create a new pipeline.
 
-    ![The + button is expanded with the pipeline option selected.](media/ex5-task4-013.png "Create a new pipeline")
+    ![The + button is expanded with the pipeline option selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-013.png "Create a new pipeline")
 
 8. Name your pipeline **InvoiceProcessing**.
 
-    ![The new pipeline properties are shown with InvoiceProcessing entered as the name of the pipeline.](media/ex5-task4-014.png "Naming the pipeline")
+    ![The new pipeline properties are shown with InvoiceProcessing entered as the name of the pipeline.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-014.png "Naming the pipeline")
 
 9. On the pipeline taskbar, select **Add trigger** then choose **New/Edit** to create an event to start the pipeline.
 
-    ![The Add trigger button is expanded with the New/Edit option selected.](media/ex5-task4-015.png "New Trigger menu item")
+    ![The Add trigger button is expanded with the New/Edit option selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-015.png "New Trigger menu item")
 
 10. On the Add triggers form, select  **+New** from the **Choose trigger** dropdown.
 
-    ![The Add triggers form is displayed with the Choose trigger dropdown expanded and the +New item is selected.](media/ex5-task4-016.png "Choosing to create a new trigger")
+    ![The Add triggers form is displayed with the Choose trigger dropdown expanded and the +New item is selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-016.png "Choosing to create a new trigger")
 
 11. For this exercise, we're going to do a schedule. However, in the future you'll also be able to use an event-based trigger that would fire off new JSON files being added to blob storage. Set the trigger to start every 5 minutes, then select **OK**.
 
-    ![The new trigger form is displayed with the trigger set to start every 5 minutes.](media/ex5-task4-017.png "New trigger form")
+    ![The new trigger form is displayed with the trigger set to start every 5 minutes.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-017.png "New trigger form")
 
 12. Select **OK** on the Run Parameters form, nothing needs to be done here.
 
 13. Next we need to add a Data Flow to the pipeline. Under Activities, expand **Move & transform** then drag and drop a **Data flow** onto the designer canvas.
 
-    ![The pipeline designer is shown with an indicator of a drag and drop operation of the data flow activity.](media/ex5-task4-018.png "The Data flow activity")
+    ![The pipeline designer is shown with an indicator of a drag and drop operation of the data flow activity.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-018.png "The Data flow activity")
 
 14. On the **Adding data flow** form, select **Create new data flow** and select **Data flow**.
 
-    ![The Adding data flow form is displayed populated with the preceding values.](media/ex5-task4-019.png)
+    ![The Adding data flow form is displayed populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-019.png)
 
 15. On the **Properties** blade of the new Data Flow, on **General** tab, enter **NewInvoicesProcessing** in the **Name** field.
 
 16. On the **NewInvoicesProcessing** data flow design canvas. Select the **Add source** box.
 
-    ![The NewInvoicesProcessing designer is shown with the Add source box selected.](media/ex5-task4-020.png "The NewInvoicesProcessing designer")
+    ![The NewInvoicesProcessing designer is shown with the Add source box selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-020.png "The NewInvoicesProcessing designer")
 
 17. In the bottom pane, name the output stream **jsonInvoice**, leave the source type as **Dataset**, and keep all the remaining options set to their defaults. Select **+New** next to the Dataset field.
 
-    ![The Source settings tab is displayed populated with the name of jsonInvoice and the +New button next to the Dataset field is selected.](media/ex5-task4-021.png "Source Settings")
+    ![The Source settings tab is displayed populated with the name of jsonInvoice and the +New button next to the Dataset field is selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-021.png "Source Settings")
 
 18. In the **New dataset blade**, select **Azure Blob Storage** then select **Continue**.
 
-    ![The New dataset blade is displayed with Azure Blob Storage selected.](media/ex5-task4-022.png "Azure Blob Storage dataset")
+    ![The New dataset blade is displayed with Azure Blob Storage selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-022.png "Azure Blob Storage dataset")
 
 19. On the **Select format** blade, select **Json** then select **Continue**.
 
-    ![The select format screen is displayed with Json selected as the type.](media/ex5-task4-023.png "Select format form")
+    ![The select format screen is displayed with Json selected as the type.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-023.png "Select format form")
 
 20. On the **Set properties** screen, name the dataset **InvoicesJson** then for the linked service field, choose the Azure Storage linked service **asastore{suffix}**.
 
-    ![A portion of the Set properties form is displayed populated with the above values.](media/ex5-task4-024.png "Dataset Set properties form")
+    ![A portion of the Set properties form is displayed populated with the above values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-024.png "Dataset Set properties form")
 
 21. For the file path field, enter **invoices-json** and set the import schema field to **From sample file**.
 
-    ![The set properties form is displayed with the file path and import schema fields populated as described.](media/ex5-task4-025.png "Data set properties form")
+    ![The set properties form is displayed with the file path and import schema fields populated as described.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-025.png "Data set properties form")
 
 22. Select **Browse** and select the file located at **Hands-on lab/environment-setup/synapse/sampleformrecognizer.json** and select **OK**.
 
-    ![The Set properties form is displayed with the sampleformrecognizer.json selected as the selected file.](media/ex5-task4-026.png "Data set properties form")
+    ![The Set properties form is displayed with the sampleformrecognizer.json selected as the selected file.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-026.png "Data set properties form")
 
 23. Select the **Source options** tab on the bottom pane. Add \*/\* to the Wildcard paths field.
 
-    ![The Source options tab is shown with the Wildcard paths field populated as specified.](media/ex5-task4-048.png "Source options tab")
+    ![The Source options tab is shown with the Wildcard paths field populated as specified.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-048.png "Source options tab")
 
 24. On the Data flow designer surface, select **+** to the lower right of the source activity to add another step in your data flow.
 
-    ![The + button is highlighted to the lower right of the source activity.](media/ex5-task4-028.png "Adding a data flow step")
+    ![The + button is highlighted to the lower right of the source activity.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-028.png "Adding a data flow step")
 
 25. From the list of options, select **Derived column** from beneath the **Schema modifier** section.
 
-    ![With the + button expanded, Derived column is selected from the list of options.](media/ex5-task4-029.png "Adding a derived column activity")
+    ![With the + button expanded, Derived column is selected from the list of options.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-029.png "Adding a derived column activity")
 
 26. On the **Derived column's settings** tab, provide the output stream name of **RemoveCharFromStrings**. Then for the Columns field, select the following 3 columns and configure them as follows, using the **Open expression builder** link for the expressions:
 
@@ -1431,39 +1431,39 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
     | totalcharges | toDecimal(replace(replace(totalcharges,'$',''),',','')) |
     | quantity | toInteger(replace(quantity,',','')) |
 
-     ![The Derived column's settings tab is shown with the fields populated as described.](media/ex5-task4-030.png "The derived column's settings tab")
+     ![The Derived column's settings tab is shown with the fields populated as described.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-030.png "The derived column's settings tab")
 
 27. Return to the Data flow designer, select the **+** next to the derived column activity to add another step to your data flow.
 
 28. This time select the **Alter Row** from beneath the **Row modifier** section.
 
-    ![In the Row modifier section, the Alter Row option is selected.](media/ex5-task4-031.png "The Alter row activity")
+    ![In the Row modifier section, the Alter Row option is selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-031.png "The Alter row activity")
 
 29. On the **Alter row settings** tab on the bottom pane, Name the Output stream **AlterTransactionID**, and leave the incoming stream set to the default value. Change **Alter row conditions** field to **Upsert If** and then set the expression to **notEquals(transactionid,"")**
 
-    ![The Alter row settings tab is shown populated with the values described above.](media/ex5-task4-032.png "The Alter row settings tab")
+    ![The Alter row settings tab is shown populated with the values described above.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-032.png "The Alter row settings tab")
 
 30. Return to the Data flow designer, select the **+** to the lower right of the **Alter Row** activity to add another step into your data flow.
 
 31. Within the **Destination** section, select **Sink**.
 
-    ![In the activity listing, the sink option is selected from within the Destination section.](media/ex5-task4-033.png "The Sink Activity")
+    ![In the activity listing, the sink option is selected from within the Destination section.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-033.png "The Sink Activity")
 
 32. On the bottom pane, with the **Sink** tab selected, name the Output stream name **SQLDatabase** and leave everything else set to the default values. Next to the **Dataset** field, select **+New** to add a new Dataset.
 
-    ![The sink tab is shown with the output stream name set to SQLDatabase and the +New button selected next to the Dataset field.](media/ex5-task4-034.png "The Sink tab")
+    ![The sink tab is shown with the output stream name set to SQLDatabase and the +New button selected next to the Dataset field.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-034.png "The Sink tab")
 
 33. On the **New integration dataset** blade, enter **Azure Synapse** as a search term and select the **Azure Synapse Analytics** item. Select **Continue**.
 
-    ![The New integration dataset form is shown with Azure Synapse entered in the search box and the Azure Synapse Analytics item highlighted.](media/dataset_azuresynapseanalytics.png "Azure Synapse Analytics Dataset")
+    ![The New integration dataset form is shown with Azure Synapse entered in the search box and the Azure Synapse Analytics item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/dataset_azuresynapseanalytics.png "Azure Synapse Analytics Dataset")
 
 34. Set the name of the Dataset to **InvoiceTable** and choose the **sqlpool01** Linked service. Choose **Select from existing table** and choose the **wwi_mcw.Invoices** table. If you don't see it in the list of your table names, select the **Refresh** button and it should show up. Select **OK**.
 
-    ![The Dataset Set properties form is displayed populated as described.](media/ex5-task4-036.png "Set properties form")
+    ![The Dataset Set properties form is displayed populated as described.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-036.png "Set properties form")
 
 35. In the bottom pane, with the Sink activity selected on the data flow designer, select the **Settings** tab and check the box to **Allow upsert**. Set the **Key columns** field to **transactionid**.
 
-    ![The Settings tab of the Sink activity is shown and is populated as described.](media/ex5-task4-037.png "Sink Settings tab")
+    ![The Settings tab of the Sink activity is shown and is populated as described.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-037.png "Sink Settings tab")
 
 36. Select the **Mapping** tab, disable the **Auto mapping** setting and configure the mappings between the json file and the database. Select **+ Add mapping** then choose **Fixed mapping** to add the following mappings:
 
@@ -1476,41 +1476,41 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
     | quantity  | Quantity |
     | totalcharges | TotalAmount |
 
-    ![The Mapping tab is displayed with Auto Mapping disabled and the column mappings from the table above are defined.](media/ex5-task4-038.png "The Mapping tab")
+    ![The Mapping tab is displayed with Auto Mapping disabled and the column mappings from the table above are defined.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-038.png "The Mapping tab")
 
 37. Return to the **InvoiceProcessing** pipeline by selecting its tab at the top of the workspace.
 
-    ![The InvoiceProcessing tab is selected at the top of the workspace.](media/ex5-task4-039.png "The InvoiceProcessing pipeline tab")
+    ![The InvoiceProcessing tab is selected at the top of the workspace.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-039.png "The InvoiceProcessing pipeline tab")
 
 38. Select the data flow activity on the pipeline designer surface, then in the bottom pane, select the **Settings** tab.
 
-    ![The data flow activity Settings tab is displayed.](media/ex5-task4-040.png "The Settings tab")
+    ![The data flow activity Settings tab is displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-040.png "The Settings tab")
 
 39. Under the **PolyBase** settings, set the **Staging linked service** to the **asastore{suffix}** linked service. Enter **invoices-staging** as the **Storage staging folder**.
 
-    ![The data flow activity Settings tab is displayed with its form populated as indicated above.](media/ex5-task4-041.png "The Settings tab")
+    ![The data flow activity Settings tab is displayed with its form populated as indicated above.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-041.png "The Settings tab")
 
 40. Select **Publish All** from the top toolbar.
 
-    ![The Publish All button is selected from the top toolbar.](media/ex5-task4-042.png "The Publish all button")
+    ![The Publish All button is selected from the top toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-042.png "The Publish all button")
 
 41. Select **Publish**.
 
 42. Within a few moments, you should see a notification that Publishing completed.
 
-    ![The Publishing completed notification is shown.](media/ex5-task4-043.png "The Publishing Completed notification")
+    ![The Publishing completed notification is shown.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-043.png "The Publishing Completed notification")
 
 43. From the left menu, select the **Monitor** hub, then ensure the **Pipeline runs** option is selected from the hub menu.
 
-    ![The Monitor hub is selected from the left menu.](media/ex5-task4-044.png "The Monitor Hub menu option")
+    ![The Monitor hub is selected from the left menu.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-044.png "The Monitor Hub menu option")
 
 44. In approximately 5 minutes, you should see the **InvoiceProcessing** pipeline begin processing. You may need to refresh this list to see it appear, a refresh button is located in the toolbar.
 
-    ![On the Pipeline runs list, the InvoiceProcessing pipeline is shown as in-progress.](media/ex5-task4-045.png "The Pipeline runs list")
+    ![On the Pipeline runs list, the InvoiceProcessing pipeline is shown as in-progress.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-045.png "The Pipeline runs list")
 
 45. After about 3 or 4 minutes it will complete. You may need to refresh the list to see the completed pipeline.
 
-    ![The Pipeline runs list is displayed with the InvoiceProcessing pipeline shown as succeeded.](media/ex5-task4-046.png "The pipeline runs list")
+    ![The Pipeline runs list is displayed with the InvoiceProcessing pipeline shown as succeeded.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-046.png "The pipeline runs list")
 
 46. From the left menu, select the **Develop** hub, then expand the **+** button an choose **SQL Script**. Ensure the proper database is selected, then run the following query to verify the data from the two test invoices.
 
@@ -1518,7 +1518,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
     SELECT * FROM wwi_mcw.Invoices
     ```
 
-    ![show the data in the databases](media/ex5-task4-047.png)
+    ![show the data in the databases](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-047.png)
 
 ## Exercise 6: Security
 
@@ -1582,11 +1582,11 @@ It is important to identify data columns of that hold sensitive information. Typ
     Revert;
     ```
 
-    ![The query tab toolbar is displayed with the Run button selected.](media/querytoolbar_run.png "Running a SQL Query")
+    ![The query tab toolbar is displayed with the Run button selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_run.png "Running a SQL Query")
 
 3. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 ### Task 2: Row level security
 
@@ -1667,11 +1667,11 @@ In many organizations it is important to filter certain rows of data by user. In
     DROP SCHEMA Security;
     ```
 
-    ![The query tab toolbar is displayed with the Run button selected.](media/querytoolbar_run.png "Running a query")
+    ![The query tab toolbar is displayed with the Run button selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_run.png "Running a query")
 
 3. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 ### Task 3: Dynamic data masking
 
@@ -1743,11 +1743,11 @@ As an alternative to column level security, SQL Administrators also have the opt
     GO
     ```
 
-    ![The query tab toolbar is displayed with the Run button selected.](media/querytoolbar_run.png "Running a query")
+    ![The query tab toolbar is displayed with the Run button selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/querytoolbar_run.png "Running a query")
 
 3. At the far right of the top toolbar, select the **Discard all** button as we will not be saving this query. When prompted, choose to **Discard changes**.
 
-   ![The top toolbar menu is displayed with the Discard all button highlighted.](media/toptoolbar_discardall.png "Discarding all changes")
+   ![The top toolbar menu is displayed with the Discard all button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/toptoolbar_discardall.png "Discarding all changes")
 
 ## Exercise 7: Machine Learning
 
@@ -1761,15 +1761,15 @@ In this exercise, you will create multiple machine learning models. You will lea
 
 1. Open the lab resource group, locate and open the **amlworkspace{{suffix}}** Machine Learning resource.
 
-    ![The lab resource group is shown with the Machine Learning resource selected](media/resourcelist_amlstudio.png "Machine learning resource")
+    ![The lab resource group is shown with the Machine Learning resource selected](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/resourcelist_amlstudio.png "Machine learning resource")
 
 2. On the **Overview** screen of the Machine Learning resource, select the **Studio web URL** link.
 
-    ![The machine learning resource overview screen is selected with the Studio web URL link highlighted.](media/machinelearning_overview.png "Machine learning overview screen")
+    ![The machine learning resource overview screen is selected with the Studio web URL link highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/machinelearning_overview.png "Machine learning overview screen")
 
 3. From the left menu of **Azure Machine Learning Studio**, select the **Datastores** item.
 
-    ![The Machine Learning Studio menu is shown with the Datastores item highlighted](media/amlstudio_datastores_menu.png "AML Studio menu")
+    ![The Machine Learning Studio menu is shown with the Datastores item highlighted](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/amlstudio_datastores_menu.png "AML Studio menu")
 
 4. On the **Datastores** screen top menu, select **+ New datastore**.
 
@@ -1786,19 +1786,19 @@ In this exercise, you will create multiple machine learning models. You will lea
     | User ID | asa.sql.admin |
     | Password | The SQL Admin password you chose when deploying the lab resources. |
 
-    ![The new datastore blade is shown populated with the preceding values.](media/amlstudio_sqlpooldatasource.png "New datastore blade")
+    ![The new datastore blade is shown populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/amlstudio_sqlpooldatasource.png "New datastore blade")
 
 6. From the left menu, select **Datasets**, and with the **Registered datasets** tab selected, expand the **+ Create dataset** button and select **From datastore**.
 
-    ![The Datasets screen is displayed with the +Create dataset button highlighted.](media/createfirstamldataset.png "AML Studio Datasets screen")
+    ![The Datasets screen is displayed with the +Create dataset button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/createfirstamldataset.png "AML Studio Datasets screen")
 
 7. In the **Create dataset from datastore** Basic info form, name the dataset **AggregatedProductSeasonality** and select **Next**.
 
-    ![The basic info form is displayed populated with the preceding values.](media/createdataset_basicinfo.png "Dataset basic info form")
+    ![The basic info form is displayed populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/createdataset_basicinfo.png "Dataset basic info form")
 
 8. On the **Datastore selection** form, select **Previously created datasource**, choose **sqlpool01** from the list and select the **Select datastore** button.
 
-    ![The Datastore selection form is displayed as described above.](media/amldatasetselectdatasource.png "The Datastore selection form")
+    ![The Datastore selection form is displayed as described above.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/amldatasetselectdatasource.png "The Datastore selection form")
 
 9. In the next **Datastore selection** form, enter the following **SQL query**. Then expand the **Advanced settings** and enter **100** for the **Query timeout (seconds)** value. Select **Next**:
 
@@ -1810,19 +1810,19 @@ In this exercise, you will create multiple machine learning models. You will lea
     GROUP BY P.ProductId ,P.Seasonality,S.TransactionDateId
     ```
 
-    ![The datastore selection form is displayed populated with the preceding query.](media/aml_dataset_datastoreselectionquery.png "Dataset query details")
+    ![The datastore selection form is displayed populated with the preceding query.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_dataset_datastoreselectionquery.png "Dataset query details")
 
 10. The **Settings and preview** data table will be displayed after a few moments. Review this data, then select the **Next** button.
 
-    ![The settings and preview screen is displayed showing a table of data.](media/amlstudio_dataset_settingsandpreview.png "The Settings and Preview screen")
+    ![The settings and preview screen is displayed showing a table of data.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/amlstudio_dataset_settingsandpreview.png "The Settings and Preview screen")
 
 11. Review the **Schema** field listing, then select **Next**.
 
-    ![The Schema screen is displayed showing a listing of columns and their types.](media/amlstudio_dataset_schema.png "The dataset Schema field listing")
+    ![The Schema screen is displayed showing a listing of columns and their types.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/amlstudio_dataset_schema.png "The dataset Schema field listing")
 
 12. On the **Confirm details** screen, select **Create**.
 
-    ![The dataset Confirm details screen is displayed showing a summary of the choices from the previous steps.](media/aml_dataset_confirmdetails.png "The dataset Confirm details screen")
+    ![The dataset Confirm details screen is displayed showing a summary of the choices from the previous steps.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_dataset_confirmdetails.png "The dataset Confirm details screen")
 
 ### Task 2: Create compute infrastructure
 
@@ -1830,7 +1830,7 @@ In this exercise, you will create multiple machine learning models. You will lea
 
 2. On the **Compute** screen with the **Compute instances** tab selected. Choose the **Create** button.
 
-    ![The Azure Machine Learning Studio compute screen is displayed, with the compute instances tab selected, and the Create button highlighted.](media/aml_createcomputebutton.png "Azure Machine Learning Compute screen")
+    ![The Azure Machine Learning Studio compute screen is displayed, with the compute instances tab selected, and the Create button highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_createcomputebutton.png "Azure Machine Learning Compute screen")
 
 3. On the **Create compute instance**, **Select virtual machine** form, configure it as follows, then select **Next**:
 
@@ -1839,11 +1839,11 @@ In this exercise, you will create multiple machine learning models. You will lea
     | Virtual machine type | CPU |
     | Virtual machine size | Search for and select Standard_DS3_v2. |
 
-    ![The new compute instance virtual machine form is displayed populated with the preceding values.](media/aml_newcomputeform.png "The new compute instance virtual machine form")
+    ![The new compute instance virtual machine form is displayed populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_newcomputeform.png "The new compute instance virtual machine form")
 
 4. On the **Configure Settings** form, enter a globally unique **Compute name** of your choice, and select **Create**.
 
-    ![The new compute instance settings form is displayed populated with a compute name](media/aml_newcomputeform_settings.png "The new compute instance settings form")
+    ![The new compute instance settings form is displayed populated with a compute name](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_newcomputeform_settings.png "The new compute instance settings form")
 
 5. Select the **Compute clusters** tab, and select **Create**.
 
@@ -1855,7 +1855,7 @@ In this exercise, you will create multiple machine learning models. You will lea
     | Virtual machine type | CPU |
     | Virtual machine size | Search for and select Standard_DS3_v2. |
 
-    ![The New compute cluster virtual machine form is displayed with the preceding values.](media/aml_cluster_settings.png "The New compute cluster virtual machine form")
+    ![The New compute cluster virtual machine form is displayed with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_cluster_settings.png "The New compute cluster virtual machine form")
 
 7. On the **Configure Settings** form, configure it as follows, then select **Create**:
 
@@ -1866,7 +1866,7 @@ In this exercise, you will create multiple machine learning models. You will lea
     | Maximum number of nodes | 3 |
     | Idle seconds before scale down | 120 |
 
-    ![The new compute cluster configure settings form is displayed populated with the preceding values.](media/aml_cluster_configsettings.png "The new compute cluster Configure settings form")
+    ![The new compute cluster configure settings form is displayed populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_cluster_configsettings.png "The new compute cluster Configure settings form")
 
 ### Task 3: Use a notebook in AML Studio to prepare data and create a Product Seasonality Classifier model using XGBoost
 
@@ -1874,15 +1874,15 @@ In this exercise, you will create multiple machine learning models. You will lea
 
 2. In the **Notebooks** pane, select the **Upload** icon from the toolbar.
 
-    ![In Azure Machine Learning Studio, the Notebooks item is selected from the left menu, and the Upload Icon is highlighted in the Notebooks panel.](media/aml_uploadnotebook_menu.png "Upload notebook")
+    ![In Azure Machine Learning Studio, the Notebooks item is selected from the left menu, and the Upload Icon is highlighted in the Notebooks panel.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_uploadnotebook_menu.png "Upload notebook")
 
 3. In the **Open** dialog, select **Hands-on lab/artifacts/ProductSeasonality_sklearn.ipynb**. When prompted, check the boxes to **Overwrite if already exists** and **I trust contents of this file** and select **Upload**.
 
-    ![A dialog is displayed with the Overwrite if already exists and the I trust contents of this file checkboxes checked.](media/aml_notebook_uploadwarning.png "File upload warning dialog")
+    ![A dialog is displayed with the Overwrite if already exists and the I trust contents of this file checkboxes checked.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_notebook_uploadwarning.png "File upload warning dialog")
 
 4. In the top toolbar of the notebook, expand the **Editors** item, and select **Edit in Jupyter**.
 
-    ![On the notebook toolbar, the Editors item is expanded with the Edit in Jupyter item selected.](media/aml_notebook_editinjupyter.png "Edit in Jupyter")
+    ![On the notebook toolbar, the Editors item is expanded with the Edit in Jupyter item selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_notebook_editinjupyter.png "Edit in Jupyter")
 
 5. Review and run each cell in the notebook individually to gain understanding of the functionality being demonstrated.
 
@@ -1892,29 +1892,29 @@ In this exercise, you will create multiple machine learning models. You will lea
 
 1. In Azure Machine Learning (AML) Studio, select **Experiments** from the left menu, then expand the **+ Create** button, and select **Automated ML run**.
 
-    ![The AML Studio Experiments screen is shown with the Create button expanded and the Automated ML run item selected.](media/aml_experiment_create.png "The AML Studio Experiments screen")
+    ![The AML Studio Experiments screen is shown with the Create button expanded and the Automated ML run item selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_experiment_create.png "The AML Studio Experiments screen")
 
 2. In the previous task, we registered our PCA dataframe (named **pcadata**) to use with Auto ML. Select **pcadata** from the list and select **Next**.
 
-    ![On the Select dataset screen, the pcadata item is selected from the dataset list.](media/aml_automl_datasetselection.png "The select dataset form is displayed")
+    ![On the Select dataset screen, the pcadata item is selected from the dataset list.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automl_datasetselection.png "The select dataset form is displayed")
 
 3. On the **Configure run** screen, select the **Create a new compute** link beneath the **Select compute cluster** field.
 
 4. Back on the **Configure run** form, name the experiment **ProductSeasonalityClassifier**, select **Seasonality** as the **Target column** and select **automlcluster** as the compute cluster. Select **Next**.
 
-    ![The Configure run form is displayed populated with the preceding values.](media/automl_experiment_configurerun.png "The Configure run form")
+    ![The Configure run form is displayed populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/automl_experiment_configurerun.png "The Configure run form")
 
 5. On the **Select task type** screen, select **Classification**, then choose **Finish**.
 
-    ![The Select task type screen is displayed with the Classification item selected.](media/aml_automlrun_tasktypeform.png "The Select task type screen")
+    ![The Select task type screen is displayed with the Classification item selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automlrun_tasktypeform.png "The Select task type screen")
 
 6. The experiment will then be run. It will take approximately 20-25 minutes for it to complete. Once it has completed, it will display the run results details. In the **Best model summary** box, select the **Algorithm name** link.
 
-    ![The Run is shown as completed and the link below Algorithm name in the Best model summary box is selected.](media/aml_automl_run_bestmodel_details.png "Completed AutoML run details")
+    ![The Run is shown as completed and the link below Algorithm name in the Best model summary box is selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automl_run_bestmodel_details.png "Completed AutoML run details")
 
 7. On the Model run screen, select **Deploy** from the top toolbar.
 
-    ![The specific model run screen is shown with the Deploy button selected from the top toolbar.](media/aml_automl_deploybestmodel.png "The best model run")
+    ![The specific model run screen is shown with the Deploy button selected from the top toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automl_deploybestmodel.png "The best model run")
 
 8. On the **Deploy a model** blade, configure the deployment as follows, then select **Deploy**:
 
@@ -1925,15 +1925,15 @@ In this exercise, you will create multiple machine learning models. You will lea
     | Compute type | Azure Container Instance |
     | Enable authentication | Off |
 
-    ![The Deploy a model blade is shown populated with the preceding values.](media/aml_automl_deploymodelaci.png "The Deploy a model blade")
+    ![The Deploy a model blade is shown populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automl_deploymodelaci.png "The Deploy a model blade")
 
 9. Once deployed, the Model summary will be displayed. You can view the endpoint by selecting the **Deploy status** link.
 
-    ![The successful model deployment was successful and the Deploy status link is highlighted.](media/aml_automl_modeldeploysuccess.png "The Model summary screen")
+    ![The successful model deployment was successful and the Deploy status link is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automl_modeldeploysuccess.png "The Model summary screen")
 
 10. Review the details of the deployed model service endpoint.
 
-    ![The service endpoint details screen is displayed.](media/aml_automl_modelserviceendpointdetails.png "The service endpoint details screen")
+    ![The service endpoint details screen is displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/aml_automl_modelserviceendpointdetails.png "The service endpoint details screen")
 
 ## Exercise 8: Monitoring
 
@@ -1957,15 +1957,15 @@ Setting importance in Synapse SQL for Azure Synapse allows you to influence the 
 
 1. Navigate to the **Develop** hub.
 
-    ![The Develop menu item is highlighted.](media/develop-hub.png "Develop hub")
+    ![The Develop menu item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop-hub.png "Develop hub")
 
 2. From the **Develop** menu, select the + button and choose **SQL Script** from the context menu.
 
-    ![The SQL script context menu item is highlighted.](media/synapse-studio-new-sql-script.png "New SQL script")
+    ![The SQL script context menu item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/synapse-studio-new-sql-script.png "New SQL script")
 
 3. In the toolbar menu, connect to the **SQL Pool** database to execute the query.
 
-    ![The connect to option is highlighted in the query toolbar.](media/synapse-studio-query-toolbar-connect.png "Query toolbar")
+    ![The connect to option is highlighted in the query toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/synapse-studio-query-toolbar-connect.png "Query toolbar")
 
 4. In the query window, replace the script with the following to confirm that there are no queries currently being run by users logged in as `asa.sql.workload01`, representing the CEO of the organization or `asa.sql.workload02` representing the data analyst working on the project:
 
@@ -1983,7 +1983,7 @@ Setting importance in Synapse SQL for Azure Synapse allows you to influence the 
 
 5. Select **Run** from the toolbar menu to execute the SQL command.
 
-    ![The run button is highlighted in the query toolbar.](media/synapse-studio-query-toolbar-run.png "Run")
+    ![The run button is highlighted in the query toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/synapse-studio-query-toolbar-run.png "Run")
 
 6. Next, you will flood the system with queries and see what happens for `asa.sql.workload01` and `asa.sql.workload02`. To do this, we'll run a Azure Synapse Pipeline that executes a large number of queries.
 
@@ -1993,11 +1993,11 @@ Setting importance in Synapse SQL for Azure Synapse allows you to influence the 
 
 9. Select **Add trigger**, then **Trigger now**. In the dialog that appears, select **OK**. **Let this pipeline run for 30 seconds to 1 minute, then proceed to the next step**.
 
-    ![The add trigger and trigger now menu items are highlighted.](media/trigger-data-analyst-and-ceo-queries-pipeline.png "Add trigger")
+    ![The add trigger and trigger now menu items are highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/trigger-data-analyst-and-ceo-queries-pipeline.png "Add trigger")
 
 10. From the left menu, select the **Monitor** hub. Hover over the link of the in-progress pipeline, and select the **Cancel recursive** icon that displays.
 
-    ![The Monitor Hub icon is selected from the left menu, and the Cancel recursive button is selected on the in progress pipeline.](media/cancel_running_pipeline_monitor_hub.png)
+    ![The Monitor Hub icon is selected from the left menu, and the Cancel recursive button is selected on the in progress pipeline.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/cancel_running_pipeline_monitor_hub.png)
 
 11. From the left menu, select the **Develop** hub and return to your SQL script. Let's see what happened to all the queries that flooded the system. In the query window, replace the script with the following:
 
@@ -2011,7 +2011,7 @@ Setting importance in Synapse SQL for Azure Synapse allows you to influence the 
 
 12. Select **Run** from the toolbar menu to execute the SQL command. You should see an output similar to the following:
 
-    ![SQL query results.](media/sql-query-2-results.png "SQL script")
+    ![SQL query results.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-query-2-results.png "SQL script")
 
 13. Intermittently perform the preceding query until all queries have been run and no results are returned.
 
@@ -2047,7 +2047,7 @@ Setting importance in Synapse SQL for Azure Synapse allows you to influence the 
 
 18. Select **Run** from the toolbar menu to execute the SQL command. You should see an output similar to the following that shows query executions for the `asa.sql.workload01` user having a **high** importance. Also note that the 'asa.sql.workload02' queries are in **Suspended** status while the high priority queries are being run.
 
-    ![SQL query results showing asa.sql.workload01 queries with a higher importance than those queries from asa.sql.workload02.](media/sql-query-4-results.png "SQL script")
+    ![SQL query results showing asa.sql.workload01 queries with a higher importance than those queries from asa.sql.workload02.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-query-4-results.png "SQL script")
 
 ### Task 2: Workload isolation
 
@@ -2061,15 +2061,15 @@ Users should avoid a workload management solution that configures 100% workload 
 
 1. Navigate to the **Develop** hub.
 
-    ![The Develop menu item is highlighted.](media/develop-hub.png "Develop hub")
+    ![The Develop menu item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop-hub.png "Develop hub")
 
 2. From the **Develop** menu, select the + button and choose **SQL Script** from the context menu.
 
-    ![The SQL script context menu item is highlighted.](media/synapse-studio-new-sql-script.png "New SQL script")
+    ![The SQL script context menu item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/synapse-studio-new-sql-script.png "New SQL script")
 
 3. In the toolbar menu, connect to the **SQL Pool** database to execute the query.
 
-    ![The connect to option is highlighted in the query toolbar.](media/synapse-studio-query-toolbar-connect.png "Query toolbar")
+    ![The connect to option is highlighted in the query toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/synapse-studio-query-toolbar-connect.png "Query toolbar")
 
 4. In the query window, replace the script with the following:
 
@@ -2126,7 +2126,7 @@ Users should avoid a workload management solution that configures 100% workload 
 
 11. Select **Run** from the toolbar menu to execute the SQL command. You should see an output similar to the following that shows the importance for each session set to `below_normal` and two queries being run in parallel:
 
-    ![The script results show that each session was executed with below normal importance with two queries being run in parallel.](media/sql-result-below-normal.png "SQL script")
+    ![The script results show that each session was executed with below normal importance with two queries being run in parallel.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-result-below-normal.png "SQL script")
 
 12. In the query window, replace the script with the following to set 3.25% minimum resources per request:
 
@@ -2166,7 +2166,7 @@ Users should avoid a workload management solution that configures 100% workload 
 
 15. Select **Run** from the toolbar menu to execute the SQL command.
 
-  ![The SQL results pane is shown with multiple queries being run in parallel.](media/multiple_parallel_queries_workload02.png "More than 2 queries being run in parallel")
+  ![The SQL results pane is shown with multiple queries being run in parallel.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/multiple_parallel_queries_workload02.png "More than 2 queries being run in parallel")
 
 ### Task 3: Monitoring with Dynamic Management Views
 
@@ -2176,15 +2176,15 @@ All logins to your data warehouse are logged to `sys.dm_pdw_exec_sessions`. This
 
 1. Navigate to the **Develop** hub.
 
-    ![The Develop menu item is highlighted.](media/develop-hub.png "Develop hub")
+    ![The Develop menu item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/develop-hub.png "Develop hub")
 
 2. From the **Develop** menu, select the + button and choose **SQL Script** from the context menu.
 
-    ![The SQL script context menu item is highlighted.](media/synapse-studio-new-sql-script.png "New SQL script")
+    ![The SQL script context menu item is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/synapse-studio-new-sql-script.png "New SQL script")
 
 3. In the toolbar menu, connect to the **SQL Pool** database to execute the query.
 
-    ![The connect to option is highlighted in the query toolbar.](media/synapse-studio-query-toolbar-connect.png "Query toolbar")
+    ![The connect to option is highlighted in the query toolbar.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/synapse-studio-query-toolbar-connect.png "Query toolbar")
 
 4. In the query window, replace the script with the following:
 
@@ -2210,7 +2210,7 @@ All logins to your data warehouse are logged to `sys.dm_pdw_exec_sessions`. This
 
 8. Select **Run** from the toolbar menu to execute the SQL command. You should see a list of sessions in the query results similar to the following. **Note the `Request_ID` of a query** in the results that you would like to investigate (*keep this value in a text editor for a later step*):
 
-    ![Active query results.](media/query-active-requests-results.png "Query results")
+    ![Active query results.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/query-active-requests-results.png "Query results")
 
 9. As an alternative, you can execute the following SQL command to find the top 10 longest running queries.
 
@@ -2252,7 +2252,7 @@ All logins to your data warehouse are logged to `sys.dm_pdw_exec_sessions`. This
 
 15. Select **Run** from the toolbar menu to execute the SQL command. You should see results showing the distributed query plan steps for the specified request:
 
-    ![The query results are displayed.](media/sql-dsql-plan-results.png "Query results")
+    ![The query results are displayed.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/sql-dsql-plan-results.png "Query results")
 
     > When a DSQL plan is taking longer than expected, the cause can be a complex plan with many DSQL steps or just one step taking a long time. If the plan is many steps with several move operations, consider optimizing your table distributions to reduce data movement.
 
@@ -2260,31 +2260,31 @@ All logins to your data warehouse are logged to `sys.dm_pdw_exec_sessions`. This
 
 1. Let's run a pipeline to monitor its execution in the next step. To do this, select the `Integrate` item from the left menu. **Run** the **Exercise 8 - Execute Business Analyst Queries** Pipeline.
 
-    ![The add trigger and trigger now menu items are highlighted.](media/ex7-task4-01.png "Add trigger")
+    ![The add trigger and trigger now menu items are highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex7-task4-01.png "Add trigger")
 
 2. Navigate to the `Monitor` hub. Then select **Pipeline runs** to get a list of pipelines that ran during the last 24 hours. Observe the Pipeline status.
 
-    ![The pipeline runs blade is displayed within the Monitor hub.](media/ex7-task4-02.png "Monitor - Pipeline runs")
+    ![The pipeline runs blade is displayed within the Monitor hub.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex7-task4-02.png "Monitor - Pipeline runs")
 
 3. Hover over the running pipeline and select **Cancel** to cancel the execution of the current instance of the pipeline.
 
-    ![The Cancel option is highlighted.](media/ex7-task4-03.png "Cancel")
+    ![The Cancel option is highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex7-task4-03.png "Cancel")
 
 ### Task 5: Monitoring SQL Requests with the Monitor Hub
 
 1. Let's run a pipeline to monitor its execution in the next step. To do this, select the `Integrate` item from the left menu. **Run** the **Exercise 8 - Execute Business Analyst Queries** Pipeline.
 
-    ![The add trigger and trigger now menu items are highlighted.](media/ex7-task5-01.png "Add trigger")
+    ![The add trigger and trigger now menu items are highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex7-task5-01.png "Add trigger")
 
 2. Navigate to the `Monitor` hub. Then select **SQL requests** to get a list of SQL requests that ran during the last 24 hours.
 
 3. Select the **Pool** filter and select your SQL Pool. Observe the `Request Submitter`, `Submit Time`, `Duration`, and `Queued Duration` values.
 
-    ![The SQL requests blade is displayed within the Monitor hub.](media/ex7-task5-02.png "Monitor - SQL requests")
+    ![The SQL requests blade is displayed within the Monitor hub.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex7-task5-02.png "Monitor - SQL requests")
 
 4. Hover onto a SQL Request log and select `Request Content` to access the actual T-SQL command executed as part of the SQL Request.
 
-    ![The request content link is displayed over a SQL request.](media/ex7-task5-03.png "SQL requests")
+    ![The request content link is displayed over a SQL request.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex7-task5-03.png "SQL requests")
 
 5. You may now return to the **Monitor** hub and cancel the in-progress pipeline run.
   

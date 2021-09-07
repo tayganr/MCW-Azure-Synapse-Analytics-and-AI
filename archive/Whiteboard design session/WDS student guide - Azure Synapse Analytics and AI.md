@@ -134,7 +134,7 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 ### Infographic for common scenarios
 
-![Overview of Azure Synapse Analytics features and capabilities. Showing how one solution provides the user experience with Azure Synapse Studio, a platform for processing data with SQL and Spark, and integrated management of the data lake.](media/infographic.png "Azure Synapse Analytics Overview")
+![Overview of Azure Synapse Analytics features and capabilities. Showing how one solution provides the user experience with Azure Synapse Studio, a platform for processing data with SQL and Spark, and integrated management of the data lake.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/infographic.png "Azure Synapse Analytics Overview")
 
 ## Step 2: Design a proof of concept solution
 
