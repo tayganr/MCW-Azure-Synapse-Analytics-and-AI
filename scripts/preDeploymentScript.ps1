@@ -126,118 +126,66 @@ $sqlAdminName = $deployment.Properties.Outputs.sqlAdminName.Value
 $keyVaultSecretName = $deployment.Properties.Outputs.keyVaultSecretName.Value
 $amlWorkspaceName =  $deployment.Properties.Outputs.amlWorkspaceName.Value
 
+# Keys
+$storageAccountKey1 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $storageAccountName)[0].Value
+$storageAccountKey2 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $dataLakeAccountName)[0].Value
+
 # Synapse
 Install-Module Az.Synapse -Force
-# Linked Service #1 - Storage Account
+
+# Linked Services
+$resourceGroupName = "synapse-rg-ui9pc"
+$synapseWorkspaceName = "asaworkspace4539c7"
+$storageAccountName = "asastore4539c7"
 $storageAccountKey1 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $storageAccountName)[0].Value
-$linkedService1 = @{
-    name = "${storageAccountName}"
-    type = "Microsoft.Synapse/workspaces/linkedservices"
-    properties = @{
-        type = "AzureBlobStorage"
-        typeProperties = @{
-            connectionString = "DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageAccountKey1};EndpointSuffix=core.windows.net;"
-        }
-    }
-}
-ConvertTo-Json $linkedService1 | Out-File "MCW/ls1.json"
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService1.name -DefinitionFile "MCW/ls1.json"
-
-# Linked Service #2 - Data Lake
+$dataLakeAccountName = "asadatalake4539c7"
 $storageAccountKey2 = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $dataLakeAccountName)[0].Value
-$linkedService2 = @{
-    name = "${dataLakeAccountName}"
-    properties =  @{
-        type = "AzureBlobFS"
-        typeProperties =  @{
-            url = "https://${dataLakeAccountName}.dfs.core.windows.net"
-            accountKey =  @{
-                type =  "SecureString"
-                value = "${storageAccountKey2}"
-            }
-        }
-    }
-}
-ConvertTo-Json $linkedService2 -Depth 10 | Out-File "MCW/ls2.json"
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService2.name -DefinitionFile "MCW/ls2.json"
+$keyVaultName = "asakeyvault4539c7"
+$sqlPoolName = "SQLPool01"
+$sqlAdminName = "asa.sql.admin"
+$keyVaultSecretName = "SQL-USER-ASA"
 
-# Linked Service #3 - Key Vault
-$linkedService3 = @{
-    name = "${keyVaultName}"
-    type = "Microsoft.Synapse/workspaces/linkedservices"
-    properties = @{
-        type = "AzureKeyVault"
-        typeProperties = @{
-            baseUrl = "https://${keyVaultName}.vault.azure.net/"
-        }
+$assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
+$linkedServices = @(
+    "${assets}/linked_services/blob_storage.json"
+    "${assets}/linked_services/data_lake.json"
+    "${assets}/linked_services/key_vault.json"
+    "${assets}/linked_services/sqlpool01.json"
+    "${assets}/linked_services/sqlpool01_workload01.json"
+    "${assets}/linked_services/sqlpool01_workload02.json"
+)
+foreach ($uri in $linkedServices) {
+    $linkedService = Invoke-RestMethod -Uri $uri -Headers @{"Cache-Control"="no-cache"}
+    $name = $linkedService.name
+    if ($name -eq "asastore") {
+        $linkedService.properties.typeProperties.connectionString = "DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageAccountKey1};EndpointSuffix=core.windows.net;"
     }
-}
-ConvertTo-Json $linkedService3  -Depth 10 | Out-File "MCW/ls3.json"
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService3.name -DefinitionFile "MCW/ls3.json"
-
-# Linked Service #4 - SQL DWH
-$linkedService4 = @{
-    name = "${sqlPoolName}"
-    type = "Microsoft.Synapse/workspaces/linkedservices"
-    properties = @{
-        type = "AzureSqlDW"
-        typeProperties = @{
-            connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=${sqlAdminName}"
-            password = @{
-                type = "AzureKeyVaultSecret"
-                store = @{ 
-                    referenceName = "${keyVaultName}"
-                    type = "LinkedServiceReference"
-                }
-                secretName = "${keyVaultSecretName}"
-            }
-        }
+    elseif ($name -eq "asadatalake") {
+        $linkedService.properties.typeProperties.url = "https://${dataLakeAccountName}.dfs.core.windows.net"
+        $linkedService.properties.typeProperties.accountKey.value = $storageAccountKey2
     }
-}
-ConvertTo-Json $linkedService4 -Depth 10 | Out-File "MCW/ls4.json"
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService4.name -DefinitionFile "MCW/ls4.json"
-
-# Linked Service #5 - SQL DWH Workload 01
-$linkedService5 = @{
-    name = "${sqlPoolName}_workload01"
-    properties = @{
-        type = "AzureSqlDW"
-        typeProperties = @{
-            connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload01"
-            password = @{
-                type = "AzureKeyVaultSecret"
-                store = @{ 
-                    referenceName = "${keyVaultName}"
-                    type = "LinkedServiceReference"
-                }
-                secretName = "${keyVaultSecretName}"
-            }
-        }
+    elseif ($name -eq "asakeyvault") {
+        $linkedService.properties.typeProperties.baseUrl = "https://${keyVaultName}.vault.azure.net/"
     }
-}
-ConvertTo-Json $linkedService5 -Depth 10 | Out-File "MCW/ls5.json"
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService5.name -DefinitionFile "MCW/ls5.json"
-
-# Linked Service #6 - SQL DWH Workload 01
-$linkedService6 = @{
-    name = "${sqlPoolName}_workload02"
-    properties = @{
-        type = "AzureSqlDW"
-        typeProperties = @{
-            connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload02"
-            password = @{
-                type = "AzureKeyVaultSecret"
-                store = @{ 
-                    referenceName = "${keyVaultName}"
-                    type = "LinkedServiceReference"
-                }
-                secretName = "${keyVaultSecretName}"
-            }
-        }
+    elseif ($name -eq "sqlpool01") {
+        $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=${sqlAdminName}"
+        $linkedService.properties.typeProperties.password.store.referenceName = $keyVaultName
+        $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
     }
+    elseif ($name -eq "sqlpool01_workload01") {
+        $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload01"
+        $linkedService.properties.typeProperties.password.store.referenceName = $keyVaultName
+        $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
+    }
+    elseif ($name -eq "sqlpool01_workload02") {
+        $linkedService.properties.typeProperties.connectionString = "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=${synapseWorkspaceName}.sql.azuresynapse.net;Initial Catalog=${sqlPoolName};User ID=asa.sql.workload02"
+        $linkedService.properties.typeProperties.password.store.referenceName = $keyVaultName
+        $linkedService.properties.typeProperties.password.secretName = $keyVaultSecretName
+    }
+    $filepath = "MCW/linked_service.json"
+    ConvertTo-Json $linkedService -Depth 10 | Out-File $filepath
+    Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService.name -DefinitionFile $filepath
 }
-ConvertTo-Json $linkedService6 -Depth 10 | Out-File "MCW/ls6.json"
-Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService6.name -DefinitionFile "MCW/ls6.json"
 
 # Datasets
 $assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
@@ -247,11 +195,9 @@ $datasets = @(
     "${assets}/datasets/asamcw_wwi_salesmall_workload1_asa.json"
     "${assets}/datasets/asamcw_wwi_salesmall_workload2_asa.json"
 )
-foreach ($datasetUri in $datasets) {
-    $dataset = Invoke-RestMethod -Uri $datasetUri -Headers @{"Cache-Control"="no-cache"}
-    if ($dataset.name -eq "asamcw_product_csv") {
-        $dataset.properties.linkedServiceName.referenceName = $linkedService2.name
-    }
+foreach ($uri in $datasets) {
+    $dataset = Invoke-RestMethod -Uri $uri -Headers @{"Cache-Control"="no-cache"}
+    $name = $dataset.name
     $filepath = "MCW/dataset.json"
     ConvertTo-Json $dataset -Depth 10 | Out-File $filepath
     Set-AzSynapseDataset -WorkspaceName $synapseWorkspaceName -Name $dataset.name -DefinitionFile $filepath
@@ -264,11 +210,9 @@ $pipelines = @(
     "${assets}/pipelines/ASAMCW - Exercise 8 - ExecuteBusinessAnalystQueries.json"
     "${assets}/pipelines/ASAMCW - Exercise 8 - ExecuteDataAnalystAndCEOQueries.json"
 )
-foreach ($pipelineUri in $pipelines) {
-    $pipeline = Invoke-RestMethod -Uri $pipelineUri -Headers @{"Cache-Control"="no-cache"}
-    if ($pipeline.name -eq "ASAMCW - Exercise 2 - Copy Product Information") {
-        $pipeline.properties.activities[0].typeProperties.stagingSettings.linkedServiceName.referenceName = $linkedService1.name
-    }
+foreach ($uri in $pipelines) {
+    $pipeline = Invoke-RestMethod -Uri $uri -Headers @{"Cache-Control"="no-cache"}
+    $name = $pipeline.name
     $filepath = "MCW/pipeline.json"
     ConvertTo-Json $pipeline -Depth 10 | Out-File $filepath
     Set-AzSynapsePipeline -WorkspaceName $synapseWorkspaceName -Name $pipeline.name -DefinitionFile $filepath

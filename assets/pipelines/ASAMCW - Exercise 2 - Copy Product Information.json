@@ -33,7 +33,7 @@
 					"stagingSettings": {
 						"linkedServiceName": {
 							"type": "LinkedServiceReference",
-							"referenceName": "#LINKED_SERVICE_NAME#"
+							"referenceName": "asastore"
 						},
 						"path": "staging"
 					},

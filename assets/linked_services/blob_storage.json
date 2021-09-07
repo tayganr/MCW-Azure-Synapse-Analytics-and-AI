@@ -1,5 +1,5 @@
 {
-    "name": "#BLOB_STORAGE_NAME#",
+    "name": "asastore",
     "type": "Microsoft.Synapse/workspaces/linkedservices",
     "properties": {
         "annotations": [],

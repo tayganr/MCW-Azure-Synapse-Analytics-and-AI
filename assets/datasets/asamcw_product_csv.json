@@ -2,7 +2,7 @@
     "name": "asamcw_product_csv",
     "properties": {
         "linkedServiceName": {
-            "referenceName": "#LINKED_SERVICE_NAME#",
+            "referenceName": "asadatalake",
             "type": "LinkedServiceReference"
         },
         "annotations": [],

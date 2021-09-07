@@ -1,5 +1,5 @@
 {
-    "name": "#KEY_VAULT_NAME#",
+    "name": "asakeyvault",
     "type": "Microsoft.Synapse/workspaces/linkedservices",
     "properties": {
         "annotations": [],

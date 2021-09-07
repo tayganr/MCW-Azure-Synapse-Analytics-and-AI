@@ -1,5 +1,5 @@
 {
-    "name": "#DATA_LAKE_NAME#",
+    "name": "asadatalake",
     "type": "Microsoft.Synapse/workspaces/linkedservices",
     "properties": {
         "annotations": [],
