@@ -26,7 +26,7 @@ Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
 
 ![Azure Portal Cloud Shell](../media/azure_portal_cloud_shell.png)
 
-3. Ensure the Cloud Shell is seto to **PowerShell**, **Paste** the code snippet, follow the prompts and wait until the deployment is complete (~15 minutes).
+3. Ensure the Cloud Shell is set to **PowerShell**, **Paste** the code snippet, follow the prompts and wait until the deployment is complete (~15 minutes).
 
 ![Switch Cloud Shell Type](../media/cloud_shell_powershell.png)
 
