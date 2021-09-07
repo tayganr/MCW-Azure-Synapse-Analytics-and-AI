@@ -1,13 +1,13 @@
-## Getting Started
+# Getting Started
 
-**[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise01.md)
+**[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#getting-started)** - [Next Exercise >](../exercises/exercise01.md)
 
 ## :thinking: Prerequisites
 
 * An active [Azure subscription](https://azure.microsoft.com/en-us/free/).
 * Sufficient access to create resources and register an application.
 
-<div align="right"><a href="#prerequisites">↥ back to top</a></div>
+<div align="right"><a href="#getting-started">↥ back to top</a></div>
 
 ## :test_tube: Usage
 
@@ -23,7 +23,7 @@ Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
 3. **Paste** the code snippet. Wait until the deployment is complete.
 
 
-<div align="right"><a href="#prerequisites">↥ back to top</a></div>
+<div align="right"><a href="#getting-started">↥ back to top</a></div>
 
 ## :books: Exercises
 
@@ -36,5 +36,5 @@ Invoke-WebRequest $uri -OutFile "preDeploymentScript.ps1"
 7. [Exercise 7: Machine Learning](exercises/exercise07.md)
 8. [Exercise 8: Monitoring](exercises/exercise08.md)
 
-<div align="right"><a href="#prerequisites">↥ back to top</a></div>
+<div align="right"><a href="#getting-started">↥ back to top</a></div>
 
