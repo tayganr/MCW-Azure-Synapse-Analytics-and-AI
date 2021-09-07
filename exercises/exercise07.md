@@ -1,6 +1,6 @@
 ## Exercise 7: Machine Learning
 
-[< Previous Exercise](../exercises/exercise06.md) - **[Home](../README.md)** - [Next Exercise >](../exercises/exercise08.md)
+[< Previous Exercise](../exercises/exercise06.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise08.md)
 
 **Duration**: 60 minutes
 

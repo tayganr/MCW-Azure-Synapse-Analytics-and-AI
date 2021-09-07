@@ -1,6 +1,6 @@
 ## Exercise 5: Synapse Pipelines and Cognitive Search (Optional)
 
-[< Previous Exercise](../exercises/exercise04.md) - **[Home](../README.md)** - [Next Exercise >](../exercises/exercise06.md)
+[< Previous Exercise](../exercises/exercise04.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise06.md)
 
 **Duration**: 45 minutes
 

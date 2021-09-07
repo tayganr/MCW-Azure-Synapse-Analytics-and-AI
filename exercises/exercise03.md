@@ -1,6 +1,6 @@
 ## Exercise 3: Exploring raw parquet
 
-[< Previous Exercise](../exercises/exercise02.md) - **[Home](../README.md)** - [Next Exercise >](../exercises/exercise04.md)
+[< Previous Exercise](../exercises/exercise02.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise04.md)
 
 **Duration**: 30 minutes
 

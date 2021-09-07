@@ -25,7 +25,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 # Azure Synapse Analytics and AI hands-on lab step-by-step
 
-**[Home](../README.md)** - [Next Exercise >](../exercises/exercise01.md)
+**[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise01.md)
 
 ## Abstract and learning objectives
 

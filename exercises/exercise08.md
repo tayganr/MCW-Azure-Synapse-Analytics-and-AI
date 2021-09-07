@@ -1,6 +1,6 @@
 ## Exercise 8: Monitoring
 
-[< Previous Exercise](../exercises/exercise07.md) - **[Home](../README.md)**
+[< Previous Exercise](../exercises/exercise07.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)**
 
 **Duration**: 45 minutes
 

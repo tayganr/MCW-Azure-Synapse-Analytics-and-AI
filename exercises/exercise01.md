@@ -1,6 +1,6 @@
 ## Exercise 1: Accessing the Azure Synapse Analytics workspace
 
-[< Previous Exercise](../exercises/exercise00.md) - **[Home](../README.md)** - [Next Exercise >](../exercises/exercise02.md)
+[< Previous Exercise](../exercises/exercise00.md) - **[Home](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI#prerequisites)** - [Next Exercise >](../exercises/exercise02.md)
 
 **Duration**: 5 minutes
 
