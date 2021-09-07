@@ -240,10 +240,6 @@ ConvertTo-Json $linkedService6 -Depth 10 | Out-File "MCW/ls6.json"
 Set-AzSynapseLinkedService -WorkspaceName $synapseWorkspaceName -Name $linkedService6.name -DefinitionFile "MCW/ls6.json"
 
 # Datasets
-$linkedService2 = @{
-    name = "asadatalake4539c7"
-}
-$synapseWorkspaceName = "asaworkspace4539c7"
 $assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
 $datasets = @(
     "${assets}/datasets/asamcw_product_asa.json"
