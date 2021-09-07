@@ -5,7 +5,7 @@
 ## :thinking: Prerequisites
 
 * An active [Azure subscription](https://azure.microsoft.com/en-us/free/).
-* Sufficient access to create resources and perform RBAC assignments.
+* Sufficient access within the Azure subscription to create resources and perform RBAC assignments.
 * Access to [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview).
 
 
