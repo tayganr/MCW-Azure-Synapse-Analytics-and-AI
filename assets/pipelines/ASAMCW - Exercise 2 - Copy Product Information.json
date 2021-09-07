@@ -33,7 +33,7 @@
 					"stagingSettings": {
 						"linkedServiceName": {
 							"type": "LinkedServiceReference",
-							"referenceName": null
+							"referenceName": "#LINKED_SERVICE_NAME#"
 						},
 						"path": "staging"
 					},
