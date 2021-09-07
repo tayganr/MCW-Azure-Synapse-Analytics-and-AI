@@ -199,16 +199,16 @@ foreach ($uri in $pipelines) {
 
 # SQL Script 1
 $uriSql = "${assets}/sql_scripts/00_master_setup.sql"
-Invoke-RestMethod -Uri $uriSql -OutFile "MCW/00_master_setup.sql"
+Invoke-RestMethod -Uri $uriSql -OutFile "MCW/00_master_setup.sql" -Headers @{"Cache-Control"="no-cache"}
 [IO.File]::ReadAllText("MCW/00_master_setup.sql") -replace '#PASSWORD#',"Synapse2021!" > "MCW/sql1.sql"
 Invoke-Sqlcmd -InputFile "MCW/sql1.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "master" -User "asa.sql.admin" -Password "Synapse2021!"
 # SQL Script 2
 $uriSql = "${assets}/sql_scripts/01_sqlpool01_mcw.sql"
-Invoke-RestMethod -Uri $uriSql -OutFile "MCW/01_sqlpool01_mcw.sql"
+Invoke-RestMethod -Uri $uriSql -OutFile "MCW/01_sqlpool01_mcw.sql" -Headers @{"Cache-Control"="no-cache"}
 Invoke-Sqlcmd -InputFile "MCW/01_sqlpool01_mcw.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
 # SQL Script 3
 $uriSql = "${assets}/sql_scripts/02_sqlpool01_ml.sql"
-Invoke-RestMethod -Uri $uriSql -OutFile "MCW/02_sqlpool01_ml.sql"
+Invoke-RestMethod -Uri $uriSql -OutFile "MCW/02_sqlpool01_ml.sql" -Headers @{"Cache-Control"="no-cache"}
 [IO.File]::ReadAllText("MCW/02_sqlpool01_ml.sql") -replace '#DATALAKESTORAGEKEY#',"${storageAccountKey2}" > "MCW/foo.sql"
 [IO.File]::ReadAllText("MCW/foo.sql") -replace '#DATALAKESTORAGEACCOUNTNAME#',"${dataLakeAccountName}" > "MCW/bar.sql"
 Invoke-Sqlcmd -InputFile "MCW/bar.sql" -ServerInstance "${synapseWorkspaceName}.sql.azuresynapse.net" -Database "SQLPool01" -User "asa.sql.admin" -Password "Synapse2021!"
