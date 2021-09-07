@@ -1,6 +1,6 @@
 # Azure Synapse Analytics and AI Hands-on Lab
 
-[Getting Started >](exercises/getting_started.md)
+[Getting Started >](exercises/getting_started.md#getting-started)
 
 ## Abstract
 
