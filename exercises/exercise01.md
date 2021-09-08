@@ -19,7 +19,7 @@ All exercises in this lab utilize the workspace Synapse Studio user interface. T
   
     ![The Azure Portal left menu is expanded with the Resource groups item highlighted.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/azureportal_leftmenu_resourcegroups.png "Azure Portal Resource Groups menu item")
 
-3. From the list of resource groups, select `WorkspaceResourceGroup`.
+3. From the list of resource groups, select `synapse-rg-{suffix}`.
   
 4. From the list of resources, select the **Synapse Workspace** resource, `asaworkspace{suffix}`.
   
