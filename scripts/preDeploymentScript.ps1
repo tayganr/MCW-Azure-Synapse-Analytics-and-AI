@@ -102,6 +102,7 @@ function setLocation() {
         Write-Host "  [${counter}] ${loc}"
         $counter += 1
     }
+    write-host "`n"
     while ($selectedIndex -lt 0) {
         $indexInput = Read-Host "Please select a location by entering a number between 0 and 18"
         if ($indexInput -In 0..18) {
