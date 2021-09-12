@@ -96,8 +96,10 @@ function setLocation() {
     $validLocations = @("Australia East","Brazil South","Canada Central","Central India","Central US","East Asia","East US","East US 2","France Central","Japan East","Korea Central","North Central US","North Europe","South Central US","Southeast Asia","UK South","West Europe","West US","West US 2")
     $counter = 0
     $selectedIndex = -1
+    write-host "`n"
+    write-host "[INFO] List of valid locations:"
     foreach ($loc in $validLocations) {
-        Write-Host "[${counter}] ${loc}"
+        Write-Host "  [${counter}] ${loc}"
         $counter += 1
     }
     while ($selectedIndex -lt 0) {
@@ -113,10 +115,11 @@ $TargetSubscriptionId = getSubscriptionId
 $context = Set-AzContext -Subscription $TargetSubscriptionId
 $registeredResourceProviders = Get-AzResourceProvider | Select-Object ProviderNamespace 
 $requiredResourceProviders = @("Microsoft.Authorization","Microsoft.Search","Microsoft.CognitiveServices","Microsoft.Insights","Microsoft.KeyVault","Microsoft.MachineLearningServices","Microsoft.ManagedIdentity","Microsoft.Resources","Microsoft.Storage","Microsoft.Synapse")
-Write-Host "Checking that the required resource providers are registered..."
+write-host "`n"
+Write-Host "[INFO] Checking that the required resource providers are registered..."
 foreach ($rp in $requiredResourceProviders) {
     if ($registeredResourceProviders -match $rp) {
-        Write-Host "[OK] ${rp}"
+        Write-Host "  [OK] ${rp}"
     } else {
         Write-Host "The following resource provider is not registered: ${rp}" -ForegroundColor Black -BackgroundColor Yellow
         Write-Host "Attempting to register resource provider: ${rp}"
