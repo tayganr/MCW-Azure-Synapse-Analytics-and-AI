@@ -43,7 +43,7 @@ In this exercise, you will create multiple machine learning models. You will lea
     | Server name / database name  | Select asaworkspace{{suffix}}/SQLPool01. |
     | Authentication type | SQL authentication |
     | User ID | asa.sql.admin |
-    | Password | The SQL Admin password you chose when deploying the lab resources. |
+    | Password | Synapse2021! |
 
     ![The new datastore blade is shown populated with the preceding values.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/amlstudio_sqlpooldatasource.png "New datastore blade")
 
