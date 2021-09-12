@@ -71,46 +71,47 @@ function putNotebook([string]$accessToken, [string]$synapseWorkspaceName, [strin
     }
     Return $response
 }
-
-# Validate Default Subscription
-$currentSubscriptionId = (Get-AzContext).Subscription.Id
-$currentSubscriptionName = (Get-AzContext).Subscription.Name
-$YesOrNo = ""
-while ("y", "n" -notcontains $YesOrNo ) { 
-    Clear-Host
-    Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})" -ForegroundColor Black -BackgroundColor Yellow
-    $YesOrNo = Read-Host "Is this correct (y/n)"
-}
-if ($YesOrNo -eq 'n') {
+function getSubscriptionId() {
+    $currentSubscriptionId = (Get-AzContext).Subscription.Id
+    $currentSubscriptionName = (Get-AzContext).Subscription.Name
+    $YesOrNo = ""
     $TargetSubscriptionId = ""
-    Clear-Host
-    Get-AzSubscription | Select-Object Id, Name | out-host
-} else {
-    $TargetSubscriptionId = $currentSubscriptionId
+    while ("y", "n" -notcontains $YesOrNo ) { 
+        Clear-Host
+        Write-Host "Current Targeted Azure Subscription: ${currentSubscriptionName} (${currentSubscriptionId})" -ForegroundColor Black -BackgroundColor Yellow
+        $YesOrNo = Read-Host "Is this correct (y/n)"
+    }
+    if ($YesOrNo -eq 'n') {
+        Clear-Host
+        Get-AzSubscription | Select-Object Id, Name | out-host
+        while ($TargetSubscriptionId.Length -ne 36) {
+            $TargetSubscriptionId = Read-Host "Please copy/paste the correct Subscription ID from the list above"
+        }
+    } else {
+        $TargetSubscriptionId = $currentSubscriptionId
+    }
+    Return $TargetSubscriptionId
 }
-while ($TargetSubscriptionId.Length -ne 36) {
-    $TargetSubscriptionId = Read-Host "Please copy/paste the correct Subscription ID from the list above"
-}
-if ($TargetSubscriptionId.Length -eq 36) {
-    $context = Set-AzContext -Subscription $TargetSubscriptionId
-    $registeredRps = Get-AzResourceProvider | Select-Object ProviderNamespace   
-    Write-Host "Checking that the required resource providers are registered..."
-    if ($registeredRps -match "Microsoft.Authorization") { Write-Host "OK - Microsoft.Authorization" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Authorization" }
-    if ($registeredRps -match "Microsoft.Search") { Write-Host "OK - Microsoft.Search" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Search" }
-    if ($registeredRps -match "Microsoft.CognitiveServices") { Write-Host "OK - Microsoft.CognitiveServices" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.CognitiveServices" }
-    if ($registeredRps -match "Microsoft.Insights") { Write-Host "OK - Microsoft.Insights" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Insights" }
-    if ($registeredRps -match "Microsoft.KeyVault") { Write-Host "OK - Microsoft.KeyVault" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.KeyVault" }
-    if ($registeredRps -match "Microsoft.MachineLearningServices") { Write-Host "OK - Microsoft.MachineLearningServices" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.MachineLearningServices" }
-    if ($registeredRps -match "Microsoft.ManagedIdentity") { Write-Host "OK - Microsoft.ManagedIdentity" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.ManagedIdentity" }
-    if ($registeredRps -match "Microsoft.Resources") { Write-Host "OK - Microsoft.Resources" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Resources" }
-    if ($registeredRps -match "Microsoft.Storage") { Write-Host "OK - Microsoft.Storage" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Storage" }
-    if ($registeredRps -match "Microsoft.Synapse") { Write-Host "OK - Microsoft.Synapse" } else { $context = $null; Write-Host "The following resource provider is not registered: Microsoft.Synapse" }
+
+# Get Target Subscription
+$TargetSubscriptionId = getSubscriptionId
+$context = Set-AzContext -Subscription $TargetSubscriptionId
+$registeredResourceProviders = Get-AzResourceProvider | Select-Object ProviderNamespace 
+$requiredResourceProviders = @("Microsoft.Authorization","Microsoft.Search","Microsoft.CognitiveServices","Microsoft.Insights","Microsoft.KeyVault","Microsoft.MachineLearningServices","Microsoft.ManagedIdentity","Microsoft.Resources","Microsoft.Storage","Microsoft.Synapse")
+foreach ($rp in $requiredResourceProviders) {
+    if ($registeredResourceProviders -match $rp) {
+        Write-Host "[OK] ${rp}"
+    } else {
+        $context = $null
+        Write-Host "The following resource provider is not registered: ${rp}" -ForegroundColor Black -BackgroundColor Yellow
+    }
 }
 if ($context) {
     $principalId = az ad signed-in-user show --query objectId -o tsv
     if ($principalId) {
         $subscriptionId = (Get-AzContext).Subscription.Id
         if (!(Test-Path -Path "MCW" )) {
+            Write-Host "Creating temporary directory (MCW)..."
             New-Item "MCW" -ItemType directory
         }
         $suffix = -join ((48..57) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })
@@ -143,7 +144,7 @@ if ($context) {
                     }
                     $elapsed = "{0:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
                     Clear-Host
-                    Write-Host "Deployment is in progress, this will take approximately 10 minutes. Elapsed ${elapsed}"
+                    Write-Host "Deployment is in progress, this will take approximately 15 minutes. Elapsed ${elapsed}"
                     Write-Host "${provisioningState}${x}"
                     $table | ForEach-Object { [PSCustomObject]$_ } | Format-Table -AutoSize
                     Start-Sleep 1
@@ -272,10 +273,12 @@ if ($context) {
         Write-Output "Resource Group: ${resourceGroupName}"
     }
     else {
+        Write-Host "[Error] Unable to attain Azure AD Principal ID (az ad signed-in-user show --query objectId -o tsv)." -ForegroundColor Black -BackgroundColor Yellow
         exit
     }
 
 }
 else {
+    Write-Host "[Error] Unable to set Azure context (Get-AzContext)." -ForegroundColor Black -BackgroundColor Yellow
     exit
 }
