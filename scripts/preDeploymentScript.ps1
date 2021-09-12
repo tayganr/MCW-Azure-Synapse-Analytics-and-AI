@@ -98,12 +98,14 @@ $TargetSubscriptionId = getSubscriptionId
 $context = Set-AzContext -Subscription $TargetSubscriptionId
 $registeredResourceProviders = Get-AzResourceProvider | Select-Object ProviderNamespace 
 $requiredResourceProviders = @("Microsoft.Authorization","Microsoft.Search","Microsoft.CognitiveServices","Microsoft.Insights","Microsoft.KeyVault","Microsoft.MachineLearningServices","Microsoft.ManagedIdentity","Microsoft.Resources","Microsoft.Storage","Microsoft.Synapse")
+Write-Host "Checking that the required resource providers are registered..."
 foreach ($rp in $requiredResourceProviders) {
     if ($registeredResourceProviders -match $rp) {
         Write-Host "[OK] ${rp}"
     } else {
-        $context = $null
         Write-Host "The following resource provider is not registered: ${rp}" -ForegroundColor Black -BackgroundColor Yellow
+        Write-Host "Attempting to register resource provider: ${rp}"
+        Register-AzResourceProvider -ProviderNamespace $rp
     }
 }
 if ($context) {
