@@ -108,7 +108,9 @@ function setLocation() {
             $selectedIndex = $indexInput
         }
     }
-    Return $validLocations[$selectedIndex]
+    $location = $validLocations[$selectedIndex]
+    Write-Host "Selected Location: ${location}"
+    Return $location
 }
 
 $TargetSubscriptionId = getSubscriptionId
