@@ -97,7 +97,7 @@ function setLocation() {
     $counter = 0
     $selectedIndex = -1
     write-host "`n"
-    write-host "[INFO] List of valid locations:"
+    write-host "[INFO] List of valid locations:" -ForegroundColor Black -BackgroundColor Yellow
     foreach ($loc in $validLocations) {
         Write-Host "  [${counter}] ${loc}"
         $counter += 1
@@ -133,6 +133,7 @@ if ($context) {
     if ($principalId) {
         $subscriptionId = (Get-AzContext).Subscription.Id
         if (!(Test-Path -Path "MCW" )) {
+            Write-Host "`n"
             Write-Host "Creating temporary directory (MCW)..."
             New-Item "MCW" -ItemType directory
         }
