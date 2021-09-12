@@ -1,5 +1,6 @@
 @description('Please enter your Azure AD Object ID. This can be found by locating your profile within Azure Portal > Azure Active Directory > Users.')
 param azureActiveDirectoryObjectID string
+param suffix string
 
 // // Variables
 var sqlAdministratorLoginPassword = 'Synapse2021!'
@@ -7,7 +8,7 @@ var tenantId = subscription().tenantId
 var subscriptionId = subscription().subscriptionId
 var location = resourceGroup().location
 var resourceGroupName = resourceGroup().name
-var suffix = substring(guid(resourceGroup().id),0,6)
+// var suffix = substring(guid(resourceGroup().id),0,6)
 var roleDefinitionPrefix = '/subscriptions/${subscriptionId}/providers/Microsoft.Authorization/roleDefinitions'
 var role = {
   Owner: '${roleDefinitionPrefix}/8e3af657-a8ff-443c-a75c-2fe8c4bcb635'

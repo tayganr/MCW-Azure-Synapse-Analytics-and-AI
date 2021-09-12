@@ -92,8 +92,23 @@ function getSubscriptionId() {
     }
     Return $TargetSubscriptionId
 }
+function setLocation() {
+    $validLocations = @("Australia East","Brazil South","Canada Central","Central India","Central US","East Asia","East US","East US 2","France Central","Japan East","Korea Central","North Central US","North Europe","South Central US","Southeast Asia","UK South","West Europe","West US","West US 2")
+    $counter = 0
+    $selectedIndex = -1
+    foreach ($loc in $validLocations) {
+        Write-Host "[${counter}] ${loc}"
+        $counter += 1
+    }
+    while ($selectedIndex -lt 0) {
+        $indexInput = Read-Host "Please select a location by entering a number between 0 and 18"
+        if ($indexInput -In 0..18) {
+            $selectedIndex = $indexInput
+        }
+    }
+    Return $validLocations[$selectedIndex]
+}
 
-# Get Target Subscription
 $TargetSubscriptionId = getSubscriptionId
 $context = Set-AzContext -Subscription $TargetSubscriptionId
 $registeredResourceProviders = Get-AzResourceProvider | Select-Object ProviderNamespace 
@@ -117,7 +132,7 @@ if ($context) {
             New-Item "MCW" -ItemType directory
         }
         $suffix = -join ((48..57) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })
-        $location = 'uksouth'
+        $location = setLocation
         $assets = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets"
     
         # Create Resource Group
@@ -127,7 +142,10 @@ if ($context) {
         # Main Deployment
         $accessToken = (Get-AzAccessToken -ResourceUrl "https://management.azure.com").Token
         $templateLink = "https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/templates/json/main.json" 
-        $parameters = @{ azureActiveDirectoryObjectID = @{ value = $principalId } }
+        $parameters = @{ 
+            azureActiveDirectoryObjectID = @{ value = $principalId } 
+            suffix = @{ value = $suffix } 
+        }
         $deployment = deployTemplate $accessToken $templateLink $resourceGroupName $parameters
         $deploymentName = $deployment.name
         $progress = ('.', '..', '...')
