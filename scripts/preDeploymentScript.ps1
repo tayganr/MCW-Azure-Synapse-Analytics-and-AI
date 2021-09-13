@@ -297,7 +297,7 @@ if ($context) {
         $timer.Stop()
         $totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
 
-        Write-Host @"
+        Write-Output @"
 ===================================================== COMPLETE =====================================================
 
  - Duration:`t`t${totalTime}
