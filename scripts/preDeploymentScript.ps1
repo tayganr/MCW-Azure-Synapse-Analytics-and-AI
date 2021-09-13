@@ -157,7 +157,7 @@ if ($context) {
         $deploymentName = $deployment.name
         $progress = ('.', '..', '...')
         $provisioningState = ""
-        While ($provisioningState -ne "Succeeded") {
+        Do {
             1..3 | ForEach-Object {
                 Foreach ($x in $progress) {
                     $table = @()
@@ -179,7 +179,7 @@ if ($context) {
             }
             $provisioningState = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName).properties.provisioningState
             $deploymentOperations = getDeploymentOps $accessToken $subscriptionId $resourceGroupName $deploymentName
-        }
+        } Until ($provisioningState -ne "Succeeded")
     
         # Get Outputs
         $deployment = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName)
