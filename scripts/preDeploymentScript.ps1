@@ -179,7 +179,7 @@ if ($context) {
             }
             $provisioningState = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName).properties.provisioningState
             $deploymentOperations = getDeploymentOps $accessToken $subscriptionId $resourceGroupName $deploymentName
-        } Until ($provisioningState -ne "Succeeded")
+        } Until ($provisioningState -eq "Succeeded")
     
         # Get Outputs
         $deployment = (getDeployment $accessToken $subscriptionId $resourceGroupName $deploymentName)
