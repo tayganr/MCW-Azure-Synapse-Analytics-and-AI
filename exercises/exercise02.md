@@ -360,7 +360,7 @@ Over the past 5 years, Wide World Importers has amassed over 3 billion rows of s
 14. Select the **Sink** tab in the bottom pane. In the **Sink dataset** field, select **asamcw_customerinfo_asa**, for the **Copy method** field, select **Bulk insert**, and for **Pre-copy script** enter:
 
     ```sql
-      truncate table wwi_mcw.CustomerInfo
+    truncate table wwi_mcw.CustomerInfo
     ```
 
     ![The Sink tab is selected with the Sink dataset field set to asamcw_customerinfo_asa, the Copy method set to Bulk insert, and the Pre-copy script field set to the previous query.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/pipeline_copycustomerinformation_sink.png "Selecting the sink dataset")
