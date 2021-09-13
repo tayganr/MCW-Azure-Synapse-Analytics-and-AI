@@ -296,8 +296,16 @@ if ($context) {
     
         $timer.Stop()
         $totalTime = "{0:HH:mm:ss}" -f ([datetime]$timer.Elapsed.Ticks)
-        Write-Output "Duration ${totalTime}"
-        Write-Output "Resource Group: ${resourceGroupName}"
+
+        Write-Host @"
+===================================================== COMPLETE =====================================================
+
+ - Duration:`t`t${totalTime}
+ - Resource Group:`t${resourceGroupName}
+
+ You're lab environment is ready. Please begin by following the exercises at https://aka.ms/synapselab
+
+"@
     }
     else {
         Write-Host "[Error] Unable to attain Azure AD Principal ID (az ad signed-in-user show --query objectId -o tsv)." -ForegroundColor Black -BackgroundColor Yellow
