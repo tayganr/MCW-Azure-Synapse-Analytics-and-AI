@@ -139,7 +139,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 14. Open Visual Studio Code.
 
-15. From the **File** menu, select **Open file** then choose to open **Hands-on lab/artifacts/pocformreader.py**.
+15. From the **File** menu, select **Open file** then choose to open **assets/artifacts/pocformreader.py** ([direct link](https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/artifacts/pocformreader.py)).
 
 16. Update Lines 8, 10, and 18 with the appropriate values indicated below:
 
@@ -175,7 +175,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 1. Open a new instance of Visual Studio Code.
 
-2. In Visual Studio Code open the folder **Hands-on lab/environment-setup/functions**.
+2. In Visual Studio Code open the folder **assets/functions** (download zip file [here](https://github.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/raw/master/assets/functions.zip)).
 
    ![The file structure of the /environment-setup/functions folder is shown.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task1-001.png "The file structure of the functions folder")
 
@@ -221,7 +221,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
 10. Now that we have the function published and all our resources created, we can create the skillset. This will be accomplished using **Postman**. Open Postman.
 
-11. From the **File** menu, select **Import** and choose to import the postman collection from **Hands-on lab/environment-setup/skillset** named **InvoiceKnowledgeStore.postman_collection.json**.
+11. From the **File** menu, select **Import** and choose to import the postman collection from **assets/skillset** named **InvoiceKnowledgeStore.postman_collection.json** (direct [link](https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/skillset/InvoiceKnowledgeStore.postman_collection.json)).
 
     ![The Postman File menu is expanded with the Import option selected.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task3-004.png "Postman File menu")
 
@@ -382,7 +382,7 @@ In this exercise you will create a Synapse Pipeline that will orchestrate updati
 
     ![The set properties form is displayed with the file path and import schema fields populated as described.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-025.png "Data set properties form")
 
-22. Select **Browse** and select the file located at **Hands-on lab/environment-setup/synapse/sampleformrecognizer.json** and select **OK**.
+22. Select **Browse** and select the file located at **assets/synapse/sampleformrecognizer.json** (direct [link](https://raw.githubusercontent.com/tayganr/MCW-Azure-Synapse-Analytics-and-AI/master/assets/synapse/sampleformrecognizer.json)) and select **OK**.
 
     ![The Set properties form is displayed with the sampleformrecognizer.json selected as the selected file.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/ex5-task4-026.png "Data set properties form")
 
