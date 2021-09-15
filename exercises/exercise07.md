@@ -75,6 +75,20 @@ In this exercise, you will create multiple machine learning models. You will lea
 
     ![The settings and preview screen is displayed showing a table of data.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/amlstudio_dataset_settingsandpreview.png "The Settings and Preview screen")
 
+Note - if you are on a low SKU you may get a timeout. Create the following view to resolve this
+
+CREATE MATERIALIZED VIEW vwSaleSmall WITH (DISTRIBUTION = HASH([ProductId])) AS
+SELECT [P].[ProductId] AS [ProductId],
+       [P].[Seasonality] AS [Seasonality],
+       [S].[TransactionDateId] AS [Expr2],
+       COUNT(*) AS [Expr3]
+FROM [wwi_mcw].[SaleSmall] [S],
+     [wwi_mcw].[Product] [P]
+WHERE [P].[ProductId]=[S].[ProductId]
+GROUP BY [P].[ProductId],
+         [P].[Seasonality],
+         [S].[TransactionDateId]
+
 11. Review the **Schema** field listing, then select **Next**.
 
     ![The Schema screen is displayed showing a listing of columns and their types.](https://raw.githubusercontent.com/microsoft/MCW-Azure-Synapse-Analytics-and-AI/master/Hands-on%20lab/media/amlstudio_dataset_schema.png "The dataset Schema field listing")
