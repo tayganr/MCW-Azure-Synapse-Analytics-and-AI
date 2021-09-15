@@ -117,7 +117,7 @@ function setLocation() {
 $TargetSubscriptionId = getSubscriptionId
 $context = Set-AzContext -Subscription $TargetSubscriptionId
 $registeredResourceProviders = Get-AzResourceProvider | Select-Object ProviderNamespace 
-$requiredResourceProviders = @("Microsoft.Authorization","Microsoft.Search","Microsoft.CognitiveServices","Microsoft.Insights","Microsoft.KeyVault","Microsoft.MachineLearningServices","Microsoft.ManagedIdentity","Microsoft.Resources","Microsoft.Storage","Microsoft.Synapse")
+$requiredResourceProviders = @("Microsoft.Authorization","Microsoft.Search","Microsoft.CognitiveServices","Microsoft.Insights","Microsoft.KeyVault","Microsoft.MachineLearningServices","Microsoft.ManagedIdentity","Microsoft.Resources","Microsoft.Storage","Microsoft.Synapse","Microsoft.Sql","Microsoft.AlertsManagement")
 write-host "`n"
 Write-Host "[INFO] Checking that the required resource providers are registered..."
 foreach ($rp in $requiredResourceProviders) {
